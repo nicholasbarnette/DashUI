@@ -1,0 +1,8 @@
+.label {
+	color: inherit;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-size: var(--font-size-md);
+	margin-right: 0.5rem;
+	overflow: hidden;
+}

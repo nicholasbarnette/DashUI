@@ -1,0 +1,33 @@
+.svg {
+	height: 100%;
+	width: 100%;
+	flex-shrink: 0;
+}
+
+.svg > path {
+	fill: var(--color-text);
+	&.inverse {
+		fill: var(--color-text-inverted);
+	}
+}
+
+.svg.alternate > path {
+	fill: var(--color-text);
+	&.inverse {
+		fill: var(--color-text-inverted);
+	}
+}
+
+.svg.inverted > path {
+	fill: var(--color-text-alt);
+	&.inverse {
+		fill: var(--color-text);
+	}
+}
+
+.svg.customColor > .path {
+	fill: var(--svg-fill);
+	&.inverse {
+		fill: var(--color-text-inverted);
+	}
+}

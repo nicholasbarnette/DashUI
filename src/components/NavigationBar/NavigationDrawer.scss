@@ -1,0 +1,126 @@
+@keyframes open {
+	0% {
+		display: flex;
+		opacity: 0;
+	}
+	100% {
+		display: flex;
+		opacity: 1;
+	}
+}
+
+@keyframes openNav {
+	0% {
+		width: 0;
+	}
+	99% {
+		width: 100%;
+	}
+	100% {
+		width: 100%;
+	}
+}
+
+.menu {
+	cursor: pointer;
+	display: flex;
+
+	> svg {
+		height: 1.5rem;
+		width: 1.5rem;
+	}
+
+	&:focus {
+		outline-width: var(--focus-width);
+		outline-style: var(--focus-style);
+		outline-color: var(--focus-color-light);
+	}
+}
+
+.user {
+	svg {
+		height: 1.5rem;
+		width: 1.5rem;
+	}
+}
+
+.navigationOverlay {
+	display: none;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	height: calc(100vh - 3.5rem);
+	position: absolute;
+	top: 3.5rem;
+	width: 100vw;
+	left: 0;
+
+	.overlay {
+		background-color: var(--background-overlay-neutral);
+		flex: 1 1 auto;
+		z-index: 2;
+	}
+}
+
+.open {
+	display: flex;
+	animation-name: open;
+	animation-timing-function: linear;
+	animation-duration: 0.5s;
+	animation-iteration-count: 1;
+	pointer-events: all;
+
+	.navigationBar {
+		animation-name: openNav;
+		animation-timing-function: linear;
+		animation-duration: 0.5s;
+		animation-iteration-count: 1;
+		width: 100%;
+	}
+}
+
+.closed {
+	display: none;
+}
+
+.navigationBar {
+	background-color: var(--page-bg);
+	color: var(--color-text);
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: flex-start;
+	height: 100%;
+	max-width: 768px;
+	width: 0;
+	transition: width 0.5s ease-in;
+	overflow: hidden;
+	padding: 0.2rem;
+}
+
+.list {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	padding: 1rem 0;
+	width: 100%;
+}
+
+.list > li {
+	list-style: none;
+	cursor: pointer;
+	display: flex;
+
+	> a {
+		font-size: var(--font-size-md);
+		padding: 0.5rem 1rem;
+		width: 100%;
+	}
+}
+
+.item {
+	&:focus {
+		outline-width: var(--focus-width);
+		outline-style: var(--focus-style);
+		outline-color: var(--focus-color-light);
+	}
+}

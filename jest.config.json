@@ -1,0 +1,15 @@
+{
+	"roots": ["./src"],
+	"transform": {
+		"^.+\\.tsx?$": "ts-jest"
+	},
+	"testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+	"moduleNameMapper": {
+		"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+		"\\.(css|scss)$": "<rootDir>/mocks/styleMock.js"
+	},
+	"moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
+	"collectCoverage": true,
+	"coverageDirectory": "cov",
+	"coverageReporters": ["lcov", "text"]
+}

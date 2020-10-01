@@ -1,0 +1,40 @@
+// Grow Animation
+@keyframes grow {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(2);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+.container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.dot {
+	height: 0.5rem;
+	width: 0.5rem;
+	background-color: var(--color-text);
+	border-radius: 100%;
+	margin: 0.5rem;
+
+	animation-name: grow;
+	animation-duration: 3s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+	animation-direction: normal;
+
+	&:nth-child(2) {
+		animation-delay: 0.5s;
+	}
+	&:nth-child(3) {
+		animation-delay: 1.5s;
+	}
+}

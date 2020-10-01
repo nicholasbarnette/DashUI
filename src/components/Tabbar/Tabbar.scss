@@ -1,0 +1,43 @@
+.container {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.content {
+	padding: 2rem;
+	overflow: auto;
+	flex: 1 1 0;
+}
+
+.tabs {
+	border-bottom: 1px solid var(--color-neutral);
+}
+
+.tab {
+	background-color: transparent;
+	color: var(--color-text);
+	border: 1px solid transparent;
+	padding: 0.5rem;
+	cursor: pointer;
+}
+
+.tab:focus {
+	outline-width: var(--focus-width);
+	outline-style: var(--focus-style);
+	outline-color: var(--focus-color-light);
+	outline-offset: calc(-1 * var(--focus-width) - 1px);
+}
+
+.selected {
+	background-color: var(--color-neutral);
+	color: var(--color-text-inverted);
+	border-color: var(--color-text);
+}
+
+.selected:focus {
+	outline-width: var(--focus-width);
+	outline-style: var(--focus-style);
+	outline-color: var(--focus-color-dark);
+}

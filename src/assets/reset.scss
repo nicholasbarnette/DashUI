@@ -1,0 +1,30 @@
+html {
+	font-size: var(--base-size) !important;
+	color: var(--color-text);
+	height: 100%;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+	font-weight: 400;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+}

@@ -1,0 +1,50 @@
+.navigationContainer {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	top: 0;
+	left: 0;
+	height: 100%;
+	user-select: none;
+	z-index: 9;
+	pointer-events: none;
+}
+
+.banner {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: center;
+	padding: 0.5rem 1rem;
+	width: 100%;
+	z-index: 10;
+	position: sticky;
+	top: 0;
+	background-color: var(--navigation-bg);
+	pointer-events: all;
+	height: 3.5rem;
+}
+
+%section {
+	display: grid;
+	grid-column-gap: 1rem;
+	grid-template-columns: repeat(auto-fit, minmax(0, auto));
+	align-items: center;
+	flex: 1 1 33%;
+}
+
+.left {
+	@extend %section;
+	justify-content: flex-start;
+}
+
+.center {
+	@extend %section;
+	justify-content: center;
+}
+
+.right {
+	@extend %section;
+	justify-content: flex-end;
+}

@@ -1,0 +1,15 @@
+.link {
+	color: var(--color-text);
+	font-size: var(--font-size-lg);
+	text-decoration: none;
+	white-space: nowrap;
+	cursor: pointer;
+	text-align: center;
+	display: flex;
+
+	&:focus {
+		outline-width: var(--focus-width);
+		outline-style: var(--focus-style);
+		outline-color: var(--focus-color-light);
+	}
+}

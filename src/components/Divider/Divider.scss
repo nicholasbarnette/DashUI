@@ -1,0 +1,14 @@
+.divider {
+	width: 80%;
+	max-width: 40rem;
+	border: 1px solid transparent;
+	margin: 0;
+}
+
+.light {
+	border-color: var(--color-text);
+}
+
+.dark {
+	border-color: var(--color-text-inverted);
+}

@@ -1,0 +1,18 @@
+.container {
+	display: inline-flex;
+	flex-direction: column;
+	align-items: flex-start;
+	position: relative;
+}
+
+.button {
+	font-size: 1rem;
+	padding: 0.25rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.menu {
+	z-index: 2;
+}

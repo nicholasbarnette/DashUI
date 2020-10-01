@@ -1,0 +1,36 @@
+.form {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	width: 100%;
+	max-width: 40rem;
+	align-items: center;
+}
+
+.button {
+	margin-inline-start: auto;
+}
+
+.container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	width: 100%;
+	flex-wrap: wrap;
+	margin: 0.5rem 0;
+}
+
+.label {
+	max-width: 25%;
+	flex: 1 1 auto;
+	min-width: 6rem;
+}
+
+.input {
+	flex: 1 1 auto;
+}
+
+.required::after {
+	content: '*';
+	color: var(--color-secondary);
+}

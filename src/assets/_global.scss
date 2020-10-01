@@ -1,0 +1,27 @@
+@import './reset.scss';
+
+// Scrollbar styles
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: var(--color-text);
+}
+
+a {
+	color: var(--color-text);
+}
+
+a:focus {
+	outline-width: var(--focus-width);
+	outline-style: var(--focus-style);
+	outline-color: var(--focus-color-light);
+}
