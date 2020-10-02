@@ -33,7 +33,7 @@
 	&:focus {
 		outline-width: var(--focus-width);
 		outline-style: var(--focus-style);
-		outline-color: var(--focus-color-light);
+		outline-color: var(--focus-light);
 	}
 }
 
@@ -83,8 +83,8 @@
 }
 
 .navigationBar {
-	background-color: var(--page-bg);
-	color: var(--color-text);
+	background-color: var(--background-page);
+	color: var(--text-default);
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
@@ -121,6 +121,6 @@
 	&:focus {
 		outline-width: var(--focus-width);
 		outline-style: var(--focus-style);
-		outline-color: var(--focus-color-light);
+		outline-color: var(--focus-light);
 	}
 }

@@ -17,9 +17,12 @@ export * from './components/Label';
 export * from './components/List';
 export * from './components/Menu';
 export * from './components/MenuButton';
-// export * from './components/NavigationBar';
+export * from './components/NavigationBar';
 export * from './components/Notifications';
 export * from './components/SVG';
 export * from './components/Switch';
 export * from './components/Tabbar';
 export * from './components/TextArea';
+
+export * from './contexts';
+export * from './theme';

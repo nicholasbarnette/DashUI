@@ -5,29 +5,29 @@
 }
 
 .svg > path {
-	fill: var(--color-text);
+	fill: var(--text-default);
 	&.inverse {
-		fill: var(--color-text-inverted);
+		fill: var(--text-inverse);
 	}
 }
 
 .svg.alternate > path {
-	fill: var(--color-text);
+	fill: var(--text-default);
 	&.inverse {
-		fill: var(--color-text-inverted);
+		fill: var(--text-inverse);
 	}
 }
 
 .svg.inverted > path {
-	fill: var(--color-text-alt);
+	fill: var(--text-alternate);
 	&.inverse {
-		fill: var(--color-text);
+		fill: var(--text-default);
 	}
 }
 
 .svg.customColor > .path {
 	fill: var(--svg-fill);
 	&.inverse {
-		fill: var(--color-text-inverted);
+		fill: var(--text-inverse);
 	}
 }

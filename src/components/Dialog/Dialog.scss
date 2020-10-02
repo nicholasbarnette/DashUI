@@ -17,10 +17,10 @@
 	min-width: 20rem;
 	max-height: 95%;
 	max-width: 95%;
-	border-radius: var(--default-border-radius);
-	background-color: var(--color-neutral);
-	border: 1px solid var(--neutral-bd);
-	color: var(--color-text-inverted);
+	border-radius: 0.25rem;
+	background-color: var(--pattern-neutral-normal-bg);
+	border: 1px solid var(--pattern-neutral-normal-bd);
+	color: var(--text-inverted);
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
@@ -30,12 +30,12 @@
 	font-size: var(--font-size-lg);
 	padding: 2rem 2rem 1rem 2rem;
 	text-align: left;
-	color: var(--color-text-inverted);
+	color: var(--text-inverse);
 }
 
 .body {
 	padding: 0 2rem;
-	color: var(--color-text-inverted);
+	color: var(--text-inverse);
 	flex: 1 1 auto;
 	overflow: auto;
 	display: grid;
