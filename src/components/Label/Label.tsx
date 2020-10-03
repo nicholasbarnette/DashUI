@@ -1,4 +1,4 @@
-import React, { FC, CSSProperties } from 'react';
+import React, { FC } from 'react';
 import { Component } from '../../types';
 
 // Styles

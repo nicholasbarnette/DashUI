@@ -60,12 +60,12 @@ export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
 	const properties = useMemo(() => {
 		let theme: { [key: string]: string } = {
 			'--base-size': `${
-				(props.theme ?? DefaultLightTheme).theme.core.baseSize
+				(props.theme ?? currentTheme.theme).theme.core.baseSize
 			}px`,
 		};
 		Object.keys(ThemeDerivations).map((derivation) => {
 			const [base, constant] = getDerivationInfo(
-				props.theme ?? DefaultLightTheme,
+				props.theme ?? currentTheme.theme,
 				derivation as keyof Derivations,
 			);
 			theme = {
@@ -75,13 +75,13 @@ export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
 					ThemeDerivations[derivation as keyof Derivations](
 						base,
 						constant,
-						(props.theme ?? DefaultLightTheme).theme.core.baseSize,
+						(props.theme ?? currentTheme.theme).theme.core.baseSize,
 					),
 				) as { [key: string]: string }),
 			};
 		});
 		return theme;
-	}, [props.theme]);
+	}, [props.theme, currentTheme]);
 
 	useEffect(() => {
 		document
