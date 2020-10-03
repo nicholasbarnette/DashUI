@@ -13,11 +13,11 @@
 	border-width: 1px;
 	border-style: solid;
 	padding: 1rem;
-	border-radius: var(--default-border-radius);
-	border-color: var(--neutral-bd);
-	background-color: var(--neutral-bg);
-	box-shadow: var(--background-sh);
-	color: var(--neutral-fg);
+	border-radius: 0.25rem;
+	border-color: var(--pattern-neutral-normal-bd);
+	background-color: var(--pattern-neutral-normal-bg);
+	box-shadow: var(--background-shadow);
+	color: var(--pattern-neutral-normal-fg);
 	display: flex;
 	max-width: 40rem;
 	max-height: 6.5rem;
@@ -44,5 +44,5 @@
 }
 
 .closeButton:focus {
-	outline: var(--focus-width) var(--focus-style) var(--focus-color-dark);
+	outline: var(--focus-width) var(--focus-style) var(--focus-dark);
 }

@@ -13,15 +13,15 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: var(--color-text);
+	background: var(--text-default);
 }
 
 a {
-	color: var(--color-text);
+	color: var(--text-default);
 }
 
 a:focus {
 	outline-width: var(--focus-width);
 	outline-style: var(--focus-style);
-	outline-color: var(--focus-color-light);
+	outline-color: var(--focus-light);
 }

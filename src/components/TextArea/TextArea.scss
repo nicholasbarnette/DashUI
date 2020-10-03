@@ -4,7 +4,7 @@
 	color: var(--input-fg);
 	max-width: 30rem;
 	padding: 0.25rem 0.5rem;
-	border-radius: var(--default-border-radius);
+	border-radius: 0.25rem;
 	font-size: var(--font-size-md);
 	transition: border-color 0.15s linear;
 	resize: none;
@@ -16,16 +16,16 @@
 
 .textarea:focus {
 	outline: none;
-	background-color: var(--input-focus-bg);
+	background-color: var(--input-bg);
 	border-color: var(--input-focus-bd);
-	color: var(--input-focus-fg);
+	color: var(--input-fg);
 }
 
 .textarea::placeholder {
-	color: var(--input-placeholder-fg);
+	color: var(--text-placeholder);
 }
 
 .invalid {
-	border-color: red;
-	color: red;
+	border-color: var(--color-alert);
+	color: var(--color-alert);
 }

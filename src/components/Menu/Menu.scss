@@ -1,32 +1,32 @@
 .menu {
 	display: flex;
 	flex-direction: column;
-	box-shadow: var(--background-sh);
-	border: 1px solid var(--neutral-bd);
-	border-radius: var(--default-border-radius);
+	box-shadow: var(--background-shadow);
+	border: 1px solid var(--pattern-neutral-bd);
+	border-radius: 0.25rem;
 	overflow: hidden;
 	position: absolute;
-	background-color: var(--neutral-bg);
+	background-color: var(--pattern-neutral-normal-bg);
 }
 
 .item {
 	list-style: none;
 	padding: 0.5rem 1rem;
-	color: var(--neutral-fg);
+	color: var(--pattern-neutral-normal-fg);
 	cursor: pointer;
 	user-select: none;
 	white-space: nowrap;
 }
 
 .item:hover {
-	background-color: var(--neutral-hover-bg);
-	color: var(--neutral-hover-fg);
+	background-color: var(--pattern-neutral-hover-bg);
+	color: var(--pattern-neutral-hover-fg);
 }
 
 .item:focus {
 	outline-width: var(--focus-width);
 	outline-style: var(--focus-style);
-	outline-color: var(--focus-color-light);
+	outline-color: var(--focus-light);
 	outline-offset: calc(-1 * var(--focus-width) - 1px);
 }
 

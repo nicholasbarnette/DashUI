@@ -1,66 +1,105 @@
-import React, { createContext, FC, useState } from 'react';
+import React, {
+	createContext,
+	FC,
+	useState,
+	useMemo,
+	useEffect,
+	useRef,
+} from 'react';
 import { MenuButton } from '../components/MenuButton';
 import { MenuItem } from '../components/Menu';
+import { ThemeDerivations, Derivations } from '../theme/ThemeDerivation';
+import { resolveDerivation, getDerivationInfo } from '../theme/utils';
+import { DefaultLightTheme, Theme, DefaultDarkTheme } from '../theme/Theme';
 
-// Styles
-import cn from '../assets/tokens.scss';
-import cx from 'classnames';
-
-const getThemeCookie = () => {
-	const cookie = decodeURIComponent(document.cookie);
-	const t = cookie.match(/theme=([a-zA-Z0-9_]*);?/);
-	if (t) {
-		document
-			.getElementsByTagName('body')[0]
-			.classList.add(t[1] || cn.light);
-		return t[1] === cn.light || t[1] === cn.dark ? t[1] : cn.light;
-	}
-	document.cookie = `theme=${cn.light};`;
-	return cn.light;
-};
-
-export const ThemeContext = createContext({
-	theme: '',
-	toggleTheme: (theme: string) => {},
-});
-
-interface ThemeProviderProps {
-	sbOverride?: boolean; // Storybook needs to override the default theme provider behavior
-	themeClass?: string;
+interface ThemeProviderContext {
+	theme: Theme;
+	setTheme: (theme: Theme) => void;
 }
 
+export const ThemeContext = createContext<ThemeProviderContext>({
+	theme: DefaultLightTheme,
+	setTheme: (theme: Theme) => {},
+});
+
+export interface ThemeProviderProps {
+	theme?: Theme;
+}
+
+export const convertPropertiesToCSS = (properties: {
+	[key: string]: string;
+}) => {
+	let styles = ':root {\n';
+	Object.keys(properties).map((key) => {
+		styles += `${key}: ${properties[key]};\n`;
+	});
+	return styles + '}';
+};
+
 export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
-	const toggleTheme = (theme: string) => {
-		// Override the body tag
-		document
-			.getElementsByTagName('body')[0]
-			.classList.remove(theme === cn.light ? cn.light : cn.dark);
-		document
-			.getElementsByTagName('body')[0]
-			.classList.add(theme === cn.light ? cn.dark : cn.light);
+	const styleBlock = useRef<HTMLStyleElement>(
+		(() => {
+			let block = document.createElement('style');
+			block.type = 'text/css';
+			return block;
+		})(),
+	);
 
-		// Save a cookie
-		document.cookie = `theme=${theme === cn.light ? cn.dark : cn.light};`;
-
-		setThemeObj({
-			theme: theme === cn.light ? cn.dark : cn.light,
-			toggleTheme: toggleTheme,
+	const setTheme = (theme: Theme) => {
+		setCurrentTheme({
+			theme,
+			setTheme,
 		});
 	};
 
-	const [themeObj, setThemeObj] = useState({
-		theme: getThemeCookie(),
-		toggleTheme: toggleTheme,
+	const [currentTheme, setCurrentTheme] = useState<ThemeProviderContext>({
+		theme: props.theme ?? DefaultLightTheme,
+		setTheme: setTheme,
 	});
 
+	const properties = useMemo(() => {
+		let theme: { [key: string]: string } = {
+			'--base-size': `${
+				(props.theme ?? currentTheme.theme).theme.core.baseSize
+			}px`,
+		};
+		Object.keys(ThemeDerivations).map((derivation) => {
+			const [base, constant] = getDerivationInfo(
+				props.theme ?? currentTheme.theme,
+				derivation as keyof Derivations,
+			);
+			theme = {
+				...theme,
+				...(resolveDerivation(
+					derivation as keyof Derivations,
+					ThemeDerivations[derivation as keyof Derivations](
+						base,
+						constant,
+						(props.theme ?? currentTheme.theme).theme.core.baseSize,
+					),
+				) as { [key: string]: string }),
+			};
+		});
+		return theme;
+	}, [props.theme, currentTheme]);
+
+	useEffect(() => {
+		document
+			.getElementsByTagName('head')[0]
+			.appendChild(styleBlock.current);
+		styleBlock.current.innerText = convertPropertiesToCSS(properties);
+	}, [properties]);
+
 	return (
-		<ThemeContext.Provider value={themeObj}>
-			{props.children}
-		</ThemeContext.Provider>
+		<div style={{ height: '100%', width: '100%' }}>
+			<ThemeContext.Provider value={currentTheme}>
+				{props.children}
+			</ThemeContext.Provider>
+		</div>
 	);
 };
 
-interface ThemeSwitcherProps {
+export interface ThemeSwitcherProps {
 	className?: string;
 	testId?: string;
 	tooltip: string;
@@ -71,15 +110,12 @@ interface ThemeSwitcherProps {
 export const ThemeSwitcher: FC<ThemeSwitcherProps> = (props) => {
 	return (
 		<ThemeContext.Consumer>
-			{({ theme, toggleTheme }) => {
-				const tgTheme = () => {
-					toggleTheme(theme);
-				};
+			{({ theme, setTheme }) => {
 				return (
 					<MenuButton
-						className={cx(cn.user, props.className)}
+						className={props.className}
 						testId={props.testId}
-						variant='lightweight'
+						variant="lightweight"
 						tooltip={props.tooltip}
 						items={[
 							...(props.items || []),
@@ -90,14 +126,19 @@ export const ThemeSwitcher: FC<ThemeSwitcherProps> = (props) => {
 								id: 'themeswitch',
 								type: 'text',
 								value: `${
-									getThemeCookie() === cn.dark
+									theme.baseTheme === 'dark'
 										? 'Light'
 										: 'Dark'
 								} Theme`,
 							},
 						]}
 						onPress={(id: string) => {
-							if (id === 'themeswitch') tgTheme();
+							if (id === 'themeswitch')
+								setTheme(
+									theme.baseTheme === 'light'
+										? DefaultDarkTheme
+										: DefaultLightTheme,
+								);
 							props.onPress?.(id);
 						}}
 					>

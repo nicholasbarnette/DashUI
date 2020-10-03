@@ -11,7 +11,7 @@ describe('basic pie graph', () => {
 				testId="pie"
 				data={[100, 250]}
 				radius={200}
-				colors={['var(--majority-bg)', 'var(--minority-bg)']}
+				colors={['var(--color-graph1)', 'var(--color-graph5)']}
 			></Pie>,
 		);
 		expect(getByRole('figure')).toBeTruthy();

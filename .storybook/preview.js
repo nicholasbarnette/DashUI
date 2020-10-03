@@ -1,15 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { addDecorator } from '@storybook/react';
 import { withContexts } from '@storybook/addon-contexts/react';
-import { ThemeContext } from '../src/contexts/ThemeContext';
+import { ThemeProvider } from '../src/contexts/ThemeContext';
+import { DefaultLightTheme, DefaultDarkTheme } from '../src/theme/Theme';
 
-import cn from './storybook.scss';
+import './storybook.scss';
 
 const PageWrapper = (props) => {
 	return (
 		<div
 			style={{
-				background: 'var(--page-bg)',
+				background: 'var(--background-page)',
 				width: '100%',
 				height: '100%',
 				padding: '1rem',
@@ -18,27 +19,6 @@ const PageWrapper = (props) => {
 		>
 			{props.children}
 		</div>
-	);
-};
-
-const ThemeProvider = (props) => {
-	useEffect(() => {
-		document
-			.getElementsByTagName('body')[0]
-			.classList.remove(
-				props.themeClass === cn.light ? cn.dark : cn.light,
-			);
-		document
-			.getElementsByTagName('body')[0]
-			.classList.add(props.themeClass === cn.light ? cn.light : cn.dark);
-	}, [props.themeClass]);
-
-	return (
-		<ThemeContext.Provider
-			value={{ theme: props.themeClass, toggleTheme: () => {} }}
-		>
-			{props.children}
-		</ThemeContext.Provider>
 	);
 };
 
@@ -51,11 +31,11 @@ addDecorator(
 				{
 					name: 'Light',
 					default: true,
-					props: { themeClass: cn.light },
+					props: { theme: DefaultLightTheme },
 				},
 				{
 					name: 'Dark',
-					props: { themeClass: cn.dark },
+					props: { theme: DefaultDarkTheme },
 				},
 			],
 		},

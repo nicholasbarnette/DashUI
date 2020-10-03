@@ -26,18 +26,18 @@
 .tab:focus {
 	outline-width: var(--focus-width);
 	outline-style: var(--focus-style);
-	outline-color: var(--focus-color-light);
+	outline-color: var(--focus-light);
 	outline-offset: calc(-1 * var(--focus-width) - 1px);
 }
 
 .selected {
 	background-color: var(--color-neutral);
-	color: var(--color-text-inverted);
-	border-color: var(--color-text);
+	color: var(--text-inverse);
+	border-color: var(--text-default);
 }
 
 .selected:focus {
 	outline-width: var(--focus-width);
 	outline-style: var(--focus-style);
-	outline-color: var(--focus-color-dark);
+	outline-color: var(--focus-dark);
 }
