@@ -136,8 +136,8 @@ export const ThemeSwitcher: FC<ThemeSwitcherProps> = (props) => {
 							if (id === 'themeswitch')
 								setTheme(
 									theme.baseTheme === 'light'
-										? DefaultLightTheme
-										: DefaultDarkTheme,
+										? DefaultDarkTheme
+										: DefaultLightTheme,
 								);
 							props.onPress?.(id);
 						}}
