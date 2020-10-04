@@ -59,9 +59,9 @@ export const ThemeDerivations: Derivations = {
 		baseSize: number,
 	): Spacing => {
 		return {
-			xxs: `calc(var(--spacing-xs) / ${spacingMultiplier} * 2)`,
-			xs: `calc(var(--spacing-sm) / ${spacingMultiplier} * 2)`,
-			sm: `calc(var(--spacing-md) / ${spacingMultiplier} * 2)`,
+			xxs: `calc(var(--spacing-xs) / ${spacingMultiplier} / 2)`,
+			xs: `calc(var(--spacing-sm) / ${spacingMultiplier} / 2)`,
+			sm: `calc(var(--spacing-md) / ${spacingMultiplier} / 2)`,
 			md: `calc(${px2rem(
 				spacingBase,
 				baseSize,

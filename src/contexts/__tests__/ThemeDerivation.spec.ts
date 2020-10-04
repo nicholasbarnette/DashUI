@@ -14,11 +14,11 @@ describe('ThemeDerivation', () => {
 		expect(spacing).toStrictEqual({
 			lg: 'calc(var(--spacing-md) * 1 * 2)',
 			md: 'calc(1rem * 1)',
-			sm: 'calc(var(--spacing-md) / 1 * 2)',
+			sm: 'calc(var(--spacing-md) / 1 / 2)',
 			xl: 'calc(var(--spacing-lg) * 1 * 2)',
-			xs: 'calc(var(--spacing-sm) / 1 * 2)',
+			xs: 'calc(var(--spacing-sm) / 1 / 2)',
 			xxl: 'calc(var(--spacing-xl) * 1 * 2)',
-			xxs: 'calc(var(--spacing-xs) / 1 * 2)',
+			xxs: 'calc(var(--spacing-xs) / 1 / 2)',
 		});
 	});
 

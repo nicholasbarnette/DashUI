@@ -1,33 +1,26 @@
 .svg {
-	height: 100%;
-	width: 100%;
+	height: var(--font-size-md);
+	width: var(--font-size-md);
 	flex-shrink: 0;
 }
 
 .svg > path {
-	fill: var(--text-default);
+	fill: var(--svg-fill, var(--text-default));
 	&.inverse {
 		fill: var(--text-inverse);
 	}
 }
 
 .svg.alternate > path {
-	fill: var(--text-default);
+	fill: var(--svg-fill, var(--text-default));
 	&.inverse {
 		fill: var(--text-inverse);
 	}
 }
 
 .svg.inverted > path {
-	fill: var(--text-alternate);
+	fill: var(--svg-fill, var(--text-alternate));
 	&.inverse {
 		fill: var(--text-default);
-	}
-}
-
-.svg.customColor > .path {
-	fill: var(--svg-fill);
-	&.inverse {
-		fill: var(--text-inverse);
 	}
 }

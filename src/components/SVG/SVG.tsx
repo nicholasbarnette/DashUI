@@ -45,8 +45,7 @@ export const SVG: FC<SVGProps> = (props) => {
 		style: { ...({ '--svg-fill': color } as CSSProperties), ...style },
 		className: cx(
 			cn.svg,
-			cn.customColor,
-			'test',
+			props.color && cn.customColor,
 			getDesignClassName(design),
 			className,
 		),

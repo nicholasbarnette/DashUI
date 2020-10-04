@@ -63,7 +63,7 @@ export const Basic = () => {
 					]}
 				/>
 			}
-			center={<NavigationLink link="/">Am I Bormal?</NavigationLink>}
+			center={<NavigationLink link="/">Page Name</NavigationLink>}
 			right={
 				<Fragment>
 					<NavigationLink link="/">

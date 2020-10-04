@@ -1,0 +1,94 @@
+.container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	height: 100%;
+	width: 100%;
+}
+
+.leftNav {
+	background-color: var(--background-navigation);
+	overflow: hidden;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	padding: var(--spacing-md) 0;
+	transition: width 0.25s ease-in-out;
+}
+
+.list {
+	flex: 1 1 auto;
+}
+
+.item {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: center;
+	justify-content: flex-start;
+	user-select: none;
+	cursor: pointer;
+	white-space: nowrap;
+	padding: var(--spacing-sm) 0;
+
+	&:focus {
+		outline-width: var(--focus-width);
+		outline-style: var(--focus-style);
+		outline-color: var(--focus-light);
+		outline-offset: calc(-1 * var(--focus-width) - 1px);
+	}
+}
+
+.iconContainer {
+	padding: var(--spacing-md);
+	margin-inline-start: var(--spacing-sm);
+	margin-inline-end: var(--spacing-sm);
+	border-radius: 100%;
+	height: var(--spacing-md);
+	width: var(--spacing-md);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.icon {
+	height: var(--spacing-md);
+	width: var(--spacing-md);
+}
+
+.textIcon {
+	font-weight: 600;
+	text-transform: uppercase;
+	font-size: var(--spacing-md);
+}
+
+.selected > .iconContainer {
+	background-color: var(--text-default);
+}
+
+.expandContainer {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	padding: var(--spacing-md) 0;
+	cursor: pointer;
+	white-space: nowrap;
+
+	&:focus {
+		outline-width: var(--focus-width);
+		outline-style: var(--focus-style);
+		outline-color: var(--focus-light);
+		outline-offset: calc(-1 * var(--focus-width) - 1px);
+	}
+}
+
+.expandIcon {
+	height: var(--spacing-md);
+	width: var(--spacing-md);
+	margin: 0 var(--spacing-md);
+}
+
+.content {
+	flex: 1 1 auto;
+	padding: var(--spacing-md);
+}
