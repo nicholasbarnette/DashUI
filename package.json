@@ -11,14 +11,14 @@
 		"format": "npm run format:prettier && npm run format:tslint",
 		"format:prettier": "prettier --write ./src",
 		"format:tslint": "tslint -p tsconfig.json -c tslint.json ./src/**/*.{ts,tsx,js,jsx} --fix",
-		"prepublish": "npm run build"
+		"prepublish": "npm run test && npm run build"
 	},
 	"lint-staged": {
-		"**/*.{ts,tsx,js,jsx}": [
+		".src/**/*.{ts,tsx,js,jsx}": [
 			"tslint -p tsconfig.json -c tslint.json --fix",
 			"prettier --write"
 		],
-		"**/*.scss": [
+		".src/**/*.scss": [
 			"prettier --write"
 		]
 	},

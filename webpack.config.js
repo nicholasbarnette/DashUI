@@ -18,7 +18,6 @@ const babelLoader = {
 			'@babel/preset-react',
 		],
 	},
-	query: { compact: false },
 };
 
 module.exports = {
