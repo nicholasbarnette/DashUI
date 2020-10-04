@@ -24,6 +24,12 @@ export const Basic = () => {
 							link: '/about',
 						},
 						{
+							key: 'hidden',
+							title: 'Hidden',
+							link: '/hidden',
+							hidden: true,
+						},
+						{
 							key: 'question',
 							title: 'Questions',
 							link: '/question',

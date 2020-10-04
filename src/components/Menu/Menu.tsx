@@ -1,4 +1,10 @@
-import React, { FC, useEffect, useState, RefObject } from 'react';
+import React, {
+	FC,
+	useEffect,
+	useState,
+	RefObject,
+	KeyboardEvent,
+} from 'react';
 import { Component } from '../../types';
 
 // Components
@@ -10,14 +16,15 @@ import cx from 'classnames';
 import cn from './Menu.scss';
 
 export interface MenuProps extends Component {
-	items?: MenuItem[];
+	items: MenuItem[];
 	onPress?: (id: string) => void;
 	isOpen?: boolean;
 	originRef?: RefObject<HTMLElement>;
 	menuId?: string;
+	onClose?: () => void;
 }
 
-export const GenerateMenuId = () => {
+export const useGenerateMenuId = () => {
 	let id = '';
 	for (let i = 0; i < 10; i++) {
 		id += Math.floor(Math.random() * 16)
@@ -37,19 +44,72 @@ export const Menu: FC<MenuProps> = (props) => {
 	const [focusedIdx, setFocusedIdx] = useState(0);
 
 	useEffect(() => {
-		setFocusedIdx(0);
+		if (props.isOpen) {
+			setFocusedIdx(0);
+		} else {
+			setFocusedIdx(-1);
+		}
 	}, [props.isOpen]);
 
 	useEffect(() => {
 		if (!props.items || !props.isOpen) return;
 		let hasSet = false;
 		props.items.map((item, idx) => {
-			if (!hasSet && item.type === 'text' && !item.hide) {
+			if (!hasSet && item.type === 'text' && !item.hidden) {
 				setFocusedIdx(idx);
 				hasSet = true;
 			}
 		});
 	}, [props.items, props.isOpen]);
+
+	const calculateFocus = (event: KeyboardEvent) => {
+		let newIdx = focusedIdx;
+		switch (event.which) {
+			case event.shiftKey && 9: // reverse tab
+				if (newIdx - 1 < 0) {
+					props.onClose?.();
+					return;
+				}
+			case 38: // up
+				while (newIdx - 1 >= -1) {
+					newIdx--;
+					if (newIdx <= -1) {
+						newIdx = 0;
+						break;
+					}
+					if (
+						!props.items[newIdx].hidden &&
+						props.items[newIdx].type !== 'divider'
+					) {
+						break;
+					}
+				}
+				setFocusedIdx(newIdx);
+				return;
+			case 9: // tab
+			case 40: // down
+				while (newIdx + 1 <= props.items.length) {
+					newIdx++;
+					if (newIdx >= props.items.length) {
+						newIdx = focusedIdx;
+						break;
+					}
+					if (
+						!props.items[newIdx].hidden &&
+						props.items[newIdx].type !== 'divider'
+					) {
+						break;
+					}
+				}
+				setFocusedIdx(newIdx);
+				return;
+			case 27:
+				props.onClose?.();
+				return;
+			default:
+				return;
+		}
+	};
 
 	useEffect(() => {
 		if (props.originRef) {
@@ -83,46 +143,8 @@ export const Menu: FC<MenuProps> = (props) => {
 			}}
 			role='menu'
 			aria-labelledby={props.menuId}
-			onKeyDown={(event) => {
-				if (!props.items) return;
-				let curIdx = focusedIdx;
-				switch (event.which) {
-					case 27: // escape
-						props.onPress?.('');
-						return;
-					case event.shiftKey && 9: // reverse tab
-					case 38: // up
-						while (curIdx >= -1) {
-							curIdx -= 1;
-							if (
-								props.items[curIdx] &&
-								!props.items[curIdx].hide &&
-								props.items[curIdx].type === 'text'
-							) {
-								break;
-							}
-						}
-						setFocusedIdx(curIdx <= -1 ? focusedIdx : curIdx);
-						return;
-					case 9: // tab
-					case 40: // down
-						while (curIdx <= props.items.length) {
-							curIdx += 1;
-							if (
-								props.items[curIdx] &&
-								!props.items[curIdx].hide &&
-								props.items[curIdx].type === 'text'
-							) {
-								break;
-							}
-						}
-						setFocusedIdx(
-							curIdx >= props.items.length ? focusedIdx : curIdx,
-						);
-						return;
-					default:
-						return;
-				}
+			onKeyDown={(event: KeyboardEvent) => {
+				calculateFocus(event);
 			}}
 		>
 			{props.items?.map((item, idx) => {
@@ -138,7 +160,7 @@ export const Menu: FC<MenuProps> = (props) => {
 										props.isOpen && focusedIdx === idx
 									}
 									onPress={props.onPress}
-									hidden={item.hide}
+									hidden={item.hidden}
 								/>
 							)
 						);

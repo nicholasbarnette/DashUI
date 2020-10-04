@@ -25,7 +25,7 @@ export const List: FC<ListProps> = (props) => {
 			style={props.style}
 		>
 			{props.items.map((item, idx) => {
-				if (props.display && idx > props.display) return;
+				if (props.display && idx >= props.display) return;
 				return (
 					<ListItem
 						key={idx}
@@ -34,7 +34,6 @@ export const List: FC<ListProps> = (props) => {
 								`${props.selectedKey}` === `${item.key}`,
 						})}
 						interactable={props.interactable}
-						testId={props.testId && `${item.key}`}
 						item={{ key: idx, ...item }}
 						onPress={(key?: string | number) => {
 							props.onPress?.(key);
@@ -46,8 +45,9 @@ export const List: FC<ListProps> = (props) => {
 				<li
 					key='showmore'
 					className={cx(cn.item, cn.interactable)}
-					onKeyPress={() => {
-						props.increaseDisplay?.();
+					onKeyPress={(event) => {
+						(event.which === 13 || event.which === 32) &&
+							props.increaseDisplay?.();
 					}}
 					onClick={() => {
 						props.increaseDisplay?.();

@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useRef, useEffect } from 'react';
+import React, { FC, ReactNode, useRef, useEffect, KeyboardEvent } from 'react';
 import { Component } from '../../types';
 
 // Styles
@@ -9,6 +9,7 @@ export interface Tab {
 	id: string | number;
 	title: string | number;
 	content: ReactNode;
+	hidden?: boolean;
 }
 
 export interface TabProps extends Component {
@@ -32,13 +33,12 @@ export const Tab: FC<TabProps> = (props) => {
 			role='tab'
 			id={`${props.tab.id}`}
 			aria-selected={props.selected}
-			tabIndex={props.selected && !props.isFocused ? 0 : -1}
+			tabIndex={props.selected ? 0 : -1}
 			ref={itemRef}
 			onClick={() => {
 				props.onPress();
 			}}
-			// @ts-ignore
-			onKeyPress={(event: KeyboardEvent<HTMLButtonElement>) => {
+			onKeyPress={(event: KeyboardEvent) => {
 				event.preventDefault();
 				(event.which === 13 || event.which === 32) && props.onPress();
 			}}

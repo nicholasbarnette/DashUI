@@ -1,4 +1,11 @@
-import React, { FC, useState, useRef, useEffect, Fragment } from 'react';
+import React, {
+	FC,
+	useState,
+	useRef,
+	useEffect,
+	Fragment,
+	KeyboardEvent,
+} from 'react';
 import { Component } from '../../types';
 
 // Components
@@ -12,7 +19,7 @@ export interface NavigationDrawerMenuItem {
 	key?: string;
 	title: string;
 	link: string;
-	display?: boolean;
+	hidden?: boolean;
 }
 
 export interface NavigationDrawerItemProps {
@@ -49,20 +56,59 @@ export const NavigationDrawer: FC<NavigationDrawerProps> = (props) => {
 	const menuRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		setFocusedIdx(0);
-	}, [isOpen]);
-
-	useEffect(() => {
-		if (focusedIdx === -1) {
+		if (isOpen) {
+			setFocusedIdx(0);
+		} else {
+			setFocusedIdx(-1);
 			menuRef.current?.focus();
 		}
-	}, [focusedIdx]);
+	}, [isOpen]);
+
+	const calculateFocus = (event: KeyboardEvent) => {
+		let newIdx = focusedIdx;
+		switch (event.which) {
+			case event.shiftKey && 9: // reverse tab
+			case 38: // up
+				while (newIdx - 1 >= -1) {
+					newIdx--;
+					if (newIdx <= -1) {
+						newIdx = 0;
+						break;
+					}
+					if (!props.items[newIdx].hidden) {
+						break;
+					}
+				}
+				setFocusedIdx(newIdx);
+				return;
+			case 9: // tab
+			case 40: // down
+				while (newIdx + 1 <= props.items.length) {
+					newIdx++;
+					if (newIdx >= props.items.length) {
+						newIdx = focusedIdx;
+						break;
+					}
+					if (!props.items[newIdx].hidden) {
+						break;
+					}
+				}
+				setFocusedIdx(newIdx);
+				return;
+			case 27:
+				setFocusedIdx(-1);
+				setIsOpen(false);
+				return;
+			default:
+				return;
+		}
+	};
 
 	return (
 		<Fragment>
 			<div
 				className={cn.menu}
-				title="Open Menu"
+				title='Open Menu'
 				onClick={(event) => {
 					event.preventDefault();
 					setIsOpen(!isOpen);
@@ -72,37 +118,13 @@ export const NavigationDrawer: FC<NavigationDrawerProps> = (props) => {
 					(event.which === 13 || event.which === 32) &&
 						setIsOpen(!isOpen);
 				}}
-				onKeyDown={(event) => {
-					switch (event.which) {
-						case event.shiftKey && 9: // reverse tab
-						case 38: // up
-							setFocusedIdx(
-								focusedIdx - 1 <= -2 ? -1 : focusedIdx - 1,
-							);
-							return;
-						case 9: // tab
-						case 40: // down
-							setFocusedIdx(
-								focusedIdx + 1 >= 3
-									? focusedIdx
-									: focusedIdx + 1,
-							);
-							return;
-						case 27:
-							setFocusedIdx(-1);
-							setIsOpen(false);
-							return;
-						default:
-							return;
-					}
-				}}
 				tabIndex={0}
 				ref={menuRef}
 			>
 				<SVG
 					svg={Hamburger}
-					tooltip="Toggle navigation drawer"
-					design="inverted"
+					tooltip='Toggle navigation drawer'
+					design='inverted'
 				/>
 			</div>
 			<div
@@ -111,39 +133,17 @@ export const NavigationDrawer: FC<NavigationDrawerProps> = (props) => {
 					(isOpen && cn.open) || cn.closed,
 					props.className,
 				)}
+				data-testid={props.testId ? `${props.testId}-menu` : null}
 			>
 				<nav className={cx(cn.navigationBar, props.className)}>
 					<ul
 						className={cn.list}
 						onKeyDown={(event) => {
-							switch (event.which) {
-								case event.shiftKey && 9: // reverse tab
-								case 38: // up
-									setFocusedIdx(
-										focusedIdx - 1 <= -2
-											? -1
-											: focusedIdx - 1,
-									);
-									return;
-								case 9: // tab
-								case 40: // down
-									setFocusedIdx(
-										focusedIdx + 1 >= props.items.length
-											? focusedIdx
-											: focusedIdx + 1,
-									);
-									return;
-								case 27:
-									setFocusedIdx(-1);
-									setIsOpen(false);
-									return;
-								default:
-									return;
-							}
+							calculateFocus(event);
 						}}
 					>
 						{props.items.map((itm, idx) => {
-							return (
+							return !itm.hidden ? (
 								<NavigationDrawerItem
 									key={itm.key ?? itm.title}
 									href={itm.link}
@@ -151,7 +151,7 @@ export const NavigationDrawer: FC<NavigationDrawerProps> = (props) => {
 								>
 									{itm.title}
 								</NavigationDrawerItem>
-							);
+							) : null;
 						})}
 					</ul>
 				</nav>
@@ -160,6 +160,9 @@ export const NavigationDrawer: FC<NavigationDrawerProps> = (props) => {
 					onClick={() => {
 						setIsOpen(false);
 					}}
+					data-testid={
+						props.testId ? `${props.testId}-overlay` : null
+					}
 				></div>
 			</div>
 		</Fragment>

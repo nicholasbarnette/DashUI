@@ -1,8 +1,15 @@
-import React, { FC, useState, useEffect, useRef } from 'react';
+import React, {
+	FC,
+	useState,
+	useEffect,
+	useRef,
+	KeyboardEvent,
+	MouseEvent,
+} from 'react';
 import { Component } from '../../types';
 
 // Components
-import { Menu, MenuItem, GenerateMenuId } from '../Menu';
+import { Menu, MenuItem, useGenerateMenuId } from '../Menu';
 import { getVariantClassName, ButtonVariant } from '../Button';
 
 // Styles
@@ -11,46 +18,22 @@ import cn from './MenuButton.scss';
 import btnCN from '../Button/Button.scss';
 
 export interface MenuButtonProps extends Component {
-	items?: MenuItem[];
+	items: MenuItem[];
 	tooltip: string;
 	onPress?: (id: string) => void;
 	variant?: ButtonVariant;
 }
 
 export const MenuButton: FC<MenuButtonProps> = (props) => {
-	const [menuId, setMenuId] = useState(GenerateMenuId);
+	const menuId = useGenerateMenuId();
 	const [isOpen, setIsOpen] = useState(false);
 	const btnRef = useRef<HTMLDivElement>(null);
 	const buttonRef = useRef<HTMLButtonElement>(null);
 
-	const checkClick = (event: any) => {
-		let shouldClose = true;
-		for (let p of event.path) {
-			if (p && p.getAttribute && p.getAttribute('data-menuid')) {
-				shouldClose =
-					shouldClose && !(p.getAttribute('data-menuid') === menuId);
-				if (!shouldClose) break;
-			}
-		}
-		shouldClose && setIsOpen(false);
-	};
-
-	const checkBlur = (event: any) => {
-		let shouldClose = true;
-		for (let p of event.path) {
-			if (p && p.getAttribute && p.getAttribute('data-menuid')) {
-				shouldClose =
-					shouldClose && !(p.getAttribute('data-menuid') === menuId);
-				if (!shouldClose) break;
-			}
-		}
-		shouldClose && setIsOpen(false);
-	};
-
 	useEffect(() => {
-		window.addEventListener('click', checkClick);
+		window.addEventListener('click', () => setIsOpen(false));
 		return () => {
-			window.removeEventListener('click', checkClick);
+			window.removeEventListener('click', () => setIsOpen(false));
 		};
 	}, []);
 
@@ -60,6 +43,7 @@ export const MenuButton: FC<MenuButtonProps> = (props) => {
 			className={cx(cn.container, props.className)}
 			data-testid={props.testId}
 			data-menuid={menuId}
+			style={props.style}
 		>
 			<button
 				className={cx(
@@ -72,10 +56,12 @@ export const MenuButton: FC<MenuButtonProps> = (props) => {
 				tabIndex={0}
 				onClick={(event) => {
 					event.preventDefault();
+					event.stopPropagation();
 					setIsOpen(!isOpen);
 				}}
 				onKeyPress={(event) => {
 					event.preventDefault();
+					event.stopPropagation();
 					(event.which === 13 || event.which === 32) &&
 						setIsOpen(!isOpen);
 				}}
@@ -93,14 +79,13 @@ export const MenuButton: FC<MenuButtonProps> = (props) => {
 				items={props.items}
 				isOpen={isOpen}
 				onPress={(id: string) => {
-					if (id === '') {
-						setIsOpen(false);
-						buttonRef.current?.focus();
-					}
 					props.onPress?.(id);
 				}}
 				className={cn.menu}
 				menuId={menuId}
+				onClose={() => {
+					setIsOpen(false);
+				}}
 			></Menu>
 		</div>
 	);

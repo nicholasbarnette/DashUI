@@ -14,6 +14,7 @@ export interface InputProps extends Component {
 	invalid?: boolean;
 	onChange?: (value: string) => void;
 	readOnly?: boolean;
+	disabled?: boolean;
 }
 
 export const Input: FC<InputProps> = (props) => {
@@ -23,16 +24,17 @@ export const Input: FC<InputProps> = (props) => {
 			className={cx(
 				cn.input,
 				props.readOnly && cn.readonly,
+				props.disabled && cn.disabled,
 				props.invalid && cn.invalid,
 				props.className,
 			)}
 			placeholder={props.placeholder}
-			type={props.type || 'text'}
+			type={props.type ?? 'text'}
 			name={props.name}
 			id={props.id}
 			value={props.value}
 			onChange={(evt) => {
-				if (!props.readOnly) {
+				if (!props.readOnly && !props.disabled) {
 					props.onChange?.(evt.target.value);
 				}
 			}}

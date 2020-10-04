@@ -17,8 +17,8 @@ const babelLoader = {
 			],
 			'@babel/preset-react',
 		],
-		plugins: ['@babel/syntax-dynamic-import'],
 	},
+	query: { compact: false },
 };
 
 module.exports = {
@@ -28,16 +28,14 @@ module.exports = {
 		path: path.join(__dirname, '/build'),
 		filename: 'index.js',
 		libraryTarget: 'umd',
-		library: 'dashui',
-		umdNamedDefine: true,
 	},
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js'],
-		alias: {
-			// Needed when library is linked via `npm link` to app
-			react: path.join(__dirname, './node_modules/react'),
-			'react-dom': path.join(__dirname, './node_modules/react-dom'),
-		},
+		// alias: {
+		// 	// Needed when library is linked via `npm link` to app
+		// 	react: path.join(__dirname, './node_modules/react'),
+		// 	'react-dom': path.join(__dirname, './node_modules/react-dom'),
+		// },
 	},
 	performance: {
 		maxEntrypointSize: 800000,
@@ -86,19 +84,10 @@ module.exports = {
 			filename: '[name].[hash].css',
 		}),
 	],
-	externals: {
+	externals: [
 		// Don't bundle react or react-dom
-		react: {
-			commonjs: 'react',
-			commonjs2: 'react',
-			amd: 'React',
-			root: 'React',
-		},
-		'react-dom': {
-			commonjs: 'react-dom',
-			commonjs2: 'react-dom',
-			amd: 'ReactDOM',
-			root: 'ReactDOM',
-		},
-	},
+		'react',
+		'react-dom',
+		'd3',
+	],
 };

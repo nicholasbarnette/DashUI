@@ -1,5 +1,10 @@
 import React from 'react';
-import { cleanup, render } from '@testing-library/react';
+import {
+	cleanup,
+	render,
+	fireEvent,
+	getByDisplayValue,
+} from '@testing-library/react';
 import { Input } from '..';
 
 afterEach(cleanup);
@@ -29,5 +34,41 @@ describe('basic input', () => {
 			<Input placeholder="Email" value="My Input" onChange={() => {}} />,
 		);
 		expect(getByPlaceholderText('Email')).toBeTruthy();
+	});
+
+	it('cannot change text when readonly', () => {
+		const handleChange = jest.fn();
+		const { getByDisplayValue } = render(
+			<Input
+				placeholder="Email"
+				value="My Input"
+				onChange={handleChange}
+				readOnly
+			/>,
+		);
+		const input = getByDisplayValue('My Input');
+		expect(input).toBeTruthy();
+		fireEvent.focus(input);
+		fireEvent.change(input, { target: { value: 'test@test.com' } });
+		expect(handleChange).not.toHaveBeenCalled();
+		expect(getByDisplayValue('My Input')).toBeTruthy();
+	});
+
+	it('cannot change text when disabled', () => {
+		const handleChange = jest.fn();
+		const { getByDisplayValue } = render(
+			<Input
+				placeholder="Email"
+				value="My Input"
+				onChange={handleChange}
+				disabled
+			/>,
+		);
+		const input = getByDisplayValue('My Input');
+		expect(input).toBeTruthy();
+		fireEvent.focus(input);
+		fireEvent.change(input, { target: { value: 'test@test.com' } });
+		expect(handleChange).not.toHaveBeenCalled();
+		expect(getByDisplayValue('My Input')).toBeTruthy();
 	});
 });

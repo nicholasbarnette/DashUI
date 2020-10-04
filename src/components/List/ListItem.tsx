@@ -19,20 +19,23 @@ export interface ListItemProps {
 }
 
 export const ListItem: FC<ListItemProps> = (props) => {
+	const interactable = props.interactable ?? true;
 	return (
 		<li
 			data-testid={props.testId}
 			key={props.item.key}
 			className={cx(
 				cn.item,
-				props.interactable && cn.interactable,
+				interactable && cn.interactable,
 				props.className,
 			)}
-			onKeyPress={() => {
-				props.onPress?.(props.item.key);
+			onKeyPress={(event) => {
+				(event.which === 13 || event.which === 32) &&
+					interactable &&
+					props.onPress?.(props.item.key);
 			}}
 			onClick={() => {
-				props.onPress?.(props.item.key);
+				interactable && props.onPress?.(props.item.key);
 			}}
 			tabIndex={0}
 		>

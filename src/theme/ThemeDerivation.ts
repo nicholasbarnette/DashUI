@@ -119,9 +119,6 @@ export const derivePattern = (pattern: States, theme: Theme) => {
 	const o: ThemeProperties = {};
 	Object.keys(pattern).map((state) => {
 		Object.keys(pattern[state as keyof States]).map((value) => {
-			// o[`${state as keyof States}-${value as keyof StateValues}`] =
-			// 	values[state as keyof States][value as keyof StateValues];
-
 			o[`${state as keyof States}-${value as keyof StateValues}`] =
 				pattern[state as keyof States][
 					value as keyof StateValues

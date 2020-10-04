@@ -6,32 +6,85 @@ afterEach(cleanup);
 
 describe('basic form element', () => {
 	it('renders', () => {
-		const { getByTestId } = render(
+		const { getByText, getByDisplayValue } = render(
 			<FormElement
 				testId="element"
 				id="element"
 				label="Element:"
-				element={{ element: 'input' }}
+				element={{ element: 'input', props: { value: 'text input' } }}
 			/>,
 		);
-		expect(getByTestId('elementLabel')).toBeTruthy();
-		expect(getByTestId('elementElement')).toBeTruthy();
+		expect(getByText('Element:')).toBeTruthy();
+		expect(getByDisplayValue('text input')).toBeTruthy();
 	});
 
-	it('renders accessibly', () => {
-		const { getByTestId } = render(
+	it('renders input accessibly', () => {
+		const { getByText, getByDisplayValue } = render(
+			<FormElement
+				id="element"
+				label="Element:"
+				element={{ element: 'input', props: { value: 'text input' } }}
+			/>,
+		);
+		expect(getByText('Element:')).toBeTruthy();
+		expect(getByText('Element:').getAttribute('for')).toBe('element');
+		expect(getByDisplayValue('text input')).toBeTruthy();
+		expect(getByDisplayValue('text input').getAttribute('id')).toBe(
+			'element',
+		);
+		expect(getByDisplayValue('text input').getAttribute('name')).toBe(
+			'element',
+		);
+	});
+
+	it('renders switch accessibly', () => {
+		const { getByText, getByRole } = render(
+			<FormElement
+				id="element"
+				label="Element:"
+				element={{ element: 'switch' }}
+			/>,
+		);
+		expect(getByText('Element:')).toBeTruthy();
+		expect(getByText('Element:').getAttribute('for')).toBe('element');
+		expect(getByRole('switch')).toBeTruthy();
+	});
+
+	it('renders text area accessibly', () => {
+		const { getByText, getByDisplayValue } = render(
+			<FormElement
+				id="element"
+				label="Element:"
+				element={{ element: 'textarea', props: { value: 'text area' } }}
+			/>,
+		);
+		expect(getByText('Element:')).toBeTruthy();
+		expect(getByText('Element:').getAttribute('for')).toBe('element');
+		expect(getByDisplayValue('text area')).toBeTruthy();
+		expect(getByDisplayValue('text area').getAttribute('id')).toBe(
+			'element',
+		);
+		expect(getByDisplayValue('text area').getAttribute('name')).toBe(
+			'element',
+		);
+	});
+
+	it('renders a required signifier', () => {
+		const { getByText, getByDisplayValue } = render(
 			<FormElement
 				testId="element"
 				id="element"
 				label="Element:"
-				element={{ element: 'input' }}
+				element={{ element: 'input', props: { value: 'text input' } }}
+				required
 			/>,
 		);
-		expect(getByTestId('elementLabel').getAttribute('for')).toBe('element');
-		expect(getByTestId('elementElement').getAttribute('id')).toBe(
+		expect(getByText('Element: *')).toBeTruthy();
+		expect(getByText('Element: *').getAttribute('for')).toBe('element');
+		expect(getByDisplayValue('text input').getAttribute('id')).toBe(
 			'element',
 		);
-		expect(getByTestId('elementElement').getAttribute('name')).toBe(
+		expect(getByDisplayValue('text input').getAttribute('name')).toBe(
 			'element',
 		);
 	});

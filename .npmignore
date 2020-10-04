@@ -6,4 +6,5 @@ jest.config.json
 src/
 mocks/
 .storybook/
+cov/
 node_modules/

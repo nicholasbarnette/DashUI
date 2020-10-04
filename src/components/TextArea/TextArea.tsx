@@ -15,6 +15,7 @@ export interface TextAreaProps extends Component {
 	maxLength?: number;
 	onChange?: (value: string) => void;
 	resize?: boolean;
+	disabled?: boolean;
 }
 
 export const TextArea: FC<TextAreaProps> = (props) => {
@@ -25,6 +26,7 @@ export const TextArea: FC<TextAreaProps> = (props) => {
 				cn.textarea,
 				props.resize && cn.resize,
 				props.invalid && cn.invalid,
+				props.disabled && cn.disabled,
 				props.className,
 			)}
 			placeholder={props.placeholder}
@@ -40,7 +42,7 @@ export const TextArea: FC<TextAreaProps> = (props) => {
 				) {
 					return;
 				}
-				props.onChange?.(evt.target.value);
+				!props.disabled && props.onChange?.(evt.target.value);
 			}}
 			style={props.style}
 		></textarea>

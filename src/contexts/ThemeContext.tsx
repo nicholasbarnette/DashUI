@@ -115,7 +115,7 @@ export const ThemeSwitcher: FC<ThemeSwitcherProps> = (props) => {
 					<MenuButton
 						className={props.className}
 						testId={props.testId}
-						variant="lightweight"
+						variant='lightweight'
 						tooltip={props.tooltip}
 						items={[
 							...(props.items || []),

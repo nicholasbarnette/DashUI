@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { Input } from '../../Input';
 import { Label } from '../../Label';
 import { InputValidator } from '../InputValidators';
@@ -11,12 +11,28 @@ export default {
 export const Basic = () => {
 	const [val, setVal] = useState('test');
 	return (
-		<Input
-			value={val}
-			onChange={(value) => {
-				setVal(value);
-			}}
-		/>
+		<Fragment>
+			<Input
+				value={val}
+				onChange={(value) => {
+					setVal(value);
+				}}
+			/>
+			<Input
+				value={val}
+				onChange={(value) => {
+					setVal(value);
+				}}
+				readOnly
+			/>
+			<Input
+				value={val}
+				onChange={(value) => {
+					setVal(value);
+				}}
+				disabled
+			/>
+		</Fragment>
 	);
 };
 

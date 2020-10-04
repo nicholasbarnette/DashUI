@@ -11,5 +11,6 @@
 	"moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
 	"collectCoverage": true,
 	"coverageDirectory": "cov",
-	"coverageReporters": ["lcov", "text"]
+	"coverageReporters": ["lcov", "text"],
+	"coveragePathIgnorePatterns": [".*/SVG/svgs", ".*/theme/Theme.ts"]
 }

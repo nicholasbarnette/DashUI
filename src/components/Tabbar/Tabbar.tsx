@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef } from 'react';
+import React, { FC, useState, useRef, KeyboardEvent } from 'react';
 import { Component } from '../../types';
 
 // Components
@@ -23,6 +23,44 @@ export const Tabbar: FC<TabbarProps> = (props) => {
 		return { [`${props.tabs[0].id}`]: true };
 	});
 
+	const calculateFocus = (event: KeyboardEvent) => {
+		let newIdx = focusedIdx;
+		switch (event.which) {
+			case event.shiftKey && 9: // reverse tab
+			case 9: // tab
+				setFocusedIdx(selectedTab);
+				return;
+			case 37: // left
+				while (newIdx - 1 >= -1) {
+					newIdx--;
+					if (newIdx <= -1) {
+						newIdx = 0;
+						break;
+					}
+					if (!props.tabs[newIdx].hidden) {
+						break;
+					}
+				}
+				setFocusedIdx(newIdx);
+				return;
+			case 39: // right
+				while (newIdx + 1 <= props.tabs.length) {
+					newIdx++;
+					if (newIdx >= props.tabs.length) {
+						newIdx = focusedIdx;
+						break;
+					}
+					if (!props.tabs[newIdx].hidden) {
+						break;
+					}
+				}
+				setFocusedIdx(newIdx);
+				return;
+			default:
+				return;
+		}
+	};
+
 	return (
 		<div
 			className={cx(cn.container, props.className)}
@@ -30,63 +68,31 @@ export const Tabbar: FC<TabbarProps> = (props) => {
 			data-testid={props.testId}
 			aria-label={props.label}
 			ref={tabbarRef}
-			onKeyDown={(event) => {
-				switch (event.which) {
-					case event.shiftKey && 9: // reverse tab
-					case 9: // tab
-						// Signifies user has tabbed away from tabs
-						setFocusedIdx(-1);
-						return;
-					case 37: // left
-						if (focusedIdx === -1) {
-							setFocusedIdx(
-								selectedTab - 1 <= 0 ? 0 : selectedTab - 1,
-							);
-						} else {
-							setFocusedIdx(
-								focusedIdx - 1 <= 0 ? 0 : focusedIdx - 1,
-							);
-						}
-						return;
-					case 39: // right
-						if (focusedIdx === -1) {
-							setFocusedIdx(
-								selectedTab + 1 >= props.tabs.length
-									? props.tabs.length
-									: selectedTab + 1,
-							);
-						} else {
-							setFocusedIdx(
-								focusedIdx + 1 >= props.tabs.length
-									? focusedIdx
-									: focusedIdx + 1,
-							);
-						}
-						return;
-					default:
-						return;
-				}
+			onKeyDown={(event: KeyboardEvent) => {
+				calculateFocus(event);
 			}}
 		>
 			<div className={cn.tabs} role='tablist'>
 				{props.tabs.map((tab, idx) => {
 					return (
-						<Tab
-							key={tab.id || idx}
-							tab={tab}
-							selected={idx === selectedTab}
-							isFocused={idx === focusedIdx}
-							onPress={() => {
-								setRenderedTabs(
-									(() => {
-										const newRenderedTabs = renderedTabs;
-										newRenderedTabs[tab.id] = true;
-										return newRenderedTabs;
-									})(),
-								);
-								setSelectedTab(idx);
-							}}
-						/>
+						!tab.hidden && (
+							<Tab
+								key={tab.id || idx}
+								tab={tab}
+								selected={idx === selectedTab}
+								isFocused={idx === focusedIdx}
+								onPress={() => {
+									setRenderedTabs(
+										(() => {
+											const newRenderedTabs = renderedTabs;
+											newRenderedTabs[tab.id] = true;
+											return newRenderedTabs;
+										})(),
+									);
+									setSelectedTab(idx);
+								}}
+							/>
+						)
 					);
 				})}
 			</div>

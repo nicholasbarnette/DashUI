@@ -2,7 +2,7 @@
 	display: flex;
 	flex-direction: column;
 	box-shadow: var(--background-shadow);
-	border: 1px solid var(--pattern-neutral-bd);
+	border: 1px solid var(--pattern-neutral-normal-bd);
 	border-radius: 0.25rem;
 	overflow: hidden;
 	position: absolute;
@@ -26,7 +26,7 @@
 .item:focus {
 	outline-width: var(--focus-width);
 	outline-style: var(--focus-style);
-	outline-color: var(--focus-light);
+	outline-color: var(--focus-dark);
 	outline-offset: calc(-1 * var(--focus-width) - 1px);
 }
 

@@ -5,15 +5,22 @@ import { Component } from '../../types';
 import cx from 'classnames';
 import cn from './Menu.scss';
 
-export interface MenuItem {
-	type: 'text' | 'divider';
+export interface MenuTextItem {
+	type: 'text';
 	id?: string;
-	value?: string;
-	hide?: boolean;
+	value: string;
+	hidden?: boolean;
 }
 
+export interface MenuDividerItem {
+	type: 'divider';
+	hidden?: boolean;
+}
+
+export type MenuItem = MenuTextItem | MenuDividerItem;
+
 export interface MenuItemProps extends Component {
-	item: MenuItem;
+	item: MenuTextItem;
 	onPress?: (id: string) => void;
 	isFocused?: boolean;
 	idx: number;
@@ -35,10 +42,12 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
 			key={props.item.id || props.idx}
 			onClick={(event) => {
 				event.preventDefault();
+				event.stopPropagation();
 				props.onPress?.(props.item.id || `${props.idx}`);
 			}}
 			onKeyPress={(event) => {
 				event.preventDefault();
+				event.stopPropagation();
 				(event.which === 13 || event.which === 32) &&
 					props.onPress?.(props.item.id || `${props.idx}`);
 			}}

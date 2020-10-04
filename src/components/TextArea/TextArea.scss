@@ -29,3 +29,11 @@
 	border-color: var(--color-alert);
 	color: var(--color-alert);
 }
+
+.disabled {
+	background-color: var(--input-bg);
+	border: 1px solid var(--input-bd);
+	color: var(--input-fg);
+	caret-color: transparent;
+	opacity: 0.3;
+}

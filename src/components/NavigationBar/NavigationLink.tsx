@@ -7,6 +7,7 @@ import cn from './NavigationLink.scss';
 
 export interface NavigationLinkProps extends Component {
 	link: string;
+	tooltip?: string;
 }
 
 export const NavigationLink: FC<NavigationLinkProps> = (props) => {
@@ -17,6 +18,7 @@ export const NavigationLink: FC<NavigationLinkProps> = (props) => {
 			className={cx(cn.link, props.className)}
 			tabIndex={0}
 			href={props.link}
+			title={props.tooltip}
 		>
 			{props.children}
 		</a>
