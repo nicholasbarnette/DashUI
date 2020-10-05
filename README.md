@@ -33,4 +33,4 @@ const MyApplicationButton: FC<{
 
 ### License
 
-This package is provided under the [MIT license](https://github.com/nicholasbarnette/DashUI/LICENSE).
+This package is provided under the [MIT license](https://github.com/nicholasbarnette/DashUI/blob/master/LICENSE).
