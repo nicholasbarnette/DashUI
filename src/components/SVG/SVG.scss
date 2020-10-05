@@ -7,20 +7,20 @@
 .svg > path {
 	fill: var(--svg-fill, var(--text-default));
 	&.inverse {
-		fill: var(--text-inverse);
+		fill: var(--svg-fill-inverse, var(--text-inverse));
 	}
 }
 
 .svg.alternate > path {
 	fill: var(--svg-fill, var(--text-default));
 	&.inverse {
-		fill: var(--text-inverse);
+		fill: var(--svg-fill-inverse, var(--text-inverse));
 	}
 }
 
 .svg.inverted > path {
-	fill: var(--svg-fill, var(--text-alternate));
+	fill: var(--svg-fill-inverse, var(--text-alternate));
 	&.inverse {
-		fill: var(--text-default);
+		fill: var(--svg-fill, var(--text-default));
 	}
 }

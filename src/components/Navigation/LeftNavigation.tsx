@@ -1,7 +1,7 @@
 import React, { FC, useState, KeyboardEvent } from 'react';
 import { Component } from '../../types';
 import { LeftNavigationItem, LeftNavItem } from './LeftNavItem';
-import { Instagram, SVG } from '../SVG';
+import { SVG, ChevronRight, ChevronLeft } from '../SVG';
 
 // Styles
 import cx from 'classnames';
@@ -9,6 +9,11 @@ import cn from './LeftNavigation.scss';
 
 export interface LeftNavigationProps extends Component {
 	items: LeftNavigationItem[];
+	/**
+	 * Desired width of the left navigation when it is open in pixels.
+	 * Default: `15rem`.
+	 */
+	width?: number;
 }
 
 export const LeftNavigation: FC<LeftNavigationProps> = (props) => {
@@ -63,7 +68,11 @@ export const LeftNavigation: FC<LeftNavigationProps> = (props) => {
 			<div
 				className={cn.leftNav}
 				style={{
-					width: isOpen ? '10rem' : 'calc(var(--spacing-md) * 3)',
+					width: isOpen
+						? !!props.width
+							? `${props.width}px`
+							: '15rem'
+						: 'calc(var(--spacing-md) * 3)',
 				}}
 			>
 				<ul
@@ -101,13 +110,13 @@ export const LeftNavigation: FC<LeftNavigationProps> = (props) => {
 					title={`${isOpen ? 'Collapse' : 'Expand'} Menu`}
 				>
 					<SVG
-						svg={Instagram}
+						svg={isOpen ? ChevronLeft : ChevronRight}
 						tooltip={`${
 							isOpen ? 'Collapse' : 'Expand'
 						} left navigation`}
 						className={cn.expandIcon}
 					/>
-					<p>{`${isOpen ? 'Collapse' : 'Expand'} Menu`}</p>
+					<span>{`${isOpen ? 'Collapse' : 'Expand'} Menu`}</span>
 				</div>
 			</div>
 			<div className={cn.content}>

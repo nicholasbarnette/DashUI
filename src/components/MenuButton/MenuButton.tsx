@@ -29,11 +29,14 @@ export const MenuButton: FC<MenuButtonProps> = (props) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const btnRef = useRef<HTMLDivElement>(null);
 	const buttonRef = useRef<HTMLButtonElement>(null);
+	const checkClick = () => {
+		setIsOpen(false);
+	};
 
 	useEffect(() => {
-		window.addEventListener('click', () => setIsOpen(false));
+		window.addEventListener('click', checkClick);
 		return () => {
-			window.removeEventListener('click', () => setIsOpen(false));
+			window.removeEventListener('click', checkClick);
 		};
 	}, []);
 
@@ -66,7 +69,7 @@ export const MenuButton: FC<MenuButtonProps> = (props) => {
 						setIsOpen(!isOpen);
 				}}
 				aria-expanded={isOpen ? 'true' : 'false'}
-				aria-haspopup='true'
+				aria-haspopup="true"
 				aria-controls={menuId}
 				ref={buttonRef}
 				aria-label={props.tooltip}

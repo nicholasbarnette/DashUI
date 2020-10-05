@@ -29,23 +29,28 @@ const GenerateRandomId = () => {
 
 export type SVGDesign = 'inverted' | 'alternate' | 'default';
 
-export type SVGProps = {
+export type SVGProps = ReactSVGProps<SVGSVGElement> & {
 	svg: SVGType;
 	design?: SVGDesign;
 	tooltip: string;
-	color?: string;
-} & ReactSVGProps<SVGSVGElement> &
-	Component;
+	fillOverride?: { default: string; inverse: string };
+} & Component;
 
 export const SVG: FC<SVGProps> = (props) => {
-	const { svg, className, design, color, style, ...restProps } = props;
+	const { svg, className, design, fillOverride, style, ...restProps } = props;
 	return svg.render({
 		role: 'img',
 		label: svg.name + GenerateRandomId(),
-		style: { ...({ '--svg-fill': color } as CSSProperties), ...style },
+		style: {
+			...({
+				'--svg-fill': fillOverride?.default,
+				'--svg-fill-inverse': fillOverride?.inverse,
+			} as CSSProperties),
+			...style,
+		},
 		className: cx(
 			cn.svg,
-			props.color && cn.customColor,
+			fillOverride?.default && cn.customColor,
 			getDesignClassName(design),
 			className,
 		),

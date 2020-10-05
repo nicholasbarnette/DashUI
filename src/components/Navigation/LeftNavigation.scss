@@ -28,8 +28,14 @@
 	justify-content: flex-start;
 	user-select: none;
 	cursor: pointer;
-	white-space: nowrap;
 	padding: var(--spacing-sm) 0;
+	padding-inline-end: var(--spacing-sm);
+
+	> span {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 
 	&:focus {
 		outline-width: var(--focus-width);
@@ -71,8 +77,14 @@
 	justify-content: flex-start;
 	align-items: center;
 	padding: var(--spacing-md) 0;
+	padding-inline-end: var(--spacing-sm);
 	cursor: pointer;
-	white-space: nowrap;
+
+	> span {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 
 	&:focus {
 		outline-width: var(--focus-width);

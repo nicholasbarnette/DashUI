@@ -60,19 +60,29 @@ export const LeftNavItem: FC<LeftNavItemProps> = (props) => {
 						svg={props.item.svg}
 						tooltip=""
 						className={cn.icon}
-						color={
-							props.selected
+						fillOverride={{
+							default: props.selected
 								? 'var(--background-navigation)'
-								: 'var(--text-default)'
-						}
+								: 'var(--text-default)',
+							inverse: props.selected
+								? 'var(--text-default)'
+								: 'var(--background-navigation)',
+						}}
 					/>
 				) : (
-					<span className={cn.textIcon}>
+					<span
+						className={cn.textIcon}
+						style={{
+							color: props.selected
+								? 'var(--background-navigation)'
+								: 'var(--text-default)',
+						}}
+					>
 						{props.item.text.slice(0, 1)}
 					</span>
 				)}
 			</div>
-			{props.item.text}
+			<span>{props.item.text}</span>
 		</li>
 	);
 };
