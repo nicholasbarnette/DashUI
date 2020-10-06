@@ -4,7 +4,7 @@ import React, {
 	useState,
 	useMemo,
 	useEffect,
-	useRef,
+	useRef,, CSSProperties
 } from 'react';
 import { MenuButton } from '../components/MenuButton';
 import { MenuItem } from '../components/Menu';
@@ -24,6 +24,7 @@ export const ThemeContext = createContext<ThemeProviderContext>({
 
 export interface ThemeProviderProps {
 	theme?: Theme;
+	style?: CSSProperties;
 }
 
 export const convertPropertiesToCSS = (properties: {
@@ -91,7 +92,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
 	}, [properties]);
 
 	return (
-		<div style={{ height: '100%', width: '100%' }}>
+		<div style={{ height: '100%', width: '100%', ...props.style }}>
 			<ThemeContext.Provider value={currentTheme}>
 				{props.children}
 			</ThemeContext.Provider>
@@ -115,7 +116,7 @@ export const ThemeSwitcher: FC<ThemeSwitcherProps> = (props) => {
 					<MenuButton
 						className={props.className}
 						testId={props.testId}
-						variant='lightweight'
+						variant="lightweight"
 						tooltip={props.tooltip}
 						items={[
 							...(props.items || []),
