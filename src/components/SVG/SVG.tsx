@@ -17,7 +17,7 @@ export interface SVGType {
 	render: (props: SVGObjectProps) => JSX.Element;
 }
 
-const GenerateRandomId = () => {
+const useGenerateRandomId = () => {
 	let id = '';
 	for (let i = 0; i < 10; i++) {
 		id += Math.floor(Math.random() * 16)
@@ -33,24 +33,41 @@ export type SVGProps = ReactSVGProps<SVGSVGElement> & {
 	svg: SVGType;
 	design?: SVGDesign;
 	tooltip: string;
-	fillOverride?: { default: string; inverse: string };
+	customColor?: { default: string; inverse?: string };
+	/**
+	 * Pixel based number size
+	 */
+	size?: number;
 } & Component;
 
 export const SVG: FC<SVGProps> = (props) => {
-	const { svg, className, design, fillOverride, style, ...restProps } = props;
+	const {
+		svg,
+		className,
+		design,
+		customColor,
+		style,
+		size,
+		...restProps
+	} = props;
+
+	const id = useGenerateRandomId();
+
 	return svg.render({
 		role: 'img',
-		label: svg.name + GenerateRandomId(),
+		label: svg.name + id,
 		style: {
 			...({
-				'--svg-fill': fillOverride?.default,
-				'--svg-fill-inverse': fillOverride?.inverse,
+				'--svg-custom-color': customColor?.default,
+				'--svg-custom-color-inverse':
+					customColor?.inverse ?? customColor?.default,
 			} as CSSProperties),
 			...style,
+			...(!!size ? { height: `${size}px`, width: `${size}px` } : {}),
 		},
 		className: cx(
 			cn.svg,
-			fillOverride?.default && cn.customColor,
+			customColor?.default && cn.customColor,
 			getDesignClassName(design),
 			className,
 		),

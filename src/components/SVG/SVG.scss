@@ -5,22 +5,31 @@
 }
 
 .svg > path {
-	fill: var(--svg-fill, var(--text-default));
+	fill: var(--svg-custom-color, var(--text-default));
 	&.inverse {
-		fill: var(--svg-fill-inverse, var(--text-inverse));
+		fill: var(--svg-custom-color-inverse, var(--text-inverse));
 	}
 }
 
 .svg.alternate > path {
-	fill: var(--svg-fill, var(--text-default));
+	fill: var(--svg-custom-color, var(--text-default));
 	&.inverse {
-		fill: var(--svg-fill-inverse, var(--text-inverse));
+		fill: var(--svg-custom-color-inverse, var(--text-inverse));
 	}
 }
 
 .svg.inverted > path {
-	fill: var(--svg-fill-inverse, var(--text-alternate));
+	fill: var(--svg-custom-color-inverse, var(--text-alternate));
 	&.inverse {
-		fill: var(--svg-fill, var(--text-default));
+		fill: var(--svg-custom-color, var(--text-default));
 	}
+}
+
+.stroke {
+	stroke: var(--svg-custom-color, var(--text-default));
+	stroke-width: 2px;
+}
+
+.noFill {
+	fill: none !important;
 }

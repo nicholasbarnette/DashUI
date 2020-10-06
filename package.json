@@ -1,9 +1,13 @@
 {
-	"name": "dashui",
+	"name": "@nickbarnette/dashui",
 	"version": "0.1.0",
 	"description": "A lightweight React UI/component library.",
 	"main": "./build/index.js",
 	"types": "./build/index.d.ts",
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/"
+	},
 	"scripts": {
 		"start": "start-storybook -p 9000 -c .storybook",
 		"build": "rm -rf build/ && webpack --config webpack.config.js --progress",

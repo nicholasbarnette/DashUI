@@ -60,7 +60,7 @@ export const LeftNavItem: FC<LeftNavItemProps> = (props) => {
 						svg={props.item.svg}
 						tooltip=""
 						className={cn.icon}
-						fillOverride={{
+						customColor={{
 							default: props.selected
 								? 'var(--background-navigation)'
 								: 'var(--text-default)',
