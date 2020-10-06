@@ -32,7 +32,7 @@ export type SVGDesign = 'inverted' | 'alternate' | 'default';
 export type SVGProps = ReactSVGProps<SVGSVGElement> & {
 	svg: SVGType;
 	design?: SVGDesign;
-	tooltip: string;
+	tooltip?: string;
 	customColor?: { default: string; inverse?: string };
 	/**
 	 * Pixel based number size
@@ -71,6 +71,7 @@ export const SVG: FC<SVGProps> = (props) => {
 			getDesignClassName(design),
 			className,
 		),
+		tooltip: '',
 		...restProps,
 	});
 };

@@ -1,5 +1,6 @@
 import React, { FC, MouseEvent, KeyboardEvent, CSSProperties } from 'react';
 import { Component } from '../../types';
+import { SVG, SVGProps, SVGType } from '../SVG';
 
 // Styles
 import cx from 'classnames';
@@ -18,6 +19,7 @@ export interface ButtonProps extends Component {
 	shape?: ButtonShape;
 	disabled?: boolean;
 	style?: CSSProperties;
+	icon?: { svg: SVGType } & SVGProps;
 }
 
 export const Button: FC<ButtonProps> = (props) => {
@@ -46,9 +48,35 @@ export const Button: FC<ButtonProps> = (props) => {
 			disabled={props.disabled}
 			style={props.style}
 		>
+			{props.icon ? (
+				<SVG
+					{...props.icon}
+					svg={props.icon.svg}
+					tooltip=""
+					customColor={{
+						default: getIconColor(props.variant),
+						...props.icon.customColor,
+					}}
+					style={{
+						marginInlineEnd: 'var(--spacing-xs)',
+						...props.icon.style,
+					}}
+				/>
+			) : null}
 			{props.children}
 		</button>
 	);
+};
+
+export const getIconColor = (variant?: ButtonVariant) => {
+	switch (variant) {
+		case 'primary':
+			return 'var(--pattern-primary-normal-fg)';
+		case 'lightweight':
+			return 'var(--text-default)';
+		default:
+			return 'var(--pattern-neutral-normal-fg)';
+	}
 };
 
 export const getShapeClassName = (shape?: ButtonShape) => {

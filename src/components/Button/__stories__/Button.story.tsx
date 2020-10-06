@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from '../../Button';
+import { SVG, StarFilled } from '../../SVG';
 
 export default {
 	component: Button,
@@ -30,6 +31,24 @@ export const Design = () => {
 			</Button>
 			<Button tooltip="Basic Button" shape="pill">
 				Pill Button
+			</Button>
+
+			<Button tooltip="Button with icon" icon={{ svg: StarFilled }}>
+				Icon Button
+			</Button>
+			<Button
+				tooltip="Button with icon"
+				icon={{ svg: StarFilled }}
+				variant="primary"
+			>
+				Icon Button
+			</Button>
+			<Button
+				tooltip="Button with icon"
+				icon={{ svg: StarFilled }}
+				variant="lightweight"
+			>
+				Icon Button
 			</Button>
 		</div>
 	);
