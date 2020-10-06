@@ -27,9 +27,9 @@ describe('ThemeDerivation', () => {
 		expect(fontSize).toStrictEqual({
 			lg: 'calc(var(--font-size-md) * 1 * 2)',
 			md: 'calc(1rem * 1)',
-			sm: 'calc(var(--font-size-md) / 1 * 2)',
+			sm: 'calc(var(--font-size-md) / 1 / 2)',
 			xl: 'calc(var(--font-size-lg) * 1 * 2)',
-			xs: 'calc(var(--font-size-sm) / 1 * 2)',
+			xs: 'calc(var(--font-size-sm) / 1 / 2)',
 		});
 	});
 
