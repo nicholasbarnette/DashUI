@@ -4,7 +4,8 @@ import React, {
 	useState,
 	useMemo,
 	useEffect,
-	useRef,, CSSProperties
+	useRef,
+	CSSProperties,
 } from 'react';
 import { MenuButton } from '../components/MenuButton';
 import { MenuItem } from '../components/Menu';

@@ -67,8 +67,8 @@ export const ThemeDerivations: Derivations = {
 				baseSize,
 			)}rem * ${spacingMultiplier})`,
 			lg: `calc(var(--spacing-md) * ${spacingMultiplier} * 2)`,
-			xl: `calc(var(--spacing-lg) * ${spacingMultiplier} * 2)`,
-			xxl: `calc(var(--spacing-xl) * ${spacingMultiplier} * 2)`,
+			xl: `calc(var(--spacing-lg) * ${spacingMultiplier} * 1.5)`,
+			xxl: `calc(var(--spacing-xl) * ${spacingMultiplier} * 1.5)`,
 		};
 	},
 	'font-size': (
@@ -77,14 +77,14 @@ export const ThemeDerivations: Derivations = {
 		baseSize: number,
 	): FontSizes => {
 		return {
-			xs: `calc(var(--font-size-sm) / ${fontSizeMultiplier} / 2)`,
+			xs: `calc(var(--font-size-sm) / ${fontSizeMultiplier} / 1.5)`,
 			sm: `calc(var(--font-size-md) / ${fontSizeMultiplier} / 2)`,
 			md: `calc(${px2rem(
 				fontSizeBase,
 				baseSize,
 			)}rem * ${fontSizeMultiplier})`,
 			lg: `calc(var(--font-size-md) * ${fontSizeMultiplier} * 2)`,
-			xl: `calc(var(--font-size-lg) * ${fontSizeMultiplier} * 2)`,
+			xl: `calc(var(--font-size-lg) * ${fontSizeMultiplier} * 1.5)`,
 		};
 	},
 	color: (colors: Colors) => colors,

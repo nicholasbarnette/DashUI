@@ -15,9 +15,9 @@ describe('ThemeDerivation', () => {
 			lg: 'calc(var(--spacing-md) * 1 * 2)',
 			md: 'calc(1rem * 1)',
 			sm: 'calc(var(--spacing-md) / 1 / 2)',
-			xl: 'calc(var(--spacing-lg) * 1 * 2)',
+			xl: 'calc(var(--spacing-lg) * 1 * 1.5)',
 			xs: 'calc(var(--spacing-sm) / 1 / 2)',
-			xxl: 'calc(var(--spacing-xl) * 1 * 2)',
+			xxl: 'calc(var(--spacing-xl) * 1 * 1.5)',
 			xxs: 'calc(var(--spacing-xs) / 1 / 2)',
 		});
 	});
@@ -28,8 +28,8 @@ describe('ThemeDerivation', () => {
 			lg: 'calc(var(--font-size-md) * 1 * 2)',
 			md: 'calc(1rem * 1)',
 			sm: 'calc(var(--font-size-md) / 1 / 2)',
-			xl: 'calc(var(--font-size-lg) * 1 * 2)',
-			xs: 'calc(var(--font-size-sm) / 1 / 2)',
+			xl: 'calc(var(--font-size-lg) * 1 * 1.5)',
+			xs: 'calc(var(--font-size-sm) / 1 / 1.5)',
 		});
 	});
 
