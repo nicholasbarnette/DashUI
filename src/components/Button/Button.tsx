@@ -58,7 +58,9 @@ export const Button: FC<ButtonProps> = (props) => {
 						...props.icon.customColor,
 					}}
 					style={{
-						marginInlineEnd: 'var(--spacing-xs)',
+						marginInlineEnd: props.children
+							? 'var(--spacing-xs)'
+							: '',
 						...props.icon.style,
 					}}
 				/>

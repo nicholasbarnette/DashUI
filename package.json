@@ -1,6 +1,6 @@
 {
 	"name": "@nickbarnette/dashui",
-	"version": "0.1.5",
+	"version": "0.1.7",
 	"description": "A lightweight React UI/component library.",
 	"main": "./build/index.js",
 	"types": "./build/index.d.ts",

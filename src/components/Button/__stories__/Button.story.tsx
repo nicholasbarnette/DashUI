@@ -50,6 +50,18 @@ export const Design = () => {
 			>
 				Icon Button
 			</Button>
+
+			<Button tooltip="Button with icon" icon={{ svg: StarFilled }} />
+			<Button
+				tooltip="Button with icon"
+				icon={{ svg: StarFilled }}
+				variant="primary"
+			/>
+			<Button
+				tooltip="Button with icon"
+				icon={{ svg: StarFilled }}
+				variant="lightweight"
+			/>
 		</div>
 	);
 };

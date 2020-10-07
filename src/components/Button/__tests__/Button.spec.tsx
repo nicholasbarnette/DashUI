@@ -1,6 +1,7 @@
 import React from 'react';
 import { cleanup, render, fireEvent } from '@testing-library/react';
 import { Button } from '..';
+import { HeartFilled } from '../../SVG';
 
 afterEach(cleanup);
 
@@ -48,6 +49,15 @@ describe('basic button', () => {
 			<Button tooltip="Hello, World!">Basic Button</Button>,
 		);
 		expect(getByTitle('Hello, World!')).toBeTruthy();
+	});
+
+	it('renders icon', () => {
+		const { getByRole } = render(
+			<Button tooltip="Hello, World!" icon={{ svg: HeartFilled }}>
+				Basic Button
+			</Button>,
+		);
+		expect(getByRole('img')).toBeTruthy();
 	});
 });
 
