@@ -399,7 +399,7 @@ export const DefaultDarkTheme: Theme = {
 			primary: '#7d00d6',
 			secondary: '#1976d2',
 			alert: '#EC4D4D',
-			warning: '#DFC32E',
+			warning: '#FF8D00',
 			success: '#18AA00',
 			graph1: '#FF7E7E',
 			graph2: '#D49EFF',
