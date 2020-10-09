@@ -26,3 +26,5 @@ export * from './components/TextArea';
 
 export * from './contexts';
 export * from './theme';
+
+export * from './hooks';

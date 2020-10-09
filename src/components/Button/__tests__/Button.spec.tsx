@@ -59,6 +59,55 @@ describe('basic button', () => {
 		);
 		expect(getByRole('img')).toBeTruthy();
 	});
+
+	it('renders variants', () => {
+		const { getByText } = render(
+			<div>
+				<Button tooltip="" variant="neutral">
+					Neutral Button
+				</Button>
+				<Button tooltip="" variant="primary">
+					Primary Button
+				</Button>
+				<Button tooltip="" variant="lightweight">
+					Lightweight Button
+				</Button>
+				<Button tooltip="" shape="pill">
+					Pill Button
+				</Button>
+			</div>,
+		);
+		expect(getByText('Neutral Button')).toBeTruthy();
+		expect(getByText('Primary Button')).toBeTruthy();
+		expect(getByText('Lightweight Button')).toBeTruthy();
+		expect(getByText('Pill Button')).toBeTruthy();
+	});
+
+	it('renders icon variants', () => {
+		const { getByTitle, getAllByRole } = render(
+			<div>
+				<Button
+					tooltip="Neutral icon"
+					variant="neutral"
+					icon={{ svg: HeartFilled }}
+				/>
+				<Button
+					tooltip="Primary icon"
+					variant="primary"
+					icon={{ svg: HeartFilled }}
+				/>
+				<Button
+					tooltip="Lightweight icon"
+					variant="lightweight"
+					icon={{ svg: HeartFilled }}
+				/>
+			</div>,
+		);
+		expect(getAllByRole('img').length).toBe(3);
+		expect(getByTitle('Neutral icon')).toBeTruthy();
+		expect(getByTitle('Primary icon')).toBeTruthy();
+		expect(getByTitle('Lightweight icon')).toBeTruthy();
+	});
 });
 
 describe('disabled button', () => {

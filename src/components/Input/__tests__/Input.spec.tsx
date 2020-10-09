@@ -1,13 +1,22 @@
-import React from 'react';
-import {
-	cleanup,
-	render,
-	fireEvent,
-	getByDisplayValue,
-} from '@testing-library/react';
-import { Input } from '..';
+import React, { FC, useState } from 'react';
+import { cleanup, render, fireEvent } from '@testing-library/react';
+import { Input, InputProps } from '..';
 
 afterEach(cleanup);
+
+const InputWithChange: FC<InputProps> = (props) => {
+	const [value, setValue] = useState('');
+	return (
+		<Input
+			{...props}
+			value={value}
+			onChange={(v) => {
+				props.onChange?.(v);
+				setValue(v);
+			}}
+		/>
+	);
+};
 
 describe('basic input', () => {
 	it('renders', () => {
@@ -34,6 +43,23 @@ describe('basic input', () => {
 			<Input placeholder="Email" value="My Input" onChange={() => {}} />,
 		);
 		expect(getByPlaceholderText('Email')).toBeTruthy();
+	});
+
+	it('handles change', () => {
+		const handleChange = jest.fn();
+		const { getByDisplayValue, getByPlaceholderText } = render(
+			<InputWithChange
+				placeholder="Email"
+				value=""
+				onChange={handleChange}
+			/>,
+		);
+		const input = getByPlaceholderText('Email');
+		expect(input).toBeTruthy();
+		fireEvent.focus(input);
+		fireEvent.change(input, { target: { value: 'test@test.com' } });
+		expect(handleChange).toHaveBeenCalled();
+		expect(getByDisplayValue('test@test.com')).toBeTruthy();
 	});
 
 	it('cannot change text when readonly', () => {

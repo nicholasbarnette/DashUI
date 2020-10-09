@@ -10,15 +10,12 @@ export type ButtonVariant = 'primary' | 'neutral' | 'lightweight';
 export type ButtonShape = 'default' | 'pill';
 
 export interface ButtonProps extends Component {
-	className?: string;
-	testId?: string;
 	tooltip: string;
 	onPress?: (event: MouseEvent | KeyboardEvent) => void;
 	type?: 'submit' | 'button';
 	variant?: ButtonVariant;
 	shape?: ButtonShape;
 	disabled?: boolean;
-	style?: CSSProperties;
 	icon?: { svg: SVGType } & SVGProps;
 }
 

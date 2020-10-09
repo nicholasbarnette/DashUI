@@ -24,16 +24,6 @@ export interface MenuProps extends Component {
 	onClose?: () => void;
 }
 
-export const useGenerateMenuId = () => {
-	let id = '';
-	for (let i = 0; i < 10; i++) {
-		id += Math.floor(Math.random() * 16)
-			.toString(16)
-			.toUpperCase();
-	}
-	return id;
-};
-
 export const Menu: FC<MenuProps> = (props) => {
 	const [position, setPosition] = useState({
 		top: -1,
@@ -141,7 +131,7 @@ export const Menu: FC<MenuProps> = (props) => {
 				left: position.left !== -1 ? position.left : undefined,
 				...props.style,
 			}}
-			role='menu'
+			role="menu"
 			aria-labelledby={props.menuId}
 			onKeyDown={(event: KeyboardEvent) => {
 				calculateFocus(event);
@@ -169,7 +159,7 @@ export const Menu: FC<MenuProps> = (props) => {
 							<Divider
 								key={`divider${idx}`}
 								className={cn.divider}
-								variant='dark'
+								variant="dark"
 							/>
 						);
 					default:

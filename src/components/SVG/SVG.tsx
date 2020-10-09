@@ -1,5 +1,6 @@
 import { FC, SVGProps as ReactSVGProps, CSSProperties } from 'react';
 import { Component } from '../../types';
+import { useGenerateUniqueId } from '../../hooks';
 
 // Styles
 import cx from 'classnames';
@@ -16,16 +17,6 @@ export interface SVGType {
 	name: string;
 	render: (props: SVGObjectProps) => JSX.Element;
 }
-
-const useGenerateRandomId = () => {
-	let id = '';
-	for (let i = 0; i < 10; i++) {
-		id += Math.floor(Math.random() * 16)
-			.toString(16)
-			.toUpperCase();
-	}
-	return id;
-};
 
 export type SVGDesign = 'inverted' | 'alternate' | 'default';
 
@@ -51,11 +42,11 @@ export const SVG: FC<SVGProps> = (props) => {
 		...restProps
 	} = props;
 
-	const id = useGenerateRandomId();
+	const id = useGenerateUniqueId(svg.name, 16);
 
 	return svg.render({
 		role: 'img',
-		label: svg.name + id,
+		label: id,
 		style: {
 			...({
 				'--svg-custom-color': customColor?.default,

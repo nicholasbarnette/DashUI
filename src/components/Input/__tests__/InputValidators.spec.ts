@@ -51,3 +51,22 @@ describe('date validator', () => {
 		expect(InputValidator('date')('13/20/2000')).toBe(false);
 	});
 });
+
+describe('time validator', () => {
+	it('validates proper times', () => {
+		expect(InputValidator('time')('00:00:00')).toBe(true);
+		expect(InputValidator('time')('23:59:59')).toBe(true);
+		expect(InputValidator('time')('09:09:09')).toBe(true);
+		expect(InputValidator('time')('15:15:15')).toBe(true);
+		expect(InputValidator('time')('20:59:30')).toBe(true);
+	});
+
+	it('invalidates improper times', () => {
+		expect(InputValidator('time')('0:0:0')).toBe(false);
+		expect(InputValidator('time')('000:0000:000')).toBe(false);
+		expect(InputValidator('time')('25:00:00')).toBe(false);
+		expect(InputValidator('time')('10:60:00')).toBe(false);
+		expect(InputValidator('time')('10:20:60')).toBe(false);
+		expect(InputValidator('time')('10:10:10:10')).toBe(false);
+	});
+});

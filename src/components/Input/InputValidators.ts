@@ -61,11 +61,16 @@ export const InputValidator = (
 				return validate_date(data);
 			};
 		case 'time':
-			return (data: string) => {
-				return true;
-			};
-		default:
-			return (data: string) => {
+			return (time: string) => {
+				// Checks for HH:mm:ss format
+				if (!/^[0-9]{2}:[0-9]{2}:[0-9]{2}$/.test(time)) return false;
+				const timeArr = time.split(':');
+				const hh = parseInt(timeArr[0], 10);
+				const mm = parseInt(timeArr[1], 10);
+				const ss = parseInt(timeArr[2], 10);
+				if (hh && (hh < 0 || hh > 23)) return false;
+				if (mm && (mm < 0 || mm > 59)) return false;
+				if (ss && (ss < 0 || ss > 59)) return false;
 				return true;
 			};
 	}

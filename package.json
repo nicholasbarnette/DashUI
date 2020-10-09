@@ -1,6 +1,6 @@
 {
 	"name": "@nickbarnette/dashui",
-	"version": "0.1.7",
+	"version": "0.1.8",
 	"description": "A lightweight React UI/component library.",
 	"main": "./build/index.js",
 	"types": "./build/index.d.ts",
@@ -45,6 +45,7 @@
 		"@storybook/addon-contexts": "^5.3.19",
 		"@storybook/react": "^5.3.19",
 		"@testing-library/react": "^10.2.1",
+		"@testing-library/react-hooks": "^3.4.2",
 		"@types/chai": "^4.2.11",
 		"@types/classnames": "^2.2.10",
 		"@types/d3": "^5.7.2",
@@ -68,6 +69,7 @@
 		"prettier": "^2.0.5",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
+		"react-test-renderer": "^16.13.1",
 		"sass-loader": "^8.0.2",
 		"style-loader": "^1.2.1",
 		"ts-jest": "^26.1.0",

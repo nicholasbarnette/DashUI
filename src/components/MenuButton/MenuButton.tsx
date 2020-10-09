@@ -7,9 +7,10 @@ import React, {
 	MouseEvent,
 } from 'react';
 import { Component } from '../../types';
+import { useGenerateUniqueId } from '../../hooks';
 
 // Components
-import { Menu, MenuItem, useGenerateMenuId } from '../Menu';
+import { Menu, MenuItem } from '../Menu';
 import { getVariantClassName, ButtonVariant } from '../Button';
 
 // Styles
@@ -22,10 +23,11 @@ export interface MenuButtonProps extends Component {
 	tooltip: string;
 	onPress?: (id: string) => void;
 	variant?: ButtonVariant;
+	id?: string;
 }
 
 export const MenuButton: FC<MenuButtonProps> = (props) => {
-	const menuId = useGenerateMenuId();
+	const menuId = useGenerateUniqueId(props.id ?? 'menu', 16);
 	const [isOpen, setIsOpen] = useState(false);
 	const btnRef = useRef<HTMLDivElement>(null);
 	const buttonRef = useRef<HTMLButtonElement>(null);

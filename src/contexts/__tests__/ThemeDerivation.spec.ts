@@ -25,11 +25,13 @@ describe('ThemeDerivation', () => {
 	it('font-size', () => {
 		const fontSize = ThemeDerivations['font-size'](16, 1, 16);
 		expect(fontSize).toStrictEqual({
-			lg: 'calc(var(--font-size-md) * 1 * 2)',
+			lg: 'calc(var(--font-size-md) * 1 * 1.5)',
 			md: 'calc(1rem * 1)',
-			sm: 'calc(var(--font-size-md) / 1 / 2)',
+			sm: 'calc(var(--font-size-md) / 1 / 1.15)',
 			xl: 'calc(var(--font-size-lg) * 1 * 1.5)',
-			xs: 'calc(var(--font-size-sm) / 1 / 1.5)',
+			xs: 'calc(var(--font-size-sm) / 1 / 1.15)',
+			xxl: 'calc(var(--font-size-xl) * 1 * 1.5)',
+			xxs: 'calc(var(--font-size-xs) / 1 / 1.15)',
 		});
 	});
 

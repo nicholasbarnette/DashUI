@@ -4,7 +4,7 @@ import { Theme, Patterns, States, StateValues, ColorDerivation } from './Theme';
 export type SpacingSize = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 type Spacing = { [key in SpacingSize]: string };
 
-export type FontSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type FontSize = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 type FontSizes = { [key in FontSize]: string };
 
 type Color = keyof Theme['theme']['color'];
@@ -77,14 +77,16 @@ export const ThemeDerivations: Derivations = {
 		baseSize: number,
 	): FontSizes => {
 		return {
-			xs: `calc(var(--font-size-sm) / ${fontSizeMultiplier} / 1.5)`,
-			sm: `calc(var(--font-size-md) / ${fontSizeMultiplier} / 2)`,
+			xxs: `calc(var(--font-size-xs) / ${fontSizeMultiplier} / 1.15)`,
+			xs: `calc(var(--font-size-sm) / ${fontSizeMultiplier} / 1.15)`,
+			sm: `calc(var(--font-size-md) / ${fontSizeMultiplier} / 1.15)`,
 			md: `calc(${px2rem(
 				fontSizeBase,
 				baseSize,
 			)}rem * ${fontSizeMultiplier})`,
-			lg: `calc(var(--font-size-md) * ${fontSizeMultiplier} * 2)`,
+			lg: `calc(var(--font-size-md) * ${fontSizeMultiplier} * 1.5)`,
 			xl: `calc(var(--font-size-lg) * ${fontSizeMultiplier} * 1.5)`,
+			xxl: `calc(var(--font-size-xl) * ${fontSizeMultiplier} * 1.5)`,
 		};
 	},
 	color: (colors: Colors) => colors,
