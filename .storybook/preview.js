@@ -15,6 +15,7 @@ const PageWrapper = (props) => {
 				height: '100%',
 				padding: '1rem',
 				boxSizing: 'border-box',
+				overflow: 'auto',
 			}}
 		>
 			{props.children}
