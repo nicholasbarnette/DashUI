@@ -32,11 +32,11 @@ addDecorator(
 				{
 					name: 'Light',
 					default: true,
-					props: { theme: DefaultLightTheme },
+					props: { themeOverride: DefaultLightTheme },
 				},
 				{
 					name: 'Dark',
-					props: { theme: DefaultDarkTheme },
+					props: { themeOverride: DefaultDarkTheme },
 				},
 			],
 		},

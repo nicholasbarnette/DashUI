@@ -15,17 +15,23 @@ import { DefaultLightTheme, Theme, DefaultDarkTheme } from '../theme/Theme';
 
 interface ThemeProviderContext {
 	theme: Theme;
-	setTheme: (theme: Theme) => void;
+	setTheme: (theme: 'light' | 'dark') => void;
 }
 
 export const ThemeContext = createContext<ThemeProviderContext>({
 	theme: DefaultLightTheme,
-	setTheme: (theme: Theme) => {},
+	setTheme: (theme: 'light' | 'dark') => {},
 });
 
 export interface ThemeProviderProps {
-	theme?: Theme;
+	/**
+	 * For overriding both the light/dark theme
+	 */
+	themeOverride?: Theme;
+	lightTheme?: Theme;
+	darkTheme?: Theme;
 	style?: CSSProperties;
+	testId?: string;
 }
 
 export const convertPropertiesToCSS = (properties: {
@@ -47,27 +53,33 @@ export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
 		})(),
 	);
 
-	const setTheme = (theme: Theme) => {
+	const setTheme = (theme: 'light' | 'dark') => {
 		setCurrentTheme({
-			theme,
+			theme:
+				theme === 'dark'
+					? props.themeOverride ?? props.darkTheme ?? DefaultDarkTheme
+					: props.themeOverride ??
+					  props.lightTheme ??
+					  DefaultLightTheme,
 			setTheme,
 		});
 	};
 
 	const [currentTheme, setCurrentTheme] = useState<ThemeProviderContext>({
-		theme: props.theme ?? DefaultLightTheme,
+		theme: props.themeOverride ?? props.lightTheme ?? DefaultLightTheme,
 		setTheme: setTheme,
 	});
 
 	const properties = useMemo(() => {
 		let theme: { [key: string]: string } = {
 			'--base-size': `${
-				(props.theme ?? currentTheme.theme).theme.core.baseSize
+				(props.themeOverride ?? props.lightTheme ?? currentTheme.theme)
+					.theme.core.baseSize
 			}px`,
 		};
 		Object.keys(ThemeDerivations).map((derivation) => {
 			const [base, constant] = getDerivationInfo(
-				props.theme ?? currentTheme.theme,
+				props.themeOverride ?? props.lightTheme ?? currentTheme.theme,
 				derivation as keyof Derivations,
 			);
 			theme = {
@@ -77,13 +89,17 @@ export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
 					ThemeDerivations[derivation as keyof Derivations](
 						base,
 						constant,
-						(props.theme ?? currentTheme.theme).theme.core.baseSize,
+						(
+							props.themeOverride ??
+							props.lightTheme ??
+							currentTheme.theme
+						).theme.core.baseSize,
 					),
 				) as { [key: string]: string }),
 			};
 		});
 		return theme;
-	}, [props.theme, currentTheme]);
+	}, [props.themeOverride, props.lightTheme, currentTheme]);
 
 	useEffect(() => {
 		document
@@ -93,7 +109,10 @@ export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
 	}, [properties]);
 
 	return (
-		<div style={{ height: '100%', width: '100%', ...props.style }}>
+		<div
+			style={{ height: '100%', width: '100%', ...props.style }}
+			data-testid={props.testId}
+		>
 			<ThemeContext.Provider value={currentTheme}>
 				{props.children}
 			</ThemeContext.Provider>
@@ -138,8 +157,8 @@ export const ThemeSwitcher: FC<ThemeSwitcherProps> = (props) => {
 							if (id === 'themeswitch')
 								setTheme(
 									theme.baseTheme === 'light'
-										? DefaultDarkTheme
-										: DefaultLightTheme,
+										? 'dark'
+										: 'light',
 								);
 							props.onPress?.(id);
 						}}
