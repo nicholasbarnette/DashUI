@@ -3,7 +3,7 @@ import { BusyIndicator } from '../../BusyIndicator';
 
 export default {
 	component: BusyIndicator,
-	title: 'BusyIndicator',
+	title: 'Components/BusyIndicator',
 };
 
 export const Basic = () => {

@@ -3,7 +3,7 @@ import { Tabbar } from '../Tabbar';
 
 export default {
 	component: Tabbar,
-	title: 'Tabbar',
+	title: 'Components/Tabbar',
 };
 
 export const Basic = () => {

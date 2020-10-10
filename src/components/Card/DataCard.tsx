@@ -29,7 +29,14 @@ export const DataCard: FC<DataCardProps> = (props) => {
 				...props.style,
 			}}
 		>
-			<div className={cn.content}>
+			<div
+				className={cn.content}
+				style={{
+					gridTemplateColumns: !!props.icon
+						? 'minmax(1rem, 1fr) var(--font-size-xl)'
+						: 'minmax(1rem, 1fr)',
+				}}
+			>
 				<div className={cn.textContainer}>
 					<span className={cn.title} title={props.title}>
 						{props.title}

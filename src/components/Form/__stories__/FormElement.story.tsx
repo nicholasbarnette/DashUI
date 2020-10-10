@@ -3,7 +3,7 @@ import { FormElement } from '../../Form';
 
 export default {
 	component: FormElement,
-	title: 'FormElement',
+	title: 'Components/FormElement',
 };
 
 export const Input = () => {

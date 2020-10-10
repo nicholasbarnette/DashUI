@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default {
-	title: 'Typography',
+	title: 'Design/Typography',
 };
 
 export const Headings = () => {

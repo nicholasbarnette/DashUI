@@ -4,7 +4,7 @@ import { Button } from '../../Button';
 
 export default {
 	component: Dialog,
-	title: 'Dialog',
+	title: 'Components/Dialog',
 };
 
 export const Basic = () => {

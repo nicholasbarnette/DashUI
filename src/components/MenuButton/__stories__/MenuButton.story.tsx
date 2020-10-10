@@ -3,7 +3,7 @@ import { MenuButton } from '../';
 
 export default {
 	component: MenuButton,
-	title: 'MenuButton',
+	title: 'Components/MenuButton',
 };
 
 const onPressFn = (id: string) => {

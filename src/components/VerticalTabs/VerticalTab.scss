@@ -1,0 +1,49 @@
+.tab {
+	padding: var(--spacing-sm) var(--spacing-md);
+	transition: all 0.15s ease-in-out;
+	list-style: none;
+	cursor: pointer;
+	user-select: none;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+
+	&:focus {
+		outline-width: var(--focus-width);
+		outline-style: var(--focus-style);
+		outline-color: var(--focus-dark);
+		outline-offset: calc(-1 * var(--focus-width) - 1px);
+	}
+}
+
+.selected {
+	background-color: var(--background-navigation);
+	color: var(--pattern-primary-normal-fg);
+
+	.description {
+		color: var(--pattern-primary-normal-fg);
+	}
+
+	&:focus {
+		outline-width: var(--focus-width);
+		outline-style: var(--focus-style);
+		outline-color: var(--focus-light);
+		outline-offset: calc(-1 * var(--focus-width) - 1px);
+	}
+}
+
+.title {
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.description {
+	font-size: var(--font-size-sm);
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color: var(--text-default);
+	overflow: hidden;
+}

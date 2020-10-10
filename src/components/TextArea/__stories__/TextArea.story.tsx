@@ -5,7 +5,7 @@ import { InputValidator } from '../../Input';
 
 export default {
 	component: TextArea,
-	title: 'TextArea',
+	title: 'Components/TextArea',
 };
 
 export const Basic = () => {

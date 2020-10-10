@@ -3,7 +3,7 @@ import { Label } from '../../Label';
 
 export default {
 	component: Label,
-	title: 'Label',
+	title: 'Components/Label',
 };
 
 export const Basic = () => {

@@ -3,7 +3,7 @@ import { Notification, NotificationContainer } from '..';
 
 export default {
 	component: Notification,
-	title: 'Notification',
+	title: 'Components/Notification',
 };
 
 export const Basic = () => {

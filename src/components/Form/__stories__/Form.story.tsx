@@ -4,7 +4,7 @@ import { InputValidator } from '../../Input';
 
 export default {
 	component: Form,
-	title: 'Form',
+	title: 'Components/Form',
 };
 
 export const Basic = () => {

@@ -1,0 +1,23 @@
+.tabs {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+.tabList {
+	height: 100%;
+	background-color: transparent;
+	color: var(--text-default);
+	max-width: 15rem;
+	overflow-y: auto;
+}
+
+.content {
+	flex: 1 1 auto;
+	padding: var(--spacing-md);
+	background-color: var(--background-navigation);
+	overflow-y: auto;
+}

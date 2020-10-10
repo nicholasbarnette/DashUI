@@ -11,7 +11,7 @@ import {
 
 export default {
 	component: SVG,
-	title: 'SVG',
+	title: 'Components/SVG',
 };
 
 export const Basic = () => {

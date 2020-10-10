@@ -4,7 +4,7 @@ import { Card } from '../Card';
 
 export default {
 	component: Card,
-	title: 'Card',
+	title: 'Components/Card',
 };
 
 export const StandardCard = () => {

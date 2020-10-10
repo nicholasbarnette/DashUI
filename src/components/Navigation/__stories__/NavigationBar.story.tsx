@@ -4,7 +4,7 @@ import { SVG, GitHub, YouTube, Twitter } from '../../SVG';
 
 export default {
 	component: NavigationBar,
-	title: 'NavigationBar',
+	title: 'Components/NavigationBar',
 };
 
 export const Basic = () => {

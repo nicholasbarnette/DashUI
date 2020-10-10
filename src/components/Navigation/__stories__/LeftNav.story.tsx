@@ -4,7 +4,7 @@ import { Home, Profile, Document } from '../../SVG';
 
 export default {
 	component: LeftNavigation,
-	title: 'LeftNavigation',
+	title: 'Components/LeftNavigation',
 };
 
 export const Basic = () => {

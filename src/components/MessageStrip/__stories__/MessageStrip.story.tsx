@@ -3,7 +3,7 @@ import { MessageStrip } from '../../MessageStrip';
 
 export default {
 	component: MessageStrip,
-	title: 'MessageStrip',
+	title: 'Components/MessageStrip',
 };
 
 export const Basic = () => {

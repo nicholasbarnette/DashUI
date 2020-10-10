@@ -3,7 +3,7 @@ import { AppRoot } from '../../AppRoot';
 
 export default {
 	component: AppRoot,
-	title: 'AppRoot',
+	title: 'Components/AppRoot',
 };
 
 export const Basic = () => {

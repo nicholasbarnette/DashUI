@@ -3,7 +3,7 @@ import { Switch } from '../Switch';
 
 export default {
 	component: Switch,
-	title: 'Switch',
+	title: 'Components/Switch',
 };
 
 export const Basic = () => {

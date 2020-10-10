@@ -4,7 +4,7 @@ import { SVG, StarFilled } from '../../SVG';
 
 export default {
 	component: Button,
-	title: 'Button',
+	title: 'Components/Button',
 };
 
 export const Basic = () => {
