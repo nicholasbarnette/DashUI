@@ -14,7 +14,8 @@
 .switch:focus {
 	outline-width: var(--focus-width);
 	outline-style: var(--focus-style);
-	outline-color: var(--focus-light);
+	outline-color: var(--focus-dark);
+	outline-offset: calc(-1 * var(--focus-width) - 1px);
 }
 
 .switch input {
@@ -30,7 +31,7 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: var(--background-overlay-neutral);
+	background-color: var(--pattern-neutral-normal-bg);
 	-webkit-transition: 0.4s;
 	transition: 0.4s;
 	border-radius: 34px;
@@ -43,14 +44,14 @@
 	width: 1.5rem;
 	left: 0.25rem;
 	bottom: 0.25rem;
-	background-color: var(--text-default);
+	background-color: var(--pattern-neutral-normal-fg);
 	-webkit-transition: 0.4s;
 	transition: 0.4s;
 	border-radius: 50%;
 }
 
 .input:checked + .slider {
-	background-color: var(--color-primary);
+	background-color: var(--pattern-primary-normal-bg);
 }
 
 .input:checked + .slider:before {

@@ -6,7 +6,7 @@ import { SVG, SVGProps, SVGType } from '../SVG';
 import cx from 'classnames';
 import cn from './Button.scss';
 
-export type ButtonVariant = 'primary' | 'neutral' | 'lightweight';
+export type ButtonVariant = 'primary' | 'neutral' | 'secondary' | 'lightweight';
 export type ButtonShape = 'default' | 'pill';
 
 export interface ButtonProps extends Component {
@@ -24,7 +24,7 @@ export const Button: FC<ButtonProps> = (props) => {
 		<button
 			className={cx(
 				cn.button,
-				getVariantClassName(props.variant),
+				cn[props.variant ?? 'neutral'],
 				getShapeClassName(props.shape),
 				props.disabled && cn.disabled,
 				props.className,
@@ -84,16 +84,5 @@ export const getShapeClassName = (shape?: ButtonShape) => {
 			return cn.pill;
 		default:
 			return cn.default;
-	}
-};
-
-export const getVariantClassName = (variant?: ButtonVariant) => {
-	switch (variant) {
-		case 'primary':
-			return cn.primary;
-		case 'lightweight':
-			return cn.lightweight;
-		default:
-			return cn.neutral;
 	}
 };

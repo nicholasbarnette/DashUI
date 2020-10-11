@@ -159,7 +159,6 @@ export const Menu: FC<MenuProps> = (props) => {
 							<Divider
 								key={`divider${idx}`}
 								className={cn.divider}
-								variant="dark"
 							/>
 						);
 					default:

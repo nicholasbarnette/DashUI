@@ -4,8 +4,8 @@
 	border-radius: 0.25rem;
 	box-shadow: var(--background-shadow);
 	position: relative;
-	background-color: var(--pattern-neutral-normal-bg);
-	color: var(--pattern-neutral-normal-fg);
+	background-color: var(--background-content);
+	color: var(--text-default);
 }
 
 .content {
@@ -47,5 +47,5 @@
 
 .description {
 	font-size: var(--font-size-sm);
-	color: var(--text-placeholder);
+	color: var(--text-label);
 }

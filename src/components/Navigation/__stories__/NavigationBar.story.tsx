@@ -67,13 +67,13 @@ export const Basic = () => {
 			right={
 				<Fragment>
 					<NavigationLink link="/">
-						<SVG svg={GitHub} tooltip="Link" />
+						<SVG svg={GitHub} tooltip="Link" design="inverted" />
 					</NavigationLink>
 					<NavigationLink link="/">
-						<SVG svg={YouTube} tooltip="Link" />
+						<SVG svg={YouTube} tooltip="Link" design="inverted" />
 					</NavigationLink>
 					<NavigationLink link="/">
-						<SVG svg={Twitter} tooltip="Link" />
+						<SVG svg={Twitter} tooltip="Link" design="inverted" />
 					</NavigationLink>
 				</Fragment>
 			}

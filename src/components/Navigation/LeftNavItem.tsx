@@ -63,9 +63,9 @@ export const LeftNavItem: FC<LeftNavItemProps> = (props) => {
 						customColor={{
 							default: props.selected
 								? 'var(--background-navigation)'
-								: 'var(--text-default)',
+								: 'var(--text-inverse)',
 							inverse: props.selected
-								? 'var(--text-default)'
+								? 'var(--text-inverse)'
 								: 'var(--background-navigation)',
 						}}
 					/>
@@ -74,8 +74,8 @@ export const LeftNavItem: FC<LeftNavItemProps> = (props) => {
 						className={cn.textIcon}
 						style={{
 							color: props.selected
-								? 'var(--background-navigation)'
-								: 'var(--text-default)',
+								? 'var(--text-default)'
+								: 'var(--text-inverse)',
 						}}
 					>
 						{props.item.text.slice(0, 1)}

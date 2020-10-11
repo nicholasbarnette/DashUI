@@ -11,7 +11,8 @@ import { useGenerateUniqueId } from '../../hooks';
 
 // Components
 import { Menu, MenuItem } from '../Menu';
-import { getVariantClassName, ButtonVariant } from '../Button';
+import { ButtonVariant } from '../Button';
+import { ChevronDown, SVG } from '../SVG';
 
 // Styles
 import cx from 'classnames';
@@ -53,7 +54,7 @@ export const MenuButton: FC<MenuButtonProps> = (props) => {
 			<button
 				className={cx(
 					btnCN.button,
-					getVariantClassName(props.variant),
+					cn[props.variant ?? 'neutral'],
 					cn.button,
 					props.className,
 				)}
@@ -78,6 +79,12 @@ export const MenuButton: FC<MenuButtonProps> = (props) => {
 				style={props.style}
 			>
 				{props.children}
+				<SVG
+					svg={ChevronDown}
+					tooltip=""
+					design="inverted"
+					style={{ marginInlineStart: 'var(--spacing-sm)' }}
+				/>
 			</button>
 			<Menu
 				originRef={btnRef}

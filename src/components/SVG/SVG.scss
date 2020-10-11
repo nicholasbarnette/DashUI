@@ -25,7 +25,7 @@
 .svg.inverted > path,
 .svg.inverted > circle,
 .svg.inverted > ellipse {
-	fill: var(--svg-custom-color-inverse, var(--text-alternate));
+	fill: var(--svg-custom-color-inverse, var(--text-inverse));
 	&.inverse {
 		fill: var(--svg-custom-color, var(--text-default));
 	}

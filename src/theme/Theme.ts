@@ -1,3 +1,5 @@
+import { Color } from 'd3';
+
 export type BaseTheme = 'light' | 'dark';
 
 export interface ColorDerivation {
@@ -23,6 +25,7 @@ export interface Patterns {
 	'pattern-neutral': States;
 	'pattern-primary': States;
 	'pattern-secondary': States;
+	'pattern-lightweight': States;
 }
 
 interface InnerTheme extends Patterns {
@@ -53,6 +56,8 @@ interface InnerTheme extends Patterns {
 	background: {
 		page: ColorDerivation;
 		navigation: ColorDerivation;
+		content: ColorDerivation;
+		container: ColorDerivation;
 		'overlay-neutral': ColorDerivation;
 		'overlay-primary': ColorDerivation;
 		shadow: ColorDerivation;
@@ -92,7 +97,7 @@ export const DefaultLightTheme: Theme = {
 			baseSize: 16,
 		},
 		color: {
-			neutral: '#ffffff',
+			neutral: '#000000',
 			primary: '#7800d2',
 			secondary: '#258fd8',
 			alert: '#FF6464',
@@ -114,11 +119,19 @@ export const DefaultLightTheme: Theme = {
 		},
 		background: {
 			page: {
-				default: '#258fd8',
+				default: '#ffffff',
 				derivation: (theme: Theme) => theme.theme.color.primary,
 			},
 			navigation: {
-				default: '#0b324c',
+				default: '#000000',
+				derivation: (theme: Theme) => theme.theme.color.primary,
+			},
+			container: {
+				default: '#dedede',
+				derivation: (theme: Theme) => theme.theme.color.primary,
+			},
+			content: {
+				default: '#ffffff',
 				derivation: (theme: Theme) => theme.theme.color.primary,
 			},
 			'overlay-neutral': {
@@ -128,20 +141,20 @@ export const DefaultLightTheme: Theme = {
 				default: 'rgba(120, 0, 210, 0.25)',
 			},
 			shadow: {
-				default: '0px 0px 32px -9px rgba(0, 0, 0, 0.75)',
+				default: '0px 2px 10px -4px rgba(0, 0, 0, 0.5)',
 			},
 		},
 		text: {
 			default: {
-				default: '#ffffff',
+				default: '#131722',
 				derivation: (theme: Theme) => theme.theme.color.primary,
 			},
 			alternate: {
-				default: '#ffffff',
+				default: '#131722',
 				derivation: (theme: Theme) => theme.theme.color.primary,
 			},
 			inverse: {
-				default: '#131722',
+				default: '#ffffff',
 				derivation: (theme: Theme) => theme.theme.color.primary,
 			},
 			placeholder: {
@@ -149,23 +162,22 @@ export const DefaultLightTheme: Theme = {
 				derivation: (theme: Theme) => theme.theme.color.primary,
 			},
 			label: {
-				default: '#ffffff',
+				default: '#333333',
 				derivation: (theme: Theme) => theme.theme.color.primary,
 			},
 		},
 		'pattern-neutral': {
 			normal: {
 				bd: {
-					default: '#131722',
-					derivation: (theme: Theme) =>
-						theme.theme.text.inverse.default,
+					default: 'hsla(0, 0%, 0%, 1)',
+					derivation: (theme: Theme) => theme.theme.color.neutral,
 				},
 				bg: {
-					default: 'hsla(0, 100%, 100%, 1)',
+					default: 'hsla(0, 0%, 0%, 1)',
 					derivation: (theme: Theme) => theme.theme.color.neutral,
 				},
 				fg: {
-					default: '#131722',
+					default: '#ffffff',
 					derivation: (theme: Theme) =>
 						theme.theme.text.inverse.default,
 				},
@@ -173,16 +185,15 @@ export const DefaultLightTheme: Theme = {
 			},
 			hover: {
 				bd: {
-					default: '#131722',
-					derivation: (theme: Theme) =>
-						theme.theme.text.inverse.default,
+					default: 'hsla(0, 0%, 0%, 0.85)',
+					derivation: (theme: Theme) => theme.theme.color.neutral,
 				},
 				bg: {
-					default: 'hsla(0, 100%, 100%, 0.9)',
+					default: 'hsla(0, 0%, 0%, 0.85)',
 					derivation: (theme: Theme) => theme.theme.color.neutral,
 				},
 				fg: {
-					default: '#131722',
+					default: '#ffffff',
 					derivation: (theme: Theme) =>
 						theme.theme.text.inverse.default,
 				},
@@ -190,16 +201,15 @@ export const DefaultLightTheme: Theme = {
 			},
 			pressed: {
 				bd: {
-					default: '#131722',
-					derivation: (theme: Theme) =>
-						theme.theme.text.inverse.default,
+					default: 'hsla(0, 0%, 0%, 0.75)',
+					derivation: (theme: Theme) => theme.theme.color.neutral,
 				},
 				bg: {
-					default: 'hsla(0, 100%, 100%, 0.8)',
+					default: 'hsla(0, 0%, 0%, 0.75)',
 					derivation: (theme: Theme) => theme.theme.color.neutral,
 				},
 				fg: {
-					default: '#131722',
+					default: '#ffffff',
 					derivation: (theme: Theme) =>
 						theme.theme.text.inverse.default,
 				},
@@ -207,18 +217,19 @@ export const DefaultLightTheme: Theme = {
 			},
 			disabled: {
 				bd: {
-					default: '#131722',
+					default: 'hsla(0, 0%, 0%, 1)',
 					derivation: (theme: Theme) =>
-						theme.theme.text.inverse.default,
+						theme.theme['pattern-neutral'].normal.bd.default,
 				},
 				bg: {
-					default: 'hsla(0, 100%, 100%, 1)',
-					derivation: (theme: Theme) => theme.theme.color.neutral,
+					default: 'hsla(0, 0%, 0%, 1)',
+					derivation: (theme: Theme) =>
+						theme.theme['pattern-neutral'].normal.bg.default,
 				},
 				fg: {
-					default: '#131722',
+					default: '#ffffff',
 					derivation: (theme: Theme) =>
-						theme.theme.text.inverse.default,
+						theme.theme['pattern-neutral'].normal.fg.default,
 				},
 				op: { default: '0.3' },
 			},
@@ -226,11 +237,11 @@ export const DefaultLightTheme: Theme = {
 		'pattern-primary': {
 			normal: {
 				bd: {
-					default: '#7800d2',
+					default: 'hsla(274, 100%, 41%, 1)',
 					derivation: (theme: Theme) => theme.theme.color.primary,
 				},
 				bg: {
-					default: '#7800d2',
+					default: 'hsla(274, 100%, 41%, 1)',
 					derivation: (theme: Theme) => theme.theme.color.primary,
 				},
 				fg: {
@@ -241,11 +252,11 @@ export const DefaultLightTheme: Theme = {
 			},
 			hover: {
 				bd: {
-					default: '#560094',
+					default: 'hsla(274, 100%, 41%, 0.85)',
 					derivation: (theme: Theme) => theme.theme.color.primary,
 				},
 				bg: {
-					default: '#560094',
+					default: 'hsla(274, 100%, 41%, 0.85)',
 					derivation: (theme: Theme) => theme.theme.color.primary,
 				},
 				fg: {
@@ -256,11 +267,11 @@ export const DefaultLightTheme: Theme = {
 			},
 			pressed: {
 				bd: {
-					default: '#5c009e',
+					default: 'hsla(274, 100%, 41%, 0.75)',
 					derivation: (theme: Theme) => theme.theme.color.primary,
 				},
 				bg: {
-					default: '#5c009e',
+					default: 'hsla(274, 100%, 41%, 0.75)',
 					derivation: (theme: Theme) => theme.theme.color.primary,
 				},
 				fg: {
@@ -271,28 +282,31 @@ export const DefaultLightTheme: Theme = {
 			},
 			disabled: {
 				bd: {
-					default: '#7800d2',
-					derivation: (theme: Theme) => theme.theme.color.primary,
+					default: 'hsla(274, 100%, 41%, 1)',
+					derivation: (theme: Theme) =>
+						theme.theme['pattern-primary'].normal.bd.default,
 				},
 				bg: {
-					default: '#7800d2',
-					derivation: (theme: Theme) => theme.theme.color.primary,
+					default: 'hsla(274, 100%, 41%, 1)',
+					derivation: (theme: Theme) =>
+						theme.theme['pattern-primary'].normal.bg.default,
 				},
 				fg: {
 					default: '#ffffff',
-					derivation: (theme: Theme) => theme.theme.color.primary,
+					derivation: (theme: Theme) =>
+						theme.theme['pattern-primary'].normal.fg.default,
 				},
-				op: { default: '1' },
+				op: { default: '0.3' },
 			},
 		},
 		'pattern-secondary': {
 			normal: {
 				bd: {
-					default: '#258fd8',
+					default: 'hsla(204, 71%, 50%, 1)',
 					derivation: (theme: Theme) => theme.theme.color.secondary,
 				},
 				bg: {
-					default: '#258fd8',
+					default: 'hsla(204, 71%, 50%, 1)',
 					derivation: (theme: Theme) => theme.theme.color.secondary,
 				},
 				fg: {
@@ -303,11 +317,11 @@ export const DefaultLightTheme: Theme = {
 			},
 			hover: {
 				bd: {
-					default: '#258fd8',
+					default: 'hsla(204, 71%, 50%, 0.85)',
 					derivation: (theme: Theme) => theme.theme.color.secondary,
 				},
 				bg: {
-					default: '#258fd8',
+					default: 'hsla(204, 71%, 50%, 0.85)',
 					derivation: (theme: Theme) => theme.theme.color.secondary,
 				},
 				fg: {
@@ -318,11 +332,11 @@ export const DefaultLightTheme: Theme = {
 			},
 			pressed: {
 				bd: {
-					default: '#258fd8',
+					default: 'hsla(204, 71%, 50%, 0.75)',
 					derivation: (theme: Theme) => theme.theme.color.secondary,
 				},
 				bg: {
-					default: '#258fd8',
+					default: 'hsla(204, 71%, 50%, 0.75)',
 					derivation: (theme: Theme) => theme.theme.color.secondary,
 				},
 				fg: {
@@ -333,38 +347,114 @@ export const DefaultLightTheme: Theme = {
 			},
 			disabled: {
 				bd: {
-					default: '#258fd8',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
+					default: 'hsla(204, 71%, 50%, 1)',
+					derivation: (theme: Theme) =>
+						theme.theme['pattern-secondary'].normal.bd.default,
 				},
 				bg: {
-					default: '#258fd8',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
+					default: 'hsla(204, 71%, 50%, 1)',
+					derivation: (theme: Theme) =>
+						theme.theme['pattern-secondary'].normal.bg.default,
 				},
 				fg: {
 					default: '#ffffff',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
+					derivation: (theme: Theme) =>
+						theme.theme['pattern-secondary'].normal.fg.default,
+				},
+				op: { default: '0.3' },
+			},
+		},
+		'pattern-lightweight': {
+			normal: {
+				bd: {
+					default: 'hsla(0, 0%, 0%, 0)',
+					derivation: (theme: Theme) =>
+						theme.theme.text.default.default,
+				},
+				bg: {
+					default: 'hsla(0, 0%, 0%, 0)',
+					derivation: (theme: Theme) =>
+						theme.theme.text.default.default,
+				},
+				fg: {
+					default: '#000000',
+					derivation: (theme: Theme) =>
+						theme.theme.text.inverse.default,
 				},
 				op: { default: '1' },
+			},
+			hover: {
+				bd: {
+					default: 'hsla(0, 0%, 0%, 0.25)',
+					derivation: (theme: Theme) =>
+						theme.theme.text.default.default,
+				},
+				bg: {
+					default: 'hsla(0, 0%, 0%, 0.25)',
+					derivation: (theme: Theme) =>
+						theme.theme.text.default.default,
+				},
+				fg: {
+					default: '#000000',
+					derivation: (theme: Theme) =>
+						theme.theme.text.inverse.default,
+				},
+				op: { default: '1' },
+			},
+			pressed: {
+				bd: {
+					default: 'hsla(0, 0%, 0%, 0.35)',
+					derivation: (theme: Theme) =>
+						theme.theme.text.default.default,
+				},
+				bg: {
+					default: 'hsla(0, 0%, 0%, 0.35)',
+					derivation: (theme: Theme) =>
+						theme.theme.text.default.default,
+				},
+				fg: {
+					default: '#000000',
+					derivation: (theme: Theme) =>
+						theme.theme.text.inverse.default,
+				},
+				op: { default: '1' },
+			},
+			disabled: {
+				bd: {
+					default: 'hsla(0, 0%, 0%, 0)',
+					derivation: (theme: Theme) =>
+						theme.theme['pattern-lightweight'].normal.bd.default,
+				},
+				bg: {
+					default: 'hsla(0, 0%, 0%, 0)',
+					derivation: (theme: Theme) =>
+						theme.theme['pattern-lightweight'].normal.bg.default,
+				},
+				fg: {
+					default: '#000000',
+					derivation: (theme: Theme) =>
+						theme.theme['pattern-lightweight'].normal.fg.default,
+				},
+				op: { default: '0.3' },
 			},
 		},
 		input: {
 			bd: {
-				default: '#131722',
+				default: '#000000',
 				derivation: (theme: Theme) =>
 					theme.theme['pattern-neutral'].normal.bd.default,
 			},
 			bg: {
 				default: 'hsla(0, 100%, 100%, 1)',
 				derivation: (theme: Theme) =>
-					theme.theme['pattern-neutral'].normal.bg.default,
-			},
-			fg: {
-				default: '#131722',
-				derivation: (theme: Theme) =>
 					theme.theme['pattern-neutral'].normal.fg.default,
 			},
+			fg: {
+				default: '#000000',
+				derivation: (theme: Theme) => theme.theme.text.default.default,
+			},
 			focus: {
-				default: '#c375ff',
+				default: '#258fd8',
 				derivation: (theme: Theme) => theme.theme.color.primary,
 			},
 		},
@@ -380,7 +470,7 @@ export const DefaultLightTheme: Theme = {
 				derivation: (theme: Theme) => theme.theme.text.default.default,
 			},
 			dark: {
-				default: '#131722',
+				default: '#000000',
 				derivation: (theme: Theme) => theme.theme.text.inverse.default,
 			},
 		},
@@ -424,6 +514,14 @@ export const DefaultDarkTheme: Theme = {
 				default: '#2a2e39',
 				derivation: (theme: Theme) => theme.theme.color.primary,
 			},
+			content: {
+				default: '#222838',
+				derivation: (theme: Theme) => theme.theme.color.primary,
+			},
+			container: {
+				default: '#222838',
+				derivation: (theme: Theme) => theme.theme.color.primary,
+			},
 			'overlay-neutral': {
 				default: 'rgba(255, 255, 255, 0.15)',
 			},
@@ -448,35 +546,18 @@ export const DefaultDarkTheme: Theme = {
 				derivation: (theme: Theme) => theme.theme.color.primary,
 			},
 			placeholder: {
-				default: 'rgba(255, 255, 255, 0.5)',
+				default: '#7d7d7d',
 				derivation: (theme: Theme) => theme.theme.color.primary,
 			},
 			label: {
-				default: '#ffffff',
+				default: '#bfbfbf',
 				derivation: (theme: Theme) => theme.theme.color.primary,
 			},
 		},
 		'pattern-neutral': {
 			normal: {
 				bd: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme.text.inverse.default,
-				},
-				bg: {
-					default: '#2a2e39',
-					derivation: (theme: Theme) => theme.theme.color.neutral,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme.text.inverse.default,
-				},
-				op: { default: '1' },
-			},
-			hover: {
-				bd: {
-					default: '#ffffff',
+					default: 'hsla(0, 100%, 100%, 0.15)',
 					derivation: (theme: Theme) =>
 						theme.theme.text.inverse.default,
 				},
@@ -487,13 +568,13 @@ export const DefaultDarkTheme: Theme = {
 				fg: {
 					default: '#ffffff',
 					derivation: (theme: Theme) =>
-						theme.theme.text.inverse.default,
+						theme.theme.text.default.default,
 				},
 				op: { default: '1' },
 			},
-			pressed: {
+			hover: {
 				bd: {
-					default: '#ffffff',
+					default: 'hsla(0, 100%, 100%, 0.25)',
 					derivation: (theme: Theme) =>
 						theme.theme.text.inverse.default,
 				},
@@ -504,24 +585,42 @@ export const DefaultDarkTheme: Theme = {
 				fg: {
 					default: '#ffffff',
 					derivation: (theme: Theme) =>
-						theme.theme.text.inverse.default,
+						theme.theme.text.default.default,
 				},
 				op: { default: '1' },
 			},
-			disabled: {
+			pressed: {
 				bd: {
-					default: '#ffffff',
+					default: 'hsla(0, 100%, 100%, 0.35)',
 					derivation: (theme: Theme) =>
 						theme.theme.text.inverse.default,
 				},
 				bg: {
-					default: '#2a2e39',
+					default: 'hsla(0, 100%, 100%, 0.35)',
 					derivation: (theme: Theme) => theme.theme.color.neutral,
 				},
 				fg: {
 					default: '#ffffff',
 					derivation: (theme: Theme) =>
-						theme.theme.text.inverse.default,
+						theme.theme.text.default.default,
+				},
+				op: { default: '1' },
+			},
+			disabled: {
+				bd: {
+					default: 'hsla(0, 100%, 100%, 0.15)',
+					derivation: (theme: Theme) =>
+						theme.theme['pattern-neutral'].normal.bd.default,
+				},
+				bg: {
+					default: 'hsla(0, 100%, 100%, 0.15)',
+					derivation: (theme: Theme) =>
+						theme.theme['pattern-neutral'].normal.bg.default,
+				},
+				fg: {
+					default: '#ffffff',
+					derivation: (theme: Theme) =>
+						theme.theme['pattern-neutral'].normal.fg.default,
 				},
 				op: { default: '0.3' },
 			},
@@ -529,125 +628,211 @@ export const DefaultDarkTheme: Theme = {
 		'pattern-primary': {
 			normal: {
 				bd: {
-					default: '#7d00d6',
+					default: 'hsla(275, 100%, 42%, 1)',
 					derivation: (theme: Theme) => theme.theme.color.primary,
 				},
 				bg: {
-					default: '#7d00d6',
+					default: 'hsla(275, 100%, 42%, 1)',
 					derivation: (theme: Theme) => theme.theme.color.primary,
 				},
 				fg: {
 					default: '#ffffff',
-					derivation: (theme: Theme) => theme.theme.color.primary,
+					derivation: (theme: Theme) =>
+						theme.theme.text.default.default,
 				},
 				op: { default: '1' },
 			},
 			hover: {
 				bd: {
-					default: '#8900eb',
+					default: 'hsla(275, 100%, 42%, 0.85)',
 					derivation: (theme: Theme) => theme.theme.color.primary,
 				},
 				bg: {
-					default: '#8900eb',
+					default: 'hsla(275, 100%, 42%, 0.85)',
 					derivation: (theme: Theme) => theme.theme.color.primary,
 				},
 				fg: {
 					default: '#ffffff',
-					derivation: (theme: Theme) => theme.theme.color.primary,
+					derivation: (theme: Theme) =>
+						theme.theme.text.default.default,
 				},
 				op: { default: '1' },
 			},
 			pressed: {
 				bd: {
-					default: '#8900eb',
+					default: 'hsla(275, 100%, 42%, 0.75)',
 					derivation: (theme: Theme) => theme.theme.color.primary,
 				},
 				bg: {
-					default: '#8900eb',
+					default: 'hsla(275, 100%, 42%, 0.75)',
 					derivation: (theme: Theme) => theme.theme.color.primary,
 				},
 				fg: {
 					default: '#ffffff',
-					derivation: (theme: Theme) => theme.theme.color.primary,
+					derivation: (theme: Theme) =>
+						theme.theme.text.default.default,
 				},
 				op: { default: '1' },
 			},
 			disabled: {
 				bd: {
-					default: '#7800d2',
-					derivation: (theme: Theme) => theme.theme.color.primary,
+					default: 'hsla(275, 100%, 42%, 1)',
+					derivation: (theme: Theme) =>
+						theme.theme['pattern-primary'].normal.bd.default,
 				},
 				bg: {
-					default: '#7800d2',
-					derivation: (theme: Theme) => theme.theme.color.primary,
+					default: 'hsla(275, 100%, 42%, 1)',
+					derivation: (theme: Theme) =>
+						theme.theme['pattern-primary'].normal.bg.default,
 				},
 				fg: {
 					default: '#ffffff',
-					derivation: (theme: Theme) => theme.theme.color.primary,
+					derivation: (theme: Theme) =>
+						theme.theme['pattern-primary'].normal.fg.default,
 				},
-				op: { default: '1' },
+				op: { default: '0.3' },
 			},
 		},
 		'pattern-secondary': {
 			normal: {
 				bd: {
-					default: '#1976d2',
+					default: 'hsla(210, 79%, 46%, 1)',
 					derivation: (theme: Theme) => theme.theme.color.secondary,
 				},
 				bg: {
-					default: '#1976d2',
+					default: 'hsla(210, 79%, 46%, 1)',
 					derivation: (theme: Theme) => theme.theme.color.secondary,
 				},
 				fg: {
 					default: '#ffffff',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
+					derivation: (theme: Theme) =>
+						theme.theme.text.default.default,
 				},
 				op: { default: '1' },
 			},
 			hover: {
 				bd: {
-					default: '#1976d2',
+					default: 'hsla(210, 79%, 46%, 0.85)',
 					derivation: (theme: Theme) => theme.theme.color.secondary,
 				},
 				bg: {
-					default: '#1976d2',
+					default: 'hsla(210, 79%, 46%, 0.85)',
 					derivation: (theme: Theme) => theme.theme.color.secondary,
 				},
 				fg: {
 					default: '#ffffff',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
+					derivation: (theme: Theme) =>
+						theme.theme.text.default.default,
 				},
 				op: { default: '1' },
 			},
 			pressed: {
 				bd: {
-					default: '#1976d2',
+					default: 'hsla(210, 79%, 46%, 0.75)',
 					derivation: (theme: Theme) => theme.theme.color.secondary,
 				},
 				bg: {
-					default: '#1976d2',
+					default: 'hsla(210, 79%, 46%, 0.75)',
 					derivation: (theme: Theme) => theme.theme.color.secondary,
 				},
 				fg: {
 					default: '#ffffff',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
+					derivation: (theme: Theme) =>
+						theme.theme.text.default.default,
 				},
 				op: { default: '1' },
 			},
 			disabled: {
 				bd: {
-					default: '#1976d2',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
+					default: 'hsla(210, 79%, 46%, 1)',
+					derivation: (theme: Theme) =>
+						theme.theme['pattern-secondary'].normal.bd.default,
 				},
 				bg: {
-					default: '#1976d2',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
+					default: 'hsla(210, 79%, 46%, 1)',
+					derivation: (theme: Theme) =>
+						theme.theme['pattern-secondary'].normal.bg.default,
 				},
 				fg: {
 					default: '#ffffff',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
+					derivation: (theme: Theme) =>
+						theme.theme['pattern-secondary'].normal.fg.default,
+				},
+				op: { default: '0.3' },
+			},
+		},
+		'pattern-lightweight': {
+			normal: {
+				bd: {
+					default: 'hsla(0, 100%, 100%, 0)',
+					derivation: (theme: Theme) =>
+						theme.theme.text.default.default,
+				},
+				bg: {
+					default: 'hsla(0, 100%, 100%, 0)',
+					derivation: (theme: Theme) =>
+						theme.theme.text.default.default,
+				},
+				fg: {
+					default: '#ffffff',
+					derivation: (theme: Theme) =>
+						theme.theme.text.default.default,
 				},
 				op: { default: '1' },
+			},
+			hover: {
+				bd: {
+					default: 'hsla(0, 100%, 100%, 0.15)',
+					derivation: (theme: Theme) =>
+						theme.theme.text.default.default,
+				},
+				bg: {
+					default: 'hsla(0, 100%, 100%, 0.15)',
+					derivation: (theme: Theme) =>
+						theme.theme.text.default.default,
+				},
+				fg: {
+					default: '#ffffff',
+					derivation: (theme: Theme) =>
+						theme.theme.text.default.default,
+				},
+				op: { default: '1' },
+			},
+			pressed: {
+				bd: {
+					default: 'hsla(0, 100%, 100%, 0.25)',
+					derivation: (theme: Theme) =>
+						theme.theme.text.default.default,
+				},
+				bg: {
+					default: 'hsla(0, 100%, 100%, 0.25)',
+					derivation: (theme: Theme) =>
+						theme.theme.text.default.default,
+				},
+				fg: {
+					default: '#ffffff',
+					derivation: (theme: Theme) =>
+						theme.theme.text.default.default,
+				},
+				op: { default: '1' },
+			},
+			disabled: {
+				bd: {
+					default: 'hsla(0, 100%, 100%, 0)',
+					derivation: (theme: Theme) =>
+						theme.theme['pattern-lightweight'].normal.bd.default,
+				},
+				bg: {
+					default: 'hsla(0, 100%, 100%, 0)',
+					derivation: (theme: Theme) =>
+						theme.theme['pattern-lightweight'].normal.bg.default,
+				},
+				fg: {
+					default: '#ffffff',
+					derivation: (theme: Theme) =>
+						theme.theme['pattern-lightweight'].normal.fg.default,
+				},
+				op: { default: '0.3' },
 			},
 		},
 		input: {
@@ -667,8 +852,8 @@ export const DefaultDarkTheme: Theme = {
 					theme.theme['pattern-neutral'].normal.fg.default,
 			},
 			focus: {
-				default: '#c375ff',
-				derivation: (theme: Theme) => theme.theme.color.primary,
+				default: '#1976d2',
+				derivation: (theme: Theme) => theme.theme.color.secondary,
 			},
 		},
 		focus: {

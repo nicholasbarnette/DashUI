@@ -10,6 +10,7 @@
 	resize: none;
 	width: 100%;
 }
+
 .resize {
 	resize: both;
 }
@@ -17,7 +18,7 @@
 .textarea:focus {
 	outline: none;
 	background-color: var(--input-bg);
-	border-color: var(--input-focus-bd);
+	border-color: var(--input-focus);
 	color: var(--input-fg);
 }
 

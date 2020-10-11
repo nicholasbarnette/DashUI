@@ -115,6 +115,7 @@ export const LeftNavigation: FC<LeftNavigationProps> = (props) => {
 							isOpen ? 'Collapse' : 'Expand'
 						} left navigation`}
 						className={cn.expandIcon}
+						design="inverted"
 					/>
 					<span>{`${isOpen ? 'Collapse' : 'Expand'} Menu`}</span>
 				</div>

@@ -31,9 +31,9 @@
 }
 
 .selected {
-	background-color: var(--color-neutral);
-	color: var(--text-inverse);
-	border-color: var(--text-default);
+	background-color: var(--pattern-neutral-normal-bg);
+	color: var(--pattern-neutral-normal-fg);
+	border-color: var(--pattern-neutral-normal-bd);
 }
 
 .selected:focus {

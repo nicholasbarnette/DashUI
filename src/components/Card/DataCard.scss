@@ -1,8 +1,8 @@
 .card {
 	padding: var(--spacing-md);
 	padding-inline-start: var(--spacing-lg);
-	background-color: var(--pattern-neutral-normal-bg);
-	color: var(--pattern-neutral-normal-fg);
+	background-color: var(--background-content);
+	color: var(--text-default);
 	border-radius: 0.25rem;
 	width: 20rem;
 	overflow: hidden;
@@ -56,7 +56,7 @@
 }
 
 .description {
-	color: var(--text-placeholder);
+	color: var(--text-label);
 	font-size: var(--font-size-sm);
 }
 

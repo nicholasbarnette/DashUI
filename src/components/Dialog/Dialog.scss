@@ -18,8 +18,7 @@
 	max-height: 95%;
 	max-width: 95%;
 	border-radius: 0.25rem;
-	background-color: var(--pattern-neutral-normal-bg);
-	border: 1px solid var(--pattern-neutral-normal-bd);
+	background-color: var(--background-content);
 	color: var(--text-inverted);
 	display: flex;
 	flex-direction: column;
@@ -30,12 +29,12 @@
 	font-size: var(--font-size-lg);
 	padding: 2rem 2rem 1rem 2rem;
 	text-align: left;
-	color: var(--text-inverse);
+	color: var(--text-default);
 }
 
 .body {
 	padding: 0 2rem;
-	color: var(--text-inverse);
+	color: var(--text-default);
 	flex: 1 1 auto;
 	overflow: auto;
 	display: grid;

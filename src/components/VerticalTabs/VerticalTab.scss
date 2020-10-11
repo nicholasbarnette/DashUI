@@ -17,17 +17,13 @@
 }
 
 .selected {
-	background-color: var(--background-navigation);
-	color: var(--pattern-primary-normal-fg);
-
-	.description {
-		color: var(--pattern-primary-normal-fg);
-	}
+	background-color: var(--background-container);
+	color: var(--text-default);
 
 	&:focus {
 		outline-width: var(--focus-width);
 		outline-style: var(--focus-style);
-		outline-color: var(--focus-light);
+		outline-color: var(--focus-dark);
 		outline-offset: calc(-1 * var(--focus-width) - 1px);
 	}
 }
@@ -44,6 +40,6 @@
 	font-size: var(--font-size-sm);
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	color: var(--text-default);
+	color: var(--text-label);
 	overflow: hidden;
 }

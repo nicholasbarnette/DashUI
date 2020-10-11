@@ -33,15 +33,15 @@ export const Neutral = () => {
 								<div style={{ display: 'row' }}>
 									<ColorChip
 										color={`var(--pattern-neutral-${pattern}-bg)`}
-										label={`--color-${pattern}`}
+										label={`--pattern-neutral-${pattern}-bg`}
 									/>
 									<ColorChip
 										color={`var(--pattern-neutral-${pattern}-bd)`}
-										label={`--color-${pattern}`}
+										label={`--pattern-neutral-${pattern}-bd`}
 									/>
 									<ColorChip
 										color={`var(--pattern-neutral-${pattern}-fg)`}
-										label={`--color-${pattern}`}
+										label={`--pattern-neutral-${pattern}-fg`}
 									/>
 								</div>,
 							);
@@ -66,15 +66,15 @@ export const Primary = () => {
 								<div style={{ display: 'row' }}>
 									<ColorChip
 										color={`var(--pattern-primary-${pattern}-bg)`}
-										label={`--color-${pattern}`}
+										label={`--pattern-primary-${pattern}-bg`}
 									/>
 									<ColorChip
 										color={`var(--pattern-primary-${pattern}-bd)`}
-										label={`--color-${pattern}`}
+										label={`--pattern-primary-${pattern}-bd`}
 									/>
 									<ColorChip
 										color={`var(--pattern-primary-${pattern}-fg)`}
-										label={`--color-${pattern}`}
+										label={`--pattern-primary-${pattern}-fg`}
 									/>
 								</div>,
 							);
@@ -99,15 +99,48 @@ export const Secondary = () => {
 								<div style={{ display: 'row' }}>
 									<ColorChip
 										color={`var(--pattern-secondary-${pattern}-bg)`}
-										label={`--color-${pattern}`}
+										label={`--pattern-secondary-${pattern}-bg`}
 									/>
 									<ColorChip
 										color={`var(--pattern-secondary-${pattern}-bd)`}
-										label={`--color-${pattern}`}
+										label={`--pattern-secondary-${pattern}-bd`}
 									/>
 									<ColorChip
 										color={`var(--pattern-secondary-${pattern}-fg)`}
-										label={`--color-${pattern}`}
+										label={`--pattern-secondary-${pattern}-fg`}
+									/>
+								</div>,
+							);
+						},
+					);
+					return colors;
+				}}
+			</ThemeContext.Consumer>
+		</div>
+	);
+};
+
+export const Lightweight = () => {
+	return (
+		<div style={{ display: 'grid', gap: '1rem' }}>
+			<ThemeContext.Consumer>
+				{({ theme }) => {
+					let colors: ReactElement[] = [];
+					Object.keys(theme.theme['pattern-lightweight']).map(
+						(pattern) => {
+							colors.push(
+								<div style={{ display: 'row' }}>
+									<ColorChip
+										color={`var(--pattern-lightweight-${pattern}-bg)`}
+										label={`--pattern-lightweight-${pattern}-bg`}
+									/>
+									<ColorChip
+										color={`var(--pattern-lightweight-${pattern}-bd)`}
+										label={`--pattern-lightweight-${pattern}-bd`}
+									/>
+									<ColorChip
+										color={`var(--pattern-lightweight-${pattern}-fg)`}
+										label={`--pattern-lightweight-${pattern}-fg`}
 									/>
 								</div>,
 							);

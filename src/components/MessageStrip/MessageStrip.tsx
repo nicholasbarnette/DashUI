@@ -31,10 +31,7 @@ export const MessageStrip: FC<MessageStripProps> = (props) => {
 				svg={getIcon(props.variant)}
 				className={cn.statusIcon}
 				customColor={{
-					default:
-						!props.variant || props.variant === 'information'
-							? 'var(--text-default)'
-							: 'var(--text-inverse)',
+					default: 'var(--text-inverse)',
 				}}
 			/>
 			<span className={cn.message}>{props.children}</span>
@@ -44,11 +41,7 @@ export const MessageStrip: FC<MessageStripProps> = (props) => {
 					icon={{
 						svg: Close,
 						customColor: {
-							default:
-								!props.variant ||
-								props.variant === 'information'
-									? 'var(--text-default)'
-									: 'var(--text-inverse)',
+							default: 'var(--text-inverse)',
 						},
 					}}
 					variant="lightweight"

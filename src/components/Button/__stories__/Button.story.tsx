@@ -26,6 +26,9 @@ export const Design = () => {
 			<Button tooltip="Basic Button" variant="primary">
 				Primary Button
 			</Button>
+			<Button tooltip="Basic Button" variant="secondary">
+				Secondary Button
+			</Button>
 			<Button tooltip="Basic Button" variant="lightweight">
 				Neutral Light Button
 			</Button>
@@ -46,6 +49,13 @@ export const Design = () => {
 			<Button
 				tooltip="Button with icon"
 				icon={{ svg: StarFilled }}
+				variant="secondary"
+			>
+				Icon Button
+			</Button>
+			<Button
+				tooltip="Button with icon"
+				icon={{ svg: StarFilled }}
 				variant="lightweight"
 			>
 				Icon Button
@@ -60,6 +70,11 @@ export const Design = () => {
 			<Button
 				tooltip="Button with icon"
 				icon={{ svg: StarFilled }}
+				variant="secondary"
+			/>
+			<Button
+				tooltip="Button with icon"
+				icon={{ svg: StarFilled }}
 				variant="lightweight"
 			/>
 		</div>
@@ -68,8 +83,19 @@ export const Design = () => {
 
 export const Disabled = () => {
 	return (
-		<Button tooltip="Basic Button" disabled>
-			Neutral Button
-		</Button>
+		<div>
+			<Button tooltip="Basic Button" disabled>
+				Neutral Button
+			</Button>
+			<Button tooltip="Basic Button" disabled variant="primary">
+				Primary Button
+			</Button>
+			<Button tooltip="Basic Button" disabled variant="secondary">
+				Secondary Button
+			</Button>
+			<Button tooltip="Basic Button" disabled variant="lightweight">
+				Lightweight Button
+			</Button>
+		</div>
 	);
 };

@@ -1,5 +1,5 @@
 .label {
-	color: inherit;
+	color: var(--text-label);
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	font-size: var(--font-size-md);

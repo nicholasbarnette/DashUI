@@ -4,6 +4,8 @@ import { Component } from '../../types';
 // Styles
 import cx from 'classnames';
 import cn from './Notification.scss';
+import { Close } from '../SVG';
+import { Button } from '../Button';
 
 export interface Notification {
 	id: string;
@@ -35,25 +37,21 @@ export const Notification: FC<NotificationProps> = (props) => {
 			className={cx(cn.toast, props.className)}
 			data-testid={props.testId}
 			style={props.style}
-			role='alert'
+			role="alert"
 		>
-			<span className={cn.text}>{props.children}</span>
-			{/* TODO: Convert this to an icon */}
-			<span
-				tabIndex={0}
-				className={cn.closeButton}
-				onClick={() => {
-					props.onClose?.();
-				}}
-				onKeyPress={(event) => {
-					(event.which === 13 || event.which === 32) &&
-						props.onClose?.();
-				}}
-				aria-label='Close notification'
-				role='button'
-			>
-				X
+			<span className={cn.text} title={props.children}>
+				{props.children}
 			</span>
+			<Button
+				icon={{
+					svg: Close,
+					customColor: { default: 'var(--text-inverse)' },
+				}}
+				tooltip="Close notification"
+				onPress={props.onClose}
+				className={cn.closeButton}
+				variant="lightweight"
+			/>
 		</div>
 	);
 };

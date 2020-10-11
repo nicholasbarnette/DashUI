@@ -4,6 +4,7 @@
 	flex-wrap: nowrap;
 	height: 100%;
 	width: 100%;
+	flex: 1 1 auto;
 }
 
 .leftNav {
@@ -30,6 +31,7 @@
 	cursor: pointer;
 	padding: var(--spacing-sm) 0;
 	padding-inline-end: var(--spacing-sm);
+	color: var(--text-inverse);
 
 	> span {
 		white-space: nowrap;
@@ -66,10 +68,11 @@
 	font-weight: 600;
 	text-transform: uppercase;
 	font-size: var(--spacing-md);
+	color: var(--text-inverse);
 }
 
 .selected > .iconContainer {
-	background-color: var(--text-default);
+	background-color: var(--text-inverse);
 }
 
 .expandContainer {
@@ -84,6 +87,7 @@
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
+		color: var(--text-inverse);
 	}
 
 	&:focus {

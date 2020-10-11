@@ -50,6 +50,7 @@ export interface Derivations {
 	'pattern-neutral': (pattern: States, theme: Theme) => ThemeProperties;
 	'pattern-primary': (pattern: States, theme: Theme) => ThemeProperties;
 	'pattern-secondary': (pattern: States, theme: Theme) => ThemeProperties;
+	'pattern-lightweight': (pattern: States, theme: Theme) => ThemeProperties;
 }
 
 export const ThemeDerivations: Derivations = {
@@ -100,6 +101,8 @@ export const ThemeDerivations: Derivations = {
 	'pattern-primary': (pattern: States, theme: Theme) =>
 		derivePattern(pattern, theme),
 	'pattern-secondary': (pattern: States, theme: Theme) =>
+		derivePattern(pattern, theme),
+	'pattern-lightweight': (pattern: States, theme: Theme) =>
 		derivePattern(pattern, theme),
 };
 

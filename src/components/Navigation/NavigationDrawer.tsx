@@ -108,7 +108,7 @@ export const NavigationDrawer: FC<NavigationDrawerProps> = (props) => {
 		<Fragment>
 			<div
 				className={cn.menu}
-				title='Open Menu'
+				title="Open Menu"
 				onClick={(event) => {
 					event.preventDefault();
 					setIsOpen(!isOpen);
@@ -123,8 +123,8 @@ export const NavigationDrawer: FC<NavigationDrawerProps> = (props) => {
 			>
 				<SVG
 					svg={Hamburger}
-					tooltip='Toggle navigation drawer'
-					design='inverted'
+					tooltip="Toggle navigation drawer"
+					design="inverted"
 				/>
 			</div>
 			<div
