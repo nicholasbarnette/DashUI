@@ -1,0 +1,29 @@
+.chart {
+	height: var(--chart-size);
+	width: var(--chart-size);
+	background-color: var(--background-content);
+	border: 1px solid var(--color-neutral);
+	border-radius: 100%;
+	position: relative;
+}
+
+.text {
+	width: 50%;
+	height: 100%;
+	display: block;
+	transform-origin: center center;
+	z-index: 100;
+	font-weight: 600;
+	position: absolute;
+	right: 25%;
+	left: 25%;
+	user-select: none;
+	padding-block-start: calc(var(--spacing-sm) * var(--chart-text-scalar));
+	text-align: center;
+	font-size: calc(
+		var(--font-size-sm) * var(--chart-text-scalar) *
+			var(--slice-text-scalar)
+	);
+	text-decoration: underline;
+	color: var(--color-neutral);
+}
