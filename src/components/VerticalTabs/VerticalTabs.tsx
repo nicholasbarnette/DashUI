@@ -69,6 +69,7 @@ export const VerticalTabs: FC<VerticalTabsProps> = (props) => {
 					return (
 						!tab.hidden && (
 							<VerticalTab
+								key={idx}
 								testId={props.testId && `${props.testId}${idx}`}
 								{...restProps}
 								isFocused={idx === focusedIdx}

@@ -1,5 +1,3 @@
-import { Color } from 'd3';
-
 export type BaseTheme = 'light' | 'dark';
 
 export interface ColorDerivation {

@@ -1,0 +1,71 @@
+$titleSpace: var(--chart-title-size);
+
+.chart {
+	height: calc(var(--chart-size) * 9 / 16);
+	width: var(--chart-size);
+	display: grid;
+	grid-template-rows: $titleSpace minmax(0, 1fr) 2px $titleSpace;
+	background-color: var(--background-content);
+	padding: calc(var(--spacing-md) * var(--chart-text-scalar));
+	border: 1px solid var(--color-neutral);
+}
+
+.title {
+	height: 100%;
+	width: 100%;
+	font-size: calc(var(--font-size-lg) * var(--chart-text-scalar));
+	text-align: center;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.xAxis {
+	font-size: calc(var(--font-size-sm) * var(--chart-text-scalar));
+	text-align: center;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	padding: calc(var(--spacing-md) * var(--chart-text-scalar));
+	margin-inline-start: $titleSpace;
+}
+
+.xAxisDivider {
+	width: calc(100% - #{$titleSpace});
+	max-width: calc(100% - #{$titleSpace});
+	margin: 0;
+	height: 100%;
+	margin-inline-start: $titleSpace;
+}
+
+.body {
+	height: 100%;
+	width: 100%;
+	display: grid;
+	grid-template-columns: $titleSpace 2px 1fr;
+}
+
+.yAxis {
+	text-align: center;
+	align-self: center;
+	justify-self: center;
+	font-size: calc(var(--font-size-sm) * var(--chart-text-scalar));
+	width: 100%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	writing-mode: vertical-lr;
+	transform: rotate(-180deg);
+	height: 100%;
+	padding: calc(var(--spacing-md) * var(--chart-text-scalar));
+}
+
+.bars {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	display: grid;
+	gap: calc(var(--spacing-md) * var(--chart-text-scalar));
+	padding: 0 calc(var(--spacing-md) * var(--chart-text-scalar));
+	align-items: flex-end;
+}
