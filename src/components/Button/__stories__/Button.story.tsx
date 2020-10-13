@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { useCookies } from '../../../hooks';
 import { Button } from '../../Button';
-import { SVG, StarFilled } from '../../SVG';
+import { StarFilled } from '../../SVG';
 
 export default {
 	component: Button,

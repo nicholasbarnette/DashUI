@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { MenuButton } from '../';
 
 export default {
@@ -23,6 +23,61 @@ export const Basic = () => {
 		>
 			Menu Button
 		</MenuButton>
+	);
+};
+
+export const Design = () => {
+	return (
+		<Fragment>
+			<MenuButton
+				variant="neutral"
+				tooltip="Menu Button"
+				items={[
+					{ id: 'item1', type: 'text', value: 'Item 1' },
+					{ id: 'item2', type: 'text', value: 'Item 2' },
+					{ id: 'item3', type: 'text', value: 'Item 3' },
+				]}
+				onPress={onPressFn}
+			>
+				Menu Button
+			</MenuButton>
+			<MenuButton
+				variant="primary"
+				tooltip="Menu Button"
+				items={[
+					{ id: 'item1', type: 'text', value: 'Item 1' },
+					{ id: 'item2', type: 'text', value: 'Item 2' },
+					{ id: 'item3', type: 'text', value: 'Item 3' },
+				]}
+				onPress={onPressFn}
+			>
+				Menu Button
+			</MenuButton>
+			<MenuButton
+				variant="secondary"
+				tooltip="Menu Button"
+				items={[
+					{ id: 'item1', type: 'text', value: 'Item 1' },
+					{ id: 'item2', type: 'text', value: 'Item 2' },
+					{ id: 'item3', type: 'text', value: 'Item 3' },
+				]}
+				onPress={onPressFn}
+			>
+				Menu Button
+			</MenuButton>
+			<MenuButton
+				variant="lightweight"
+				tooltip="Menu Button"
+				items={[
+					{ id: 'item1', type: 'text', value: 'Item 1' },
+					{ id: 'item2', type: 'text', value: 'Item 2' },
+					{ id: 'item3', type: 'text', value: 'Item 3' },
+				]}
+				onPress={onPressFn}
+			>
+				Menu Button
+			</MenuButton>
+		</Fragment>
 	);
 };
 

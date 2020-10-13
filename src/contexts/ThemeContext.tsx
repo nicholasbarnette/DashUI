@@ -4,15 +4,14 @@ import React, {
 	useState,
 	useMemo,
 	useEffect,
-	useRef,
 	CSSProperties,
 } from 'react';
-import { MenuButton } from '../components/MenuButton';
+import { MenuButton, MenuButtonProps } from '../components/MenuButton';
 import { MenuItem } from '../components/Menu';
 import { ThemeDerivations, Derivations } from '../theme/ThemeDerivation';
 import { resolveDerivation, getDerivationInfo } from '../theme/utils';
 import { DefaultLightTheme, Theme, DefaultDarkTheme } from '../theme/Theme';
-import { useGenerateUniqueId } from '../hooks';
+import { useCookies, useGenerateUniqueId } from '../hooks';
 
 interface ThemeProviderContext {
 	theme: Theme;
@@ -47,17 +46,10 @@ export const convertPropertiesToCSS = (properties: {
 
 export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
 	const styleId = useGenerateUniqueId('dash-theme', 20);
+	const [cookies, setCookie] = useCookies();
 
 	const setTheme = (theme: 'light' | 'dark') => {
-		setCurrentTheme({
-			theme:
-				theme === 'dark'
-					? props.themeOverride ?? props.darkTheme ?? DefaultDarkTheme
-					: props.themeOverride ??
-					  props.lightTheme ??
-					  DefaultLightTheme,
-			setTheme,
-		});
+		setCookie('theme', theme);
 	};
 
 	const [currentTheme, setCurrentTheme] = useState<ThemeProviderContext>({
@@ -68,13 +60,12 @@ export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
 	const properties = useMemo(() => {
 		let theme: { [key: string]: string } = {
 			'--base-size': `${
-				(props.themeOverride ?? props.lightTheme ?? currentTheme.theme)
-					.theme.core.baseSize
+				(props.themeOverride ?? currentTheme.theme).theme.core.baseSize
 			}px`,
 		};
 		Object.keys(ThemeDerivations).map((derivation) => {
 			const [base, constant] = getDerivationInfo(
-				props.themeOverride ?? props.lightTheme ?? currentTheme.theme,
+				props.themeOverride ?? currentTheme.theme,
 				derivation as keyof Derivations,
 			);
 			theme = {
@@ -84,17 +75,14 @@ export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
 					ThemeDerivations[derivation as keyof Derivations](
 						base,
 						constant,
-						(
-							props.themeOverride ??
-							props.lightTheme ??
-							currentTheme.theme
-						).theme.core.baseSize,
+						(props.themeOverride ?? currentTheme.theme).theme.core
+							.baseSize,
 					),
 				) as { [key: string]: string }),
 			};
 		});
 		return theme;
-	}, [props.themeOverride, props.lightTheme, currentTheme]);
+	}, [props.themeOverride, currentTheme]);
 
 	useEffect(() => {
 		let block = document.createElement('style');
@@ -112,6 +100,22 @@ export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
 			block.innerText = convertPropertiesToCSS(properties);
 		}
 	}, [properties, styleId]);
+
+	useEffect(() => {
+		if (cookies.theme) {
+			setCurrentTheme({
+				theme:
+					cookies.theme === 'dark'
+						? props.themeOverride ??
+						  props.darkTheme ??
+						  DefaultDarkTheme
+						: props.themeOverride ??
+						  props.lightTheme ??
+						  DefaultLightTheme,
+				setTheme,
+			});
+		}
+	}, [cookies]);
 
 	return (
 		<div
@@ -131,6 +135,7 @@ export interface ThemeSwitcherProps {
 	tooltip: string;
 	items?: MenuItem[];
 	onPress?: (id: string) => void;
+	variant?: MenuButtonProps['variant'];
 }
 
 export const ThemeSwitcher: FC<ThemeSwitcherProps> = (props) => {
@@ -141,7 +146,7 @@ export const ThemeSwitcher: FC<ThemeSwitcherProps> = (props) => {
 					<MenuButton
 						className={props.className}
 						testId={props.testId}
-						variant="lightweight"
+						variant={props.variant ?? 'lightweight'}
 						tooltip={props.tooltip}
 						items={[
 							...(props.items || []),

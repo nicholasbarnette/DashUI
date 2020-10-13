@@ -22,6 +22,41 @@ describe('basic menu button', () => {
 		expect(getByText('Menu Button')).toBeTruthy();
 	});
 
+	it('renders dropdown arrow', () => {
+		const { getByRole } = render(
+			<MenuButton
+				tooltip="Menu Button"
+				items={[
+					{ id: 'item1', type: 'text', value: 'Item 1' },
+					{ id: 'item2', type: 'text', value: 'Item 2' },
+					{ id: 'item3', type: 'text', value: 'Item 3' },
+				]}
+				onPress={() => {}}
+			>
+				Menu Button
+			</MenuButton>,
+		);
+		expect(getByRole('img')).toBeTruthy();
+	});
+
+	it('hides dropdown arrow', () => {
+		const { findByRole } = render(
+			<MenuButton
+				tooltip="Menu Button"
+				items={[
+					{ id: 'item1', type: 'text', value: 'Item 1' },
+					{ id: 'item2', type: 'text', value: 'Item 2' },
+					{ id: 'item3', type: 'text', value: 'Item 3' },
+				]}
+				onPress={() => {}}
+				hideDropdownArrow
+			>
+				Menu Button
+			</MenuButton>,
+		);
+		expect(() => findByRole('img')).rejects;
+	});
+
 	it('renders menu on click', () => {
 		const { getByRole, getByText } = render(
 			<MenuButton

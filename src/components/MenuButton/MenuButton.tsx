@@ -1,11 +1,4 @@
-import React, {
-	FC,
-	useState,
-	useEffect,
-	useRef,
-	KeyboardEvent,
-	MouseEvent,
-} from 'react';
+import React, { FC, useState, useEffect, useRef } from 'react';
 import { Component } from '../../types';
 import { useGenerateUniqueId } from '../../hooks';
 
@@ -25,6 +18,7 @@ export interface MenuButtonProps extends Component {
 	onPress?: (id: string) => void;
 	variant?: ButtonVariant;
 	id?: string;
+	hideDropdownArrow?: boolean;
 }
 
 export const MenuButton: FC<MenuButtonProps> = (props) => {
@@ -54,7 +48,7 @@ export const MenuButton: FC<MenuButtonProps> = (props) => {
 			<button
 				className={cx(
 					btnCN.button,
-					cn[props.variant ?? 'neutral'],
+					btnCN[props.variant ?? 'neutral'],
 					cn.button,
 					props.className,
 				)}
@@ -79,12 +73,18 @@ export const MenuButton: FC<MenuButtonProps> = (props) => {
 				style={props.style}
 			>
 				{props.children}
-				<SVG
-					svg={ChevronDown}
-					tooltip=""
-					design="inverted"
-					style={{ marginInlineStart: 'var(--spacing-sm)' }}
-				/>
+				{!props.hideDropdownArrow ? (
+					<SVG
+						svg={ChevronDown}
+						tooltip=""
+						design={
+							props.variant === 'lightweight'
+								? 'default'
+								: 'inverted'
+						}
+						style={{ marginInlineStart: 'var(--spacing-sm)' }}
+					/>
+				) : null}
 			</button>
 			<Menu
 				originRef={btnRef}

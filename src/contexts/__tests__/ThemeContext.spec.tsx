@@ -52,6 +52,16 @@ const TestThemeProvider: FC<{
 };
 
 describe('theme provider', () => {
+	beforeEach(() => {
+		Object.defineProperty(document, 'cookie', {
+			configurable: true,
+			get: jest.fn().mockImplementation(() => {
+				return 'theme=light';
+			}),
+			set: jest.fn().mockImplementation(() => {}),
+		});
+	});
+
 	it('renders default themes', () => {
 		const { getByTestId, getByText } = render(
 			<TestThemeProvider testId="theme" />,
@@ -238,6 +248,49 @@ describe('theme provider', () => {
 		);
 		expect(theme.getAttribute('data-secondary')).toBe(
 			ApplicationLightTheme.theme.color.secondary,
+		);
+	});
+
+	it('renders saved theme', () => {
+		Object.defineProperty(document, 'cookie', {
+			configurable: true,
+			get: jest.fn().mockImplementation(() => {
+				return 'theme=dark';
+			}),
+			set: jest.fn().mockImplementation(() => {}),
+		});
+		const { getByTestId, getByText } = render(
+			<TestThemeProvider testId="theme" />,
+		);
+		let theme = getByTestId('theme');
+		expect(theme.getAttribute('data-neutral')).toBe(
+			DefaultDarkTheme.theme.color.neutral,
+		);
+		expect(theme.getAttribute('data-primary')).toBe(
+			DefaultDarkTheme.theme.color.primary,
+		);
+		expect(theme.getAttribute('data-secondary')).toBe(
+			DefaultDarkTheme.theme.color.secondary,
+		);
+		fireEvent.click(getByText('Switch Theme'));
+		expect(theme.getAttribute('data-neutral')).toBe(
+			DefaultLightTheme.theme.color.neutral,
+		);
+		expect(theme.getAttribute('data-primary')).toBe(
+			DefaultLightTheme.theme.color.primary,
+		);
+		expect(theme.getAttribute('data-secondary')).toBe(
+			DefaultLightTheme.theme.color.secondary,
+		);
+		fireEvent.click(getByText('Switch Theme'));
+		expect(theme.getAttribute('data-neutral')).toBe(
+			DefaultDarkTheme.theme.color.neutral,
+		);
+		expect(theme.getAttribute('data-primary')).toBe(
+			DefaultDarkTheme.theme.color.primary,
+		);
+		expect(theme.getAttribute('data-secondary')).toBe(
+			DefaultDarkTheme.theme.color.secondary,
 		);
 	});
 });
