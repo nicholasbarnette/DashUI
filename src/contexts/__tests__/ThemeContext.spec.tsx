@@ -173,4 +173,71 @@ describe('theme provider', () => {
 			DefaultLightTheme.theme.color.secondary,
 		);
 	});
+
+	it('renders custom app themes', () => {
+		const ApplicationLightTheme: Theme = {
+			...DefaultLightTheme,
+			type: 'default',
+			theme: {
+				...DefaultLightTheme.theme,
+				color: {
+					...DefaultLightTheme.theme.color,
+					neutral: 'red',
+					primary: 'green',
+					secondary: 'blue',
+				},
+			},
+		};
+		const ApplicationDarkTheme: Theme = {
+			...DefaultDarkTheme,
+			type: 'default',
+			theme: {
+				...DefaultDarkTheme.theme,
+				color: {
+					...DefaultDarkTheme.theme.color,
+					neutral: 'orange',
+					primary: 'purple',
+					secondary: 'yellow',
+				},
+			},
+		};
+
+		const { getByTestId, getByText } = render(
+			<TestThemeProvider
+				testId="theme"
+				lightTheme={ApplicationLightTheme}
+				darkTheme={ApplicationDarkTheme}
+			/>,
+		);
+		let theme = getByTestId('theme');
+		expect(theme.getAttribute('data-neutral')).toBe(
+			ApplicationLightTheme.theme.color.neutral,
+		);
+		expect(theme.getAttribute('data-primary')).toBe(
+			ApplicationLightTheme.theme.color.primary,
+		);
+		expect(theme.getAttribute('data-secondary')).toBe(
+			ApplicationLightTheme.theme.color.secondary,
+		);
+		fireEvent.click(getByText('Switch Theme'));
+		expect(theme.getAttribute('data-neutral')).toBe(
+			ApplicationDarkTheme.theme.color.neutral,
+		);
+		expect(theme.getAttribute('data-primary')).toBe(
+			ApplicationDarkTheme.theme.color.primary,
+		);
+		expect(theme.getAttribute('data-secondary')).toBe(
+			ApplicationDarkTheme.theme.color.secondary,
+		);
+		fireEvent.click(getByText('Switch Theme'));
+		expect(theme.getAttribute('data-neutral')).toBe(
+			ApplicationLightTheme.theme.color.neutral,
+		);
+		expect(theme.getAttribute('data-primary')).toBe(
+			ApplicationLightTheme.theme.color.primary,
+		);
+		expect(theme.getAttribute('data-secondary')).toBe(
+			ApplicationLightTheme.theme.color.secondary,
+		);
+	});
 });

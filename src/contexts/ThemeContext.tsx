@@ -12,6 +12,7 @@ import { MenuItem } from '../components/Menu';
 import { ThemeDerivations, Derivations } from '../theme/ThemeDerivation';
 import { resolveDerivation, getDerivationInfo } from '../theme/utils';
 import { DefaultLightTheme, Theme, DefaultDarkTheme } from '../theme/Theme';
+import { useGenerateUniqueId } from '../hooks';
 
 interface ThemeProviderContext {
 	theme: Theme;
@@ -45,13 +46,7 @@ export const convertPropertiesToCSS = (properties: {
 };
 
 export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
-	const styleBlock = useRef<HTMLStyleElement>(
-		(() => {
-			let block = document.createElement('style');
-			block.type = 'text/css';
-			return block;
-		})(),
-	);
+	const styleId = useGenerateUniqueId('dash-theme', 20);
 
 	const setTheme = (theme: 'light' | 'dark') => {
 		setCurrentTheme({
@@ -102,11 +97,21 @@ export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
 	}, [props.themeOverride, props.lightTheme, currentTheme]);
 
 	useEffect(() => {
-		document
-			.getElementsByTagName('head')[0]
-			.appendChild(styleBlock.current);
-		styleBlock.current.innerText = convertPropertiesToCSS(properties);
-	}, [properties]);
+		let block = document.createElement('style');
+		block.setAttribute('id', styleId);
+		document.getElementsByTagName('head')[0].appendChild(block);
+
+		return () => {
+			document.getElementById(styleId)?.remove();
+		};
+	}, []);
+
+	useEffect(() => {
+		const block = document.getElementById(styleId);
+		if (block) {
+			block.innerText = convertPropertiesToCSS(properties);
+		}
+	}, [properties, styleId]);
 
 	return (
 		<div
