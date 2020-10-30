@@ -31,19 +31,18 @@ export const List: FC<ListProps> = (props) => {
 						key={idx}
 						className={cx({
 							[cn.selected]:
-								`${props.selectedKey}` === `${item.key}`,
+								props.selectedKey !== undefined &&
+								`${props.selectedKey}` === `${item.key ?? idx}`,
 						})}
 						interactable={props.interactable}
 						item={{ key: idx, ...item }}
-						onPress={(key?: string | number) => {
-							props.onPress?.(key);
-						}}
+						onPress={() => props.onPress?.(item.key ?? idx)}
 					/>
 				);
 			})}
 			{props.display && props.items.length > props.display && (
 				<li
-					key='showmore'
+					key="showmore"
 					className={cx(cn.item, cn.interactable)}
 					onKeyPress={(event) => {
 						(event.which === 13 || event.which === 32) &&
