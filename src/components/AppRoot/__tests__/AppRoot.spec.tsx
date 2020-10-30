@@ -3,10 +3,72 @@ import { cleanup, fireEvent, render } from '@testing-library/react';
 import { AppRoot } from '..';
 import { ThemeContext } from '../../../contexts/ThemeContext';
 import { DefaultDarkTheme, DefaultLightTheme, Theme } from '../../../theme';
+import {
+	LeftNavigation,
+	NavigationBar,
+	NavigationLink,
+} from '../../Navigation';
+import { Home, Profile, Document } from '../../SVG';
 
 afterEach(cleanup);
 
-const TestAppRoot: FC<{
+describe('approot theme support', () => {
+	it('renders', () => {
+		const { getByTestId } = render(
+			<AppRoot testId="approot">Basic AppRoot</AppRoot>,
+		);
+		expect(getByTestId('approot')).toBeTruthy();
+	});
+
+	it('renders conent', () => {
+		const { getByText } = render(<AppRoot>Basic AppRoot</AppRoot>);
+		expect(getByText('Basic AppRoot')).toBeTruthy();
+	});
+
+	it('renders navigation', () => {
+		const { getByText, getAllByRole } = render(
+			<AppRoot
+				topNavigation={
+					<NavigationBar
+						left={
+							<NavigationLink link="/">
+								Application Name
+							</NavigationLink>
+						}
+					/>
+				}
+				leftNavigation={
+					<LeftNavigation
+						items={[
+							{
+								svg: Home,
+								text: 'Item 1',
+								content: <p>Content 1</p>,
+							},
+							{
+								svg: Profile,
+								text: 'Item 2',
+								content: <p>Content 2</p>,
+							},
+							{
+								svg: Document,
+								text: 'Item 3',
+								content: <p>Content 3</p>,
+							},
+						]}
+					/>
+				}
+			>
+				Basic AppRoot
+			</AppRoot>,
+		);
+		expect(getByText('Application Name')).toBeTruthy();
+		expect(getAllByRole('img').length).toBe(4);
+		expect(getByText('Content 1')).toBeTruthy();
+	});
+});
+
+const TestAppRootTheme: FC<{
 	testId?: string;
 	lightTheme?: Theme;
 	darkTheme?: Theme;
@@ -44,19 +106,7 @@ const TestAppRoot: FC<{
 	);
 };
 
-describe('basic approot', () => {
-	it('renders', () => {
-		const { getByTestId } = render(
-			<AppRoot testId="approot">Basic AppRoot</AppRoot>,
-		);
-		expect(getByTestId('approot')).toBeTruthy();
-	});
-
-	it('renders conent', () => {
-		const { getByText } = render(<AppRoot>Basic AppRoot</AppRoot>);
-		expect(getByText('Basic AppRoot')).toBeTruthy();
-	});
-
+describe('approot theme support', () => {
 	it('renders custom themes', () => {
 		const CustomLightTheme: Theme = {
 			...DefaultLightTheme,
@@ -86,7 +136,7 @@ describe('basic approot', () => {
 		};
 
 		const { getByTestId, getByText } = render(
-			<TestAppRoot
+			<TestAppRootTheme
 				testId="theme"
 				lightTheme={CustomLightTheme}
 				darkTheme={CustomDarkTheme}
