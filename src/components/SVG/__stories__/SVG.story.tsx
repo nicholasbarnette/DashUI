@@ -7,6 +7,8 @@ import {
 	StarFilled,
 	Home,
 	Close,
+	Moon,
+	Sun,
 } from '../../SVG';
 
 export default {
@@ -21,8 +23,8 @@ export const Basic = () => {
 			<SVG svg={StarFilled} tooltip="" />
 			<SVG svg={HeartEmpty} tooltip="" />
 			<SVG svg={HeartFilled} tooltip="" />
-			<SVG svg={Home} tooltip="" />
-			<SVG svg={Close} tooltip="" />
+			<SVG svg={Moon} tooltip="" />
+			<SVG svg={Sun} tooltip="" />
 		</div>
 	);
 };
@@ -36,6 +38,8 @@ export const CustomSize = () => {
 			<SVG svg={HeartFilled} tooltip="" size={50} />
 			<SVG svg={Home} tooltip="" size={50} />
 			<SVG svg={Close} tooltip="" size={50} />
+			<SVG svg={Moon} tooltip="" size={50} />
+			<SVG svg={Sun} tooltip="" size={50} />
 		</div>
 	);
 };

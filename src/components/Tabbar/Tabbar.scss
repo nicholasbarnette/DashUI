@@ -26,7 +26,7 @@
 .tab:focus {
 	outline-width: var(--focus-width);
 	outline-style: var(--focus-style);
-	outline-color: var(--focus-light);
+	outline-color: var(--focus-dark);
 	outline-offset: calc(-1 * var(--focus-width) - 1px);
 }
 
@@ -39,5 +39,5 @@
 .selected:focus {
 	outline-width: var(--focus-width);
 	outline-style: var(--focus-style);
-	outline-color: var(--focus-dark);
+	outline-color: var(--focus-light);
 }

@@ -6,7 +6,8 @@
 
 .svg > path,
 .svg > circle,
-.svg > ellipse {
+.svg > ellipse,
+.svg > rect {
 	fill: var(--svg-custom-color, var(--text-default));
 	&.inverse {
 		fill: var(--svg-custom-color-inverse, var(--text-inverse));
@@ -15,7 +16,8 @@
 
 .svg.alternate > path,
 .svg.alternate > circle,
-.svg.alternate > ellipse {
+.svg.alternate > ellipse,
+.svg.alternate > rect {
 	fill: var(--svg-custom-color, var(--text-default));
 	&.inverse {
 		fill: var(--svg-custom-color-inverse, var(--text-inverse));
@@ -24,7 +26,8 @@
 
 .svg.inverted > path,
 .svg.inverted > circle,
-.svg.inverted > ellipse {
+.svg.inverted > ellipse,
+.svg.inverted > rect {
 	fill: var(--svg-custom-color-inverse, var(--text-inverse));
 	&.inverse {
 		fill: var(--svg-custom-color, var(--text-default));

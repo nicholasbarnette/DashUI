@@ -12,6 +12,7 @@ import { ThemeDerivations, Derivations } from '../theme/ThemeDerivation';
 import { resolveDerivation, getDerivationInfo } from '../theme/utils';
 import { DefaultLightTheme, Theme, DefaultDarkTheme } from '../theme/Theme';
 import { useCookies, useGenerateUniqueId } from '../hooks';
+import { useGenerateUniqueClassName } from '../hooks/useGenerateUniqueClassName';
 
 interface ThemeProviderContext {
 	theme: Theme;
@@ -34,10 +35,13 @@ export interface ThemeProviderProps {
 	testId?: string;
 }
 
-export const convertPropertiesToCSS = (properties: {
-	[key: string]: string;
-}) => {
-	let styles = ':root {\n';
+export const convertPropertiesToCSS = (
+	properties: {
+		[key: string]: string;
+	},
+	id?: string,
+) => {
+	let styles = `${'.' + id ?? ':root'} {\n`;
 	Object.keys(properties).map((key) => {
 		styles += `${key}: ${properties[key]};\n`;
 	});
@@ -46,6 +50,7 @@ export const convertPropertiesToCSS = (properties: {
 
 export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
 	const styleId = useGenerateUniqueId('dash-theme', 20);
+	const themeClassName = useGenerateUniqueClassName(20);
 	const [cookies, setCookie] = useCookies();
 
 	const setTheme = (theme: 'light' | 'dark') => {
@@ -97,7 +102,10 @@ export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
 	useEffect(() => {
 		const block = document.getElementById(styleId);
 		if (block) {
-			block.innerText = convertPropertiesToCSS(properties);
+			block.innerText = convertPropertiesToCSS(
+				properties,
+				themeClassName,
+			);
 		}
 	}, [properties, styleId]);
 
@@ -121,6 +129,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
 		<div
 			style={{ height: '100%', width: '100%', ...props.style }}
 			data-testid={props.testId}
+			className={themeClassName}
 		>
 			<ThemeContext.Provider value={currentTheme}>
 				{props.children}
