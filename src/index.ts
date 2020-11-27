@@ -12,6 +12,7 @@ export * from './components/Dialog';
 export * from './components/Divider';
 export * from './components/Form';
 export * from './components/Graphs';
+export * from './components/Heading';
 export * from './components/Input';
 export * from './components/Label';
 export * from './components/List';
@@ -22,6 +23,7 @@ export * from './components/Notifications';
 export * from './components/SVG';
 export * from './components/Switch';
 export * from './components/Tabbar';
+export * from './components/Text';
 export * from './components/TextArea';
 
 export * from './contexts';
