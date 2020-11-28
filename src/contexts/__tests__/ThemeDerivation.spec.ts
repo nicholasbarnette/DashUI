@@ -191,11 +191,11 @@ describe('ThemeDerivation', () => {
 		const CustomTheme: Theme = { ...DefaultLightTheme, type: 'custom' };
 		const text = ThemeDerivations.text(CustomTheme.theme.text, CustomTheme);
 		expect(text).toStrictEqual({
-			alternate: '#7800d2',
-			default: '#7800d2',
-			inverse: '#7800d2',
-			label: '#7800d2',
-			placeholder: '#7800d2',
+			alternate: '#131722',
+			default: '#131722',
+			inverse: '#ffffff',
+			label: '#333333',
+			placeholder: '#a1a1a1',
 		});
 	});
 
@@ -210,17 +210,17 @@ describe('ThemeDerivation', () => {
 			'disabled-bg': 'hsla(204, 71%, 50%, 1)',
 			'disabled-fg': '#ffffff',
 			'disabled-op': '0.3',
-			'hover-bd': '#258fd8',
-			'hover-bg': '#258fd8',
-			'hover-fg': '#258fd8',
+			'hover-bd': 'hsla(204, 71%, 50%, 0.85)',
+			'hover-bg': 'hsla(204, 71%, 50%, 0.85)',
+			'hover-fg': '#ffffff',
 			'hover-op': '1',
-			'normal-bd': '#258fd8',
-			'normal-bg': '#258fd8',
-			'normal-fg': '#258fd8',
+			'normal-bd': 'hsla(204, 71%, 50%, 1)',
+			'normal-bg': 'hsla(204, 71%, 50%, 1)',
+			'normal-fg': '#ffffff',
 			'normal-op': '1',
-			'pressed-bd': '#258fd8',
-			'pressed-bg': '#258fd8',
-			'pressed-fg': '#258fd8',
+			'pressed-bd': 'hsla(204, 71%, 50%, 0.75)',
+			'pressed-bg': 'hsla(204, 71%, 50%, 0.75)',
+			'pressed-fg': '#ffffff',
 			'pressed-op': '1',
 		});
 	});

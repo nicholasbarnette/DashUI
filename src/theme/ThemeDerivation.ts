@@ -11,21 +11,21 @@ type Color = keyof Theme['theme']['color'];
 type Colors = { [key in Color]: string };
 
 type TextType = keyof Theme['theme']['text'];
-type Text = { [key in TextType]: ColorDerivation };
+type Text = { [key in TextType]: string };
 
 type Background = keyof Theme['theme']['background'];
 type Backgrounds = {
-	[key in Background]: ColorDerivation;
+	[key in Background]: string;
 };
 
 type InputType = keyof Theme['theme']['input'];
-type Input = { [key in InputType]: ColorDerivation };
+type Input = { [key in InputType]: string };
 
 type FocusType = keyof Theme['theme']['focus'];
-type Focus = { [key in FocusType]: ColorDerivation };
+type Focus = { [key in FocusType]: string };
 
 type PatternColor = keyof Patterns;
-type Pattern = { [key: string]: ColorDerivation };
+type Pattern = { [key: string]: string };
 
 interface ThemeProperties {
 	[key: string]: string;
@@ -107,14 +107,14 @@ export const ThemeDerivations: Derivations = {
 };
 
 export const deriveColor = (
-	values: { [key: string]: ColorDerivation },
+	values: { [key: string]: string },
 	theme: Theme,
 ) => {
 	const o: ThemeProperties = {};
 	Object.keys(values).map((key) => {
-		o[key] = values[key].default;
+		o[key] = values[key];
 		if (theme.type === 'custom') {
-			o[key] = values[key].derivation?.(theme) ?? o[key];
+			o[key] = values[key] ?? o[key];
 		}
 	});
 	return o;
@@ -125,15 +125,13 @@ export const derivePattern = (pattern: States, theme: Theme) => {
 	Object.keys(pattern).map((state) => {
 		Object.keys(pattern[state as keyof States]).map((value) => {
 			o[`${state as keyof States}-${value as keyof StateValues}`] =
-				pattern[state as keyof States][
-					value as keyof StateValues
-				].default;
+				pattern[state as keyof States][value as keyof StateValues];
 
 			if (theme.type === 'custom') {
 				o[`${state as keyof States}-${value as keyof StateValues}`] =
 					pattern[state as keyof States][
 						value as keyof StateValues
-					].derivation?.(theme) ??
+					] ??
 					o[`${state as keyof States}-${value as keyof StateValues}`];
 			}
 		});
