@@ -6,8 +6,11 @@
  */
 
 export * from './components/AppRoot';
+export * from './components/Badge';
 export * from './components/BusyIndicator';
 export * from './components/Button';
+export * from './components/Card';
+export * from './components/ColorPicker';
 export * from './components/Dialog';
 export * from './components/Divider';
 export * from './components/Form';
@@ -18,13 +21,16 @@ export * from './components/Label';
 export * from './components/List';
 export * from './components/Menu';
 export * from './components/MenuButton';
+export * from './components/MessageStrip';
 export * from './components/Navigation';
 export * from './components/Notifications';
+export * from './components/Popover';
 export * from './components/SVG';
 export * from './components/Switch';
 export * from './components/Tabbar';
 export * from './components/Text';
 export * from './components/TextArea';
+export * from './components/VerticalTabs';
 
 export * from './contexts';
 export * from './theme';
