@@ -62,12 +62,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
 		setTheme: setTheme,
 	});
 
-	useEffect(() => {
-		console.log('lmao', props.lightTheme);
-	}, [props.lightTheme]);
-
 	const properties = useMemo(() => {
-		console.log('recalculating properties...');
 		let theme: { [key: string]: string } = {
 			'--base-size': `${
 				(props.themeOverride ?? currentTheme.theme).theme.core.baseSize
