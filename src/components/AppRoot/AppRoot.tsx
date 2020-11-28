@@ -1,4 +1,4 @@
-import React, { CSSProperties, FC, ReactElement } from 'react';
+import React, { CSSProperties, FC, ReactElement, useEffect } from 'react';
 import { Component } from '../../types';
 import { ThemeProvider } from '../../contexts/ThemeContext';
 import { Theme } from '../../theme';
@@ -8,8 +8,7 @@ import cx from 'classnames';
 import cn from './AppRoot.scss';
 
 export interface AppRootProps extends Component {
-	customLightTheme?: Theme;
-	customDarkTheme?: Theme;
+	customTheme?: Theme;
 	/**
 	 * Assumses the position of a banner
 	 */
@@ -23,10 +22,7 @@ export interface AppRootProps extends Component {
 
 export const AppRoot: FC<AppRootProps> = (props) => {
 	return (
-		<ThemeProvider
-			lightTheme={props.customLightTheme}
-			darkTheme={props.customDarkTheme}
-		>
+		<ThemeProvider themeOverride={props.customTheme}>
 			<div
 				data-testid={props.testId}
 				className={cx(cn.app, props.className)}

@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import { cleanup, fireEvent, render } from '@testing-library/react';
+import { cleanup, render } from '@testing-library/react';
 import { AppRoot } from '..';
 import { ThemeContext } from '../../../contexts/ThemeContext';
-import { DefaultDarkTheme, DefaultLightTheme, Theme } from '../../../theme';
+import { DefaultLightTheme, Theme } from '../../../theme';
 import {
 	LeftNavigation,
 	NavigationBar,
@@ -70,14 +70,10 @@ describe('approot theme support', () => {
 
 const TestAppRootTheme: FC<{
 	testId?: string;
-	lightTheme?: Theme;
-	darkTheme?: Theme;
+	customTheme?: Theme;
 }> = (props) => {
 	return (
-		<AppRoot
-			customLightTheme={props.lightTheme}
-			customDarkTheme={props.darkTheme}
-		>
+		<AppRoot customTheme={props.customTheme}>
 			<ThemeContext.Consumer>
 				{({ theme, setTheme }) => {
 					return (
@@ -86,19 +82,7 @@ const TestAppRootTheme: FC<{
 							data-neutral={theme.theme.color.neutral}
 							data-primary={theme.theme.color.primary}
 							data-secondary={theme.theme.color.secondary}
-						>
-							<button
-								onClick={() =>
-									setTheme(
-										theme.baseTheme === 'light'
-											? 'dark'
-											: 'light',
-									)
-								}
-							>
-								Switch Theme
-							</button>
-						</div>
+						></div>
 					);
 				}}
 			</ThemeContext.Consumer>
@@ -121,26 +105,9 @@ describe('approot theme support', () => {
 				},
 			},
 		};
-		const CustomDarkTheme: Theme = {
-			...DefaultDarkTheme,
-			type: 'custom',
-			theme: {
-				...DefaultDarkTheme.theme,
-				color: {
-					...DefaultDarkTheme.theme.color,
-					neutral: 'orange',
-					primary: 'purple',
-					secondary: 'yellow',
-				},
-			},
-		};
 
-		const { getByTestId, getByText } = render(
-			<TestAppRootTheme
-				testId="theme"
-				lightTheme={CustomLightTheme}
-				darkTheme={CustomDarkTheme}
-			/>,
+		const { getByTestId } = render(
+			<TestAppRootTheme testId="theme" customTheme={CustomLightTheme} />,
 		);
 		let theme = getByTestId('theme');
 		expect(theme.getAttribute('data-neutral')).toBe(
@@ -151,16 +118,6 @@ describe('approot theme support', () => {
 		);
 		expect(theme.getAttribute('data-secondary')).toBe(
 			CustomLightTheme.theme.color.secondary,
-		);
-		fireEvent.click(getByText('Switch Theme'));
-		expect(theme.getAttribute('data-neutral')).toBe(
-			CustomDarkTheme.theme.color.neutral,
-		);
-		expect(theme.getAttribute('data-primary')).toBe(
-			CustomDarkTheme.theme.color.primary,
-		);
-		expect(theme.getAttribute('data-secondary')).toBe(
-			CustomDarkTheme.theme.color.secondary,
 		);
 	});
 });
