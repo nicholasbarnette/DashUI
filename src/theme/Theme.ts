@@ -6,10 +6,10 @@ export interface ColorDerivation {
 }
 
 export interface StateValues {
-	bd: ColorDerivation;
-	bg: ColorDerivation;
-	fg: ColorDerivation;
-	op: ColorDerivation;
+	bd: string;
+	bg: string;
+	fg: string;
+	op: string;
 }
 
 export interface States {
@@ -52,32 +52,32 @@ interface InnerTheme extends Patterns {
 		fontSizeMultiplier: number;
 	};
 	background: {
-		page: ColorDerivation;
-		navigation: ColorDerivation;
-		content: ColorDerivation;
-		container: ColorDerivation;
-		'overlay-neutral': ColorDerivation;
-		'overlay-primary': ColorDerivation;
-		shadow: ColorDerivation;
+		page: string;
+		navigation: string;
+		content: string;
+		container: string;
+		'overlay-neutral': string;
+		'overlay-primary': string;
+		shadow: string;
 	};
 	text: {
-		default: ColorDerivation;
-		alternate: ColorDerivation;
-		inverse: ColorDerivation;
-		placeholder: ColorDerivation;
-		label: ColorDerivation;
+		default: string;
+		alternate: string;
+		inverse: string;
+		placeholder: string;
+		label: string;
 	};
 	input: {
-		bd: ColorDerivation;
-		bg: ColorDerivation;
-		fg: ColorDerivation;
-		focus: ColorDerivation;
+		bd: string;
+		bg: string;
+		fg: string;
+		focus: string;
 	};
 	focus: {
-		width: ColorDerivation;
-		style: ColorDerivation;
-		light: ColorDerivation;
-		dark: ColorDerivation;
+		width: string;
+		style: string;
+		light: string;
+		dark: string;
 	};
 }
 
@@ -116,361 +116,136 @@ export const DefaultLightTheme: Theme = {
 			fontSizeMultiplier: 1,
 		},
 		background: {
-			page: {
-				default: '#ffffff',
-				derivation: (theme: Theme) => theme.theme.color.primary,
-			},
-			navigation: {
-				default: '#000000',
-				derivation: (theme: Theme) => theme.theme.color.primary,
-			},
-			container: {
-				default: '#dedede',
-				derivation: (theme: Theme) => theme.theme.color.primary,
-			},
-			content: {
-				default: '#ffffff',
-				derivation: (theme: Theme) => theme.theme.color.primary,
-			},
-			'overlay-neutral': {
-				default: 'rgba(0, 0, 0, 0.25)',
-			},
-			'overlay-primary': {
-				default: 'rgba(120, 0, 210, 0.25)',
-			},
-			shadow: {
-				default: '0px 2px 10px -4px rgba(0, 0, 0, 0.5)',
-			},
+			page: '#ffffff',
+			navigation: '#000000',
+			container: '#dedede',
+			content: '#ffffff',
+			'overlay-neutral': 'rgba(0, 0, 0, 0.25)',
+			'overlay-primary': 'rgba(120, 0, 210, 0.25)',
+			shadow: '0px 2px 10px -4px rgba(0, 0, 0, 0.5)',
 		},
 		text: {
-			default: {
-				default: '#131722',
-				derivation: (theme: Theme) => theme.theme.color.primary,
-			},
-			alternate: {
-				default: '#131722',
-				derivation: (theme: Theme) => theme.theme.color.primary,
-			},
-			inverse: {
-				default: '#ffffff',
-				derivation: (theme: Theme) => theme.theme.color.primary,
-			},
-			placeholder: {
-				default: '#a1a1a1',
-				derivation: (theme: Theme) => theme.theme.color.primary,
-			},
-			label: {
-				default: '#333333',
-				derivation: (theme: Theme) => theme.theme.color.primary,
-			},
+			default: '#131722',
+			alternate: '#131722',
+			inverse: '#ffffff',
+			placeholder: '#a1a1a1',
+			label: '#333333',
 		},
 		'pattern-neutral': {
 			normal: {
-				bd: {
-					default: 'hsla(0, 0%, 0%, 1)',
-					derivation: (theme: Theme) => theme.theme.color.neutral,
-				},
-				bg: {
-					default: 'hsla(0, 0%, 0%, 1)',
-					derivation: (theme: Theme) => theme.theme.color.neutral,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme.text.inverse.default,
-				},
-				op: { default: '1' },
+				bd: 'hsla(0, 0%, 0%, 1)',
+				bg: 'hsla(0, 0%, 0%, 1)',
+				fg: '#ffffff',
+				op: '1',
 			},
 			hover: {
-				bd: {
-					default: 'hsla(0, 0%, 0%, 0.85)',
-					derivation: (theme: Theme) => theme.theme.color.neutral,
-				},
-				bg: {
-					default: 'hsla(0, 0%, 0%, 0.85)',
-					derivation: (theme: Theme) => theme.theme.color.neutral,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme.text.inverse.default,
-				},
-				op: { default: '1' },
+				bd: 'hsla(0, 0%, 0%, 0.85)',
+				bg: 'hsla(0, 0%, 0%, 0.85)',
+				fg: '#ffffff',
+				op: '1',
 			},
 			pressed: {
-				bd: {
-					default: 'hsla(0, 0%, 0%, 0.75)',
-					derivation: (theme: Theme) => theme.theme.color.neutral,
-				},
-				bg: {
-					default: 'hsla(0, 0%, 0%, 0.75)',
-					derivation: (theme: Theme) => theme.theme.color.neutral,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme.text.inverse.default,
-				},
-				op: { default: '1' },
+				bd: 'hsla(0, 0%, 0%, 0.75)',
+				bg: 'hsla(0, 0%, 0%, 0.75)',
+				fg: '#ffffff',
+				op: '1',
 			},
 			disabled: {
-				bd: {
-					default: 'hsla(0, 0%, 0%, 1)',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-neutral'].normal.bd.default,
-				},
-				bg: {
-					default: 'hsla(0, 0%, 0%, 1)',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-neutral'].normal.bg.default,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-neutral'].normal.fg.default,
-				},
-				op: { default: '0.3' },
+				bd: 'hsla(0, 0%, 0%, 1)',
+				bg: 'hsla(0, 0%, 0%, 1)',
+				fg: '#ffffff',
+				op: '0.3',
 			},
 		},
 		'pattern-primary': {
 			normal: {
-				bd: {
-					default: 'hsla(274, 100%, 41%, 1)',
-					derivation: (theme: Theme) => theme.theme.color.primary,
-				},
-				bg: {
-					default: 'hsla(274, 100%, 41%, 1)',
-					derivation: (theme: Theme) => theme.theme.color.primary,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) => theme.theme.color.primary,
-				},
-				op: { default: '1' },
+				bd: 'hsla(274, 100%, 41%, 1)',
+				bg: 'hsla(274, 100%, 41%, 1)',
+				fg: '#ffffff',
+				op: '1',
 			},
 			hover: {
-				bd: {
-					default: 'hsla(274, 100%, 41%, 0.85)',
-					derivation: (theme: Theme) => theme.theme.color.primary,
-				},
-				bg: {
-					default: 'hsla(274, 100%, 41%, 0.85)',
-					derivation: (theme: Theme) => theme.theme.color.primary,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) => theme.theme.color.primary,
-				},
-				op: { default: '1' },
+				bd: 'hsla(274, 100%, 41%, 0.85)',
+				bg: 'hsla(274, 100%, 41%, 0.85)',
+				fg: '#ffffff',
+				op: '1',
 			},
 			pressed: {
-				bd: {
-					default: 'hsla(274, 100%, 41%, 0.75)',
-					derivation: (theme: Theme) => theme.theme.color.primary,
-				},
-				bg: {
-					default: 'hsla(274, 100%, 41%, 0.75)',
-					derivation: (theme: Theme) => theme.theme.color.primary,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) => theme.theme.color.primary,
-				},
-				op: { default: '1' },
+				bd: 'hsla(274, 100%, 41%, 0.75)',
+				bg: 'hsla(274, 100%, 41%, 0.75)',
+				fg: '#ffffff',
+				op: '1',
 			},
 			disabled: {
-				bd: {
-					default: 'hsla(274, 100%, 41%, 1)',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-primary'].normal.bd.default,
-				},
-				bg: {
-					default: 'hsla(274, 100%, 41%, 1)',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-primary'].normal.bg.default,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-primary'].normal.fg.default,
-				},
-				op: { default: '0.3' },
+				bd: 'hsla(274, 100%, 41%, 1)',
+				bg: 'hsla(274, 100%, 41%, 1)',
+				fg: '#ffffff',
+				op: '0.3',
 			},
 		},
 		'pattern-secondary': {
 			normal: {
-				bd: {
-					default: 'hsla(204, 71%, 50%, 1)',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
-				},
-				bg: {
-					default: 'hsla(204, 71%, 50%, 1)',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
-				},
-				op: { default: '1' },
+				bd: 'hsla(204, 71%, 50%, 1)',
+				bg: 'hsla(204, 71%, 50%, 1)',
+				fg: '#ffffff',
+				op: '1',
 			},
 			hover: {
-				bd: {
-					default: 'hsla(204, 71%, 50%, 0.85)',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
-				},
-				bg: {
-					default: 'hsla(204, 71%, 50%, 0.85)',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
-				},
-				op: { default: '1' },
+				bd: 'hsla(204, 71%, 50%, 0.85)',
+				bg: 'hsla(204, 71%, 50%, 0.85)',
+				fg: '#ffffff',
+				op: '1',
 			},
 			pressed: {
-				bd: {
-					default: 'hsla(204, 71%, 50%, 0.75)',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
-				},
-				bg: {
-					default: 'hsla(204, 71%, 50%, 0.75)',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
-				},
-				op: { default: '1' },
+				bd: 'hsla(204, 71%, 50%, 0.75)',
+				bg: 'hsla(204, 71%, 50%, 0.75)',
+				fg: '#ffffff',
+				op: '1',
 			},
 			disabled: {
-				bd: {
-					default: 'hsla(204, 71%, 50%, 1)',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-secondary'].normal.bd.default,
-				},
-				bg: {
-					default: 'hsla(204, 71%, 50%, 1)',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-secondary'].normal.bg.default,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-secondary'].normal.fg.default,
-				},
-				op: { default: '0.3' },
+				bd: 'hsla(204, 71%, 50%, 1)',
+				bg: 'hsla(204, 71%, 50%, 1)',
+				fg: '#ffffff',
+				op: '0.3',
 			},
 		},
 		'pattern-lightweight': {
 			normal: {
-				bd: {
-					default: 'hsla(0, 0%, 0%, 0)',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				bg: {
-					default: 'hsla(0, 0%, 0%, 0)',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				fg: {
-					default: '#000000',
-					derivation: (theme: Theme) =>
-						theme.theme.text.inverse.default,
-				},
-				op: { default: '1' },
+				bd: 'hsla(0, 0%, 0%, 0)',
+				bg: 'hsla(0, 0%, 0%, 0)',
+				fg: '#000000',
+				op: '1',
 			},
 			hover: {
-				bd: {
-					default: 'hsla(0, 0%, 0%, 0.25)',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				bg: {
-					default: 'hsla(0, 0%, 0%, 0.25)',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				fg: {
-					default: '#000000',
-					derivation: (theme: Theme) =>
-						theme.theme.text.inverse.default,
-				},
-				op: { default: '1' },
+				bd: 'hsla(0, 0%, 0%, 0.25)',
+				bg: 'hsla(0, 0%, 0%, 0.25)',
+				fg: '#000000',
+				op: '1',
 			},
 			pressed: {
-				bd: {
-					default: 'hsla(0, 0%, 0%, 0.35)',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				bg: {
-					default: 'hsla(0, 0%, 0%, 0.35)',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				fg: {
-					default: '#000000',
-					derivation: (theme: Theme) =>
-						theme.theme.text.inverse.default,
-				},
-				op: { default: '1' },
+				bd: 'hsla(0, 0%, 0%, 0.35)',
+				bg: 'hsla(0, 0%, 0%, 0.35)',
+				fg: '#000000',
+				op: '1',
 			},
 			disabled: {
-				bd: {
-					default: 'hsla(0, 0%, 0%, 0)',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-lightweight'].normal.bd.default,
-				},
-				bg: {
-					default: 'hsla(0, 0%, 0%, 0)',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-lightweight'].normal.bg.default,
-				},
-				fg: {
-					default: '#000000',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-lightweight'].normal.fg.default,
-				},
-				op: { default: '0.3' },
+				bd: 'hsla(0, 0%, 0%, 0)',
+				bg: 'hsla(0, 0%, 0%, 0)',
+				fg: '#000000',
+				op: '0.3',
 			},
 		},
 		input: {
-			bd: {
-				default: '#000000',
-				derivation: (theme: Theme) =>
-					theme.theme['pattern-neutral'].normal.bd.default,
-			},
-			bg: {
-				default: 'hsla(0, 100%, 100%, 1)',
-				derivation: (theme: Theme) =>
-					theme.theme['pattern-neutral'].normal.fg.default,
-			},
-			fg: {
-				default: '#000000',
-				derivation: (theme: Theme) => theme.theme.text.default.default,
-			},
-			focus: {
-				default: '#258fd8',
-				derivation: (theme: Theme) => theme.theme.color.primary,
-			},
+			bd: '#000000',
+			bg: 'hsla(0, 100%, 100%, 1)',
+			fg: '#000000',
+			focus: '#258fd8',
 		},
 		focus: {
-			width: {
-				default: '1px',
-			},
-			style: {
-				default: 'dotted',
-			},
-			light: {
-				default: '#ffffff',
-				derivation: (theme: Theme) => theme.theme.text.default.default,
-			},
-			dark: {
-				default: '#000000',
-				derivation: (theme: Theme) => theme.theme.text.inverse.default,
-			},
+			width: '1px',
+			style: 'dotted',
+			light: '#ffffff',
+			dark: '#000000',
 		},
 	},
 };
@@ -504,371 +279,136 @@ export const DefaultDarkTheme: Theme = {
 			fontSizeMultiplier: 1,
 		},
 		background: {
-			page: {
-				default: '#131722',
-				derivation: (theme: Theme) => theme.theme.color.primary,
-			},
-			navigation: {
-				default: '#2a2e39',
-				derivation: (theme: Theme) => theme.theme.color.primary,
-			},
-			content: {
-				default: '#222838',
-				derivation: (theme: Theme) => theme.theme.color.primary,
-			},
-			container: {
-				default: '#222838',
-				derivation: (theme: Theme) => theme.theme.color.primary,
-			},
-			'overlay-neutral': {
-				default: 'rgba(255, 255, 255, 0.15)',
-			},
-			'overlay-primary': {
-				default: 'rgba(125, 0, 214, 0.25)',
-			},
-			shadow: {
-				default: '0px 0px 32px -9px rgba(0, 0, 0, 0.75)',
-			},
+			page: '#131722',
+			navigation: '#2a2e39',
+			content: '#222838',
+			container: '#222838',
+			'overlay-neutral': 'rgba(255, 255, 255, 0.15)',
+			'overlay-primary': 'rgba(125, 0, 214, 0.25)',
+			shadow: '0px 0px 32px -9px rgba(0, 0, 0, 0.75)',
 		},
 		text: {
-			default: {
-				default: '#ffffff',
-				derivation: (theme: Theme) => theme.theme.color.primary,
-			},
-			alternate: {
-				default: '#ffffff',
-				derivation: (theme: Theme) => theme.theme.color.primary,
-			},
-			inverse: {
-				default: '#ffffff',
-				derivation: (theme: Theme) => theme.theme.color.primary,
-			},
-			placeholder: {
-				default: '#7d7d7d',
-				derivation: (theme: Theme) => theme.theme.color.primary,
-			},
-			label: {
-				default: '#bfbfbf',
-				derivation: (theme: Theme) => theme.theme.color.primary,
-			},
+			default: '#ffffff',
+			alternate: '#ffffff',
+			inverse: '#ffffff',
+			placeholder: '#7d7d7d',
+			label: '#bfbfbf',
 		},
 		'pattern-neutral': {
 			normal: {
-				bd: {
-					default: 'hsla(0, 100%, 100%, 0.15)',
-					derivation: (theme: Theme) =>
-						theme.theme.text.inverse.default,
-				},
-				bg: {
-					default: 'hsla(0, 100%, 100%, 0.15)',
-					derivation: (theme: Theme) => theme.theme.color.neutral,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				op: { default: '1' },
+				bd: 'hsla(0, 100%, 100%, 0.15)',
+				bg: 'hsla(0, 100%, 100%, 0.15)',
+				fg: '#ffffff',
+				op: '1',
 			},
 			hover: {
-				bd: {
-					default: 'hsla(0, 100%, 100%, 0.25)',
-					derivation: (theme: Theme) =>
-						theme.theme.text.inverse.default,
-				},
-				bg: {
-					default: 'hsla(0, 100%, 100%, 0.25)',
-					derivation: (theme: Theme) => theme.theme.color.neutral,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				op: { default: '1' },
+				bd: 'hsla(0, 100%, 100%, 0.25)',
+				bg: 'hsla(0, 100%, 100%, 0.25)',
+				fg: '#ffffff',
+				op: '1',
 			},
 			pressed: {
-				bd: {
-					default: 'hsla(0, 100%, 100%, 0.35)',
-					derivation: (theme: Theme) =>
-						theme.theme.text.inverse.default,
-				},
-				bg: {
-					default: 'hsla(0, 100%, 100%, 0.35)',
-					derivation: (theme: Theme) => theme.theme.color.neutral,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				op: { default: '1' },
+				bd: 'hsla(0, 100%, 100%, 0.35)',
+				bg: 'hsla(0, 100%, 100%, 0.35)',
+				fg: '#ffffff',
+				op: '1',
 			},
 			disabled: {
-				bd: {
-					default: 'hsla(0, 100%, 100%, 0.15)',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-neutral'].normal.bd.default,
-				},
-				bg: {
-					default: 'hsla(0, 100%, 100%, 0.15)',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-neutral'].normal.bg.default,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-neutral'].normal.fg.default,
-				},
-				op: { default: '0.3' },
+				bd: 'hsla(0, 100%, 100%, 0.15)',
+				bg: 'hsla(0, 100%, 100%, 0.15)',
+				fg: '#ffffff',
+				op: '0.3',
 			},
 		},
 		'pattern-primary': {
 			normal: {
-				bd: {
-					default: 'hsla(275, 100%, 42%, 1)',
-					derivation: (theme: Theme) => theme.theme.color.primary,
-				},
-				bg: {
-					default: 'hsla(275, 100%, 42%, 1)',
-					derivation: (theme: Theme) => theme.theme.color.primary,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				op: { default: '1' },
+				bd: 'hsla(275, 100%, 42%, 1)',
+				bg: 'hsla(275, 100%, 42%, 1)',
+				fg: '#ffffff',
+				op: '1',
 			},
 			hover: {
-				bd: {
-					default: 'hsla(275, 100%, 42%, 0.85)',
-					derivation: (theme: Theme) => theme.theme.color.primary,
-				},
-				bg: {
-					default: 'hsla(275, 100%, 42%, 0.85)',
-					derivation: (theme: Theme) => theme.theme.color.primary,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				op: { default: '1' },
+				bd: 'hsla(275, 100%, 42%, 0.85)',
+				bg: 'hsla(275, 100%, 42%, 0.85)',
+				fg: '#ffffff',
+				op: '1',
 			},
 			pressed: {
-				bd: {
-					default: 'hsla(275, 100%, 42%, 0.75)',
-					derivation: (theme: Theme) => theme.theme.color.primary,
-				},
-				bg: {
-					default: 'hsla(275, 100%, 42%, 0.75)',
-					derivation: (theme: Theme) => theme.theme.color.primary,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				op: { default: '1' },
+				bd: 'hsla(275, 100%, 42%, 0.75)',
+				bg: 'hsla(275, 100%, 42%, 0.75)',
+				fg: '#ffffff',
+				op: '1',
 			},
 			disabled: {
-				bd: {
-					default: 'hsla(275, 100%, 42%, 1)',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-primary'].normal.bd.default,
-				},
-				bg: {
-					default: 'hsla(275, 100%, 42%, 1)',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-primary'].normal.bg.default,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-primary'].normal.fg.default,
-				},
-				op: { default: '0.3' },
+				bd: 'hsla(275, 100%, 42%, 1)',
+				bg: 'hsla(275, 100%, 42%, 1)',
+				fg: '#ffffff',
+				op: '0.3',
 			},
 		},
 		'pattern-secondary': {
 			normal: {
-				bd: {
-					default: 'hsla(210, 79%, 46%, 1)',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
-				},
-				bg: {
-					default: 'hsla(210, 79%, 46%, 1)',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				op: { default: '1' },
+				bd: 'hsla(210, 79%, 46%, 1)',
+				bg: 'hsla(210, 79%, 46%, 1)',
+				fg: '#ffffff',
+				op: '1',
 			},
 			hover: {
-				bd: {
-					default: 'hsla(210, 79%, 46%, 0.85)',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
-				},
-				bg: {
-					default: 'hsla(210, 79%, 46%, 0.85)',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				op: { default: '1' },
+				bd: 'hsla(210, 79%, 46%, 0.85)',
+				bg: 'hsla(210, 79%, 46%, 0.85)',
+				fg: '#ffffff',
+				op: '1',
 			},
 			pressed: {
-				bd: {
-					default: 'hsla(210, 79%, 46%, 0.75)',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
-				},
-				bg: {
-					default: 'hsla(210, 79%, 46%, 0.75)',
-					derivation: (theme: Theme) => theme.theme.color.secondary,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				op: { default: '1' },
+				bd: 'hsla(210, 79%, 46%, 0.75)',
+				bg: 'hsla(210, 79%, 46%, 0.75)',
+				fg: '#ffffff',
+				op: '1',
 			},
 			disabled: {
-				bd: {
-					default: 'hsla(210, 79%, 46%, 1)',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-secondary'].normal.bd.default,
-				},
-				bg: {
-					default: 'hsla(210, 79%, 46%, 1)',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-secondary'].normal.bg.default,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-secondary'].normal.fg.default,
-				},
-				op: { default: '0.3' },
+				bd: 'hsla(210, 79%, 46%, 1)',
+				bg: 'hsla(210, 79%, 46%, 1)',
+				fg: '#ffffff',
+				op: '0.3',
 			},
 		},
 		'pattern-lightweight': {
 			normal: {
-				bd: {
-					default: 'hsla(0, 100%, 100%, 0)',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				bg: {
-					default: 'hsla(0, 100%, 100%, 0)',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				op: { default: '1' },
+				bd: 'hsla(0, 100%, 100%, 0)',
+				bg: 'hsla(0, 100%, 100%, 0)',
+				fg: '#ffffff',
+				op: '1',
 			},
 			hover: {
-				bd: {
-					default: 'hsla(0, 100%, 100%, 0.15)',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				bg: {
-					default: 'hsla(0, 100%, 100%, 0.15)',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				op: { default: '1' },
+				bd: 'hsla(0, 100%, 100%, 0.15)',
+				bg: 'hsla(0, 100%, 100%, 0.15)',
+				fg: '#ffffff',
+				op: '1',
 			},
 			pressed: {
-				bd: {
-					default: 'hsla(0, 100%, 100%, 0.25)',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				bg: {
-					default: 'hsla(0, 100%, 100%, 0.25)',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme.text.default.default,
-				},
-				op: { default: '1' },
+				bd: 'hsla(0, 100%, 100%, 0.25)',
+				bg: 'hsla(0, 100%, 100%, 0.25)',
+				fg: '#ffffff',
+				op: '1',
 			},
 			disabled: {
-				bd: {
-					default: 'hsla(0, 100%, 100%, 0)',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-lightweight'].normal.bd.default,
-				},
-				bg: {
-					default: 'hsla(0, 100%, 100%, 0)',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-lightweight'].normal.bg.default,
-				},
-				fg: {
-					default: '#ffffff',
-					derivation: (theme: Theme) =>
-						theme.theme['pattern-lightweight'].normal.fg.default,
-				},
-				op: { default: '0.3' },
+				bd: 'hsla(0, 100%, 100%, 0)',
+				bg: 'hsla(0, 100%, 100%, 0)',
+				fg: '#ffffff',
+				op: '0.3',
 			},
 		},
 		input: {
-			bd: {
-				default: '#2a2e39',
-				derivation: (theme: Theme) =>
-					theme.theme['pattern-neutral'].normal.bd.default,
-			},
-			bg: {
-				default: 'rgba(0, 0, 0, 0.25)',
-				derivation: (theme: Theme) =>
-					theme.theme['pattern-neutral'].normal.bg.default,
-			},
-			fg: {
-				default: '#ffffff',
-				derivation: (theme: Theme) =>
-					theme.theme['pattern-neutral'].normal.fg.default,
-			},
-			focus: {
-				default: '#1976d2',
-				derivation: (theme: Theme) => theme.theme.color.secondary,
-			},
+			bd: '#2a2e39',
+			bg: 'rgba(0, 0, 0, 0.25)',
+			fg: '#ffffff',
+			focus: '#1976d2',
 		},
 		focus: {
-			width: {
-				default: '1px',
-			},
-			style: {
-				default: 'dotted',
-			},
-			light: {
-				default: '#ffffff',
-				derivation: (theme: Theme) => theme.theme.text.default.default,
-			},
-			dark: {
-				default: '#ffffff',
-				derivation: (theme: Theme) => theme.theme.text.inverse.default,
-			},
+			width: '1px',
+			style: 'dotted',
+			light: '#ffffff',
+			dark: '#ffffff',
 		},
 	},
 };
