@@ -11,7 +11,7 @@ import cn from './Switch.scss';
 export interface SwitchProps extends Component {
 	id?: string;
 	name?: string;
-	onSwitch?: () => void;
+	onSwitch: () => void;
 	labels?: [string, string];
 	defaultChecked?: boolean;
 	disabled?: boolean;
@@ -30,12 +30,11 @@ export const Switch: FC<SwitchProps> = (props) => {
 			style={props.style}
 		>
 			{props.labels && (
-				<Label id={props.id || ''} className={cn.label}>
+				<Label id={props.id ?? ''} className={cn.label}>
 					{props.labels[0]}
 				</Label>
 			)}
 			<label
-				data-testid={props.testId && `${props.testId}Inner`}
 				className={cn.switch}
 				tabIndex={0}
 				onKeyPress={(evt) => {
@@ -43,23 +42,23 @@ export const Switch: FC<SwitchProps> = (props) => {
 						(evt.which === 13 || evt.which === 32) &&
 						!props.disabled
 					) {
-						props.onSwitch?.();
+						props.onSwitch();
 						setChecked(!checked);
 					}
 				}}
-				role='switch'
+				role="switch"
 				aria-checked={checked ? 'true' : 'false'}
 				aria-disabled={props.disabled}
 			>
 				<input
 					checked={checked}
 					className={cn.input}
-					type='checkbox'
+					type="checkbox"
 					onChange={() => {
 						!props.disabled && setChecked(!checked);
 					}}
 					onClick={() => {
-						!props.disabled && props.onSwitch?.();
+						!props.disabled && props.onSwitch();
 					}}
 					id={props.id}
 					name={props.name}
@@ -68,7 +67,7 @@ export const Switch: FC<SwitchProps> = (props) => {
 				<span className={cx(cn.slider, cn.round)}></span>
 			</label>
 			{props.labels && (
-				<Label id={props.id || ''} className={cn.label}>
+				<Label id={props.id ?? ''} className={cn.label}>
 					{props.labels[1]}
 				</Label>
 			)}

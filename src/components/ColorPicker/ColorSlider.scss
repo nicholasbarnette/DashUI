@@ -1,0 +1,47 @@
+.colorSlider {
+	width: 2rem;
+	height: 10rem;
+	border: 1px solid black;
+	margin-left: 1rem;
+	position: relative;
+	background: -moz-linear-gradient(
+		top,
+		#f00 0%,
+		#ff0 16.66%,
+		#0f0 33.33%,
+		#0ff 50%,
+		#00f 66.66%,
+		#f0f 83.33%,
+		#f00 100%
+	);
+	background: -webkit-linear-gradient(
+		top,
+		#f00 0%,
+		#ff0 16.66%,
+		#0f0 33.33%,
+		#0ff 50%,
+		#00f 66.66%,
+		#f0f 83.33%,
+		#f00 100%
+	);
+	background: -ms-linear-gradient(
+		top,
+		#f00 0%,
+		#ff0 16.66%,
+		#0f0 33.33%,
+		#0ff 50%,
+		#00f 66.66%,
+		#f0f 83.33%,
+		#f00 100%
+	);
+	background: -o-linear-gradient(
+		top,
+		#f00 0%,
+		#ff0 16.66%,
+		#0f0 33.33%,
+		#0ff 50%,
+		#00f 66.66%,
+		#f0f 83.33%,
+		#f00 100%
+	);
+}

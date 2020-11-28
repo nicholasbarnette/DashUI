@@ -1,0 +1,15 @@
+.popover {
+	display: flex;
+	flex-direction: column;
+	box-shadow: var(--background-shadow);
+	border: 1px solid var(--pattern-neutral-normal-bd);
+	border-radius: 0.125rem;
+	overflow: hidden;
+	position: absolute;
+	background-color: var(--background-content);
+	padding: var(--spacing-md);
+}
+
+.closed {
+	display: none;
+}

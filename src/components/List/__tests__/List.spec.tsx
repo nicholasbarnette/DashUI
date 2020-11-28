@@ -118,4 +118,17 @@ describe('basic list', () => {
 		expect(getAllByText(/List Item/).length).toBe(6);
 		expect(() => findByText('Show More...')).rejects;
 	});
+
+	it('renders selected item', () => {
+		const { getAllByText } = render(
+			<List
+				items={[
+					{ key: '1', text: 'List Item' },
+					{ key: '2', text: 'List Item' },
+				]}
+				selectedKey={1}
+			/>,
+		);
+		expect(getAllByText('List Item').length).toBe(2);
+	});
 });

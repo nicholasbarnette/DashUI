@@ -9,4 +9,9 @@ describe('basic divider', () => {
 		const { getByRole } = render(<Divider />);
 		expect(getByRole('separator')).toBeTruthy();
 	});
+
+	it('handles custom spacing', () => {
+		const { getByRole } = render(<Divider spacing="md" />);
+		expect(getByRole('separator')).toBeTruthy();
+	});
 });

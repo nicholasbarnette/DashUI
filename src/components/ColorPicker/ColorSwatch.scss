@@ -1,0 +1,16 @@
+.swatch {
+	height: 1.5rem;
+	width: 1.5rem;
+	border: 1px solid #000000;
+	outline: #ffffff solid 1px;
+	outline-offset: -2px;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+.swatch:focus {
+	outline-width: var(--focus-width);
+	outline-style: var(--focus-style);
+	outline-color: var(--focus-dark);
+	outline-offset: var(--focus-width);
+}

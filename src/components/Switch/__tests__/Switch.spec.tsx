@@ -6,7 +6,7 @@ afterEach(cleanup);
 
 describe('basic switch', () => {
 	it('renders', () => {
-		const { getByRole } = render(<Switch />);
+		const { getByRole } = render(<Switch onSwitch={() => {}} />);
 		expect(getByRole('switch')).toBeTruthy();
 	});
 
@@ -35,8 +35,21 @@ describe('basic switch', () => {
 
 	it('renders labels', () => {
 		const { getAllByText } = render(
-			<Switch id="switch" labels={['label', 'label']} />,
+			<Switch
+				id="switch"
+				labels={['label', 'label']}
+				onSwitch={() => {}}
+			/>,
 		);
 		expect(getAllByText('label').length).toBe(2);
+	});
+
+	it("doesn't click when disabled", () => {
+		const handleClick = jest.fn();
+		const { getByRole } = render(
+			<Switch onSwitch={handleClick} disabled />,
+		);
+		fireEvent.click(getByRole('switch'));
+		expect(handleClick).not.toHaveBeenCalled();
 	});
 });

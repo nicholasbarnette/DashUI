@@ -46,6 +46,7 @@ export const FormElement: FC<FormElementProps> = (props) => {
 			)}
 			{props.element.element === 'switch' && (
 				<Switch
+					onSwitch={() => {}}
 					{...props.element.props}
 					id={props.id}
 					name={props.id}

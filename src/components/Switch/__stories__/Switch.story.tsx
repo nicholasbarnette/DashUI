@@ -7,9 +7,9 @@ export default {
 };
 
 export const Basic = () => {
-	return <Switch />;
+	return <Switch onSwitch={() => {}} />;
 };
 
 export const withLabels = () => {
-	return <Switch labels={['Left', 'Right']} />;
+	return <Switch labels={['Left', 'Right']} onSwitch={() => {}} />;
 };

@@ -1,0 +1,35 @@
+.colorSquare {
+	background: -moz-linear-gradient(
+			top,
+			hsl(0, 0%, 100%) 0%,
+			hsla(0, 0%, 100%, 0) 50%,
+			hsla(0, 0%, 0%, 0) 50%,
+			hsl(0, 0%, 0%) 100%
+		),
+		-moz-linear-gradient(left, hsl(0, 0%, 50%) 0%, hsla(0, 0%, 50%, 0) 100%);
+	background: -webkit-linear-gradient(
+			top,
+			hsl(0, 0%, 100%) 0%,
+			hsla(0, 0%, 100%, 0) 50%,
+			hsla(0, 0%, 0%, 0) 50%,
+			hsl(0, 0%, 0%) 100%
+		),
+		-webkit-linear-gradient(left, hsl(0, 0%, 50%) 0%, hsla(0, 0%, 50%, 0)
+					100%);
+	background: -ms-linear-gradient(
+			top,
+			hsl(0, 0%, 100%) 0%,
+			hsla(0, 0%, 100%, 0) 50%,
+			hsla(0, 0%, 0%, 0) 50%,
+			hsl(0, 0%, 0%) 100%
+		),
+		-ms-linear-gradient(left, hsl(0, 0%, 50%) 0%, hsla(0, 0%, 50%, 0) 100%);
+	background: -o-linear-gradient(
+			top,
+			hsl(0, 0%, 100%) 0%,
+			hsla(0, 0%, 100%, 0) 50%,
+			hsla(0, 0%, 0%, 0) 50%,
+			hsl(0, 0%, 0%) 100%
+		),
+		-o-linear-gradient(left, hsl(0, 0%, 50%) 0%, hsla(0, 0%, 50%, 0) 100%);
+}
