@@ -16,9 +16,8 @@ describe('theme context', () => {
 
 const TestThemeProvider: FC<{
 	testId?: string;
-	themeOverride?: Theme;
-	lightTheme?: Theme;
-	darkTheme?: Theme;
+	lightThemeOverride?: Theme;
+	darkThemeOverride?: Theme;
 }> = (props) => {
 	const { testId, ...restProps } = props;
 	return (
@@ -129,8 +128,8 @@ describe('theme provider', () => {
 		const { getByTestId, getByText } = render(
 			<TestThemeProvider
 				testId="theme"
-				lightTheme={CustomLightTheme}
-				darkTheme={CustomDarkTheme}
+				lightThemeOverride={CustomLightTheme}
+				darkThemeOverride={CustomDarkTheme}
 			/>,
 		);
 		let theme = getByTestId('theme');
@@ -159,7 +158,7 @@ describe('theme provider', () => {
 		const { getByTestId, getByText } = render(
 			<TestThemeProvider
 				testId="theme"
-				themeOverride={DefaultLightTheme}
+				lightThemeOverride={DefaultLightTheme}
 			/>,
 		);
 		let theme = getByTestId('theme');
@@ -174,13 +173,13 @@ describe('theme provider', () => {
 		);
 		fireEvent.click(getByText('Switch Theme'));
 		expect(theme.getAttribute('data-neutral')).toBe(
-			DefaultLightTheme.theme.color.neutral,
+			DefaultDarkTheme.theme.color.neutral,
 		);
 		expect(theme.getAttribute('data-primary')).toBe(
-			DefaultLightTheme.theme.color.primary,
+			DefaultDarkTheme.theme.color.primary,
 		);
 		expect(theme.getAttribute('data-secondary')).toBe(
-			DefaultLightTheme.theme.color.secondary,
+			DefaultDarkTheme.theme.color.secondary,
 		);
 	});
 
@@ -215,8 +214,8 @@ describe('theme provider', () => {
 		const { getByTestId, getByText } = render(
 			<TestThemeProvider
 				testId="theme"
-				lightTheme={ApplicationLightTheme}
-				darkTheme={ApplicationDarkTheme}
+				lightThemeOverride={ApplicationLightTheme}
+				darkThemeOverride={ApplicationDarkTheme}
 			/>,
 		);
 		let theme = getByTestId('theme');

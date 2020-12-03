@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { ThemeSwitcher } from '../../../contexts/ThemeContext';
 import { AppRoot } from '../../AppRoot';
 import {
 	LeftNavigation,
@@ -16,6 +17,9 @@ import {
 	Document,
 } from '../../SVG';
 import { VerticalTabs } from '../../VerticalTabs';
+import { Text } from '../../Text';
+import { CustomDarkTheme } from './CustomDarkTheme';
+import { CustomLightTheme } from './CustomLightTheme';
 
 export default {
 	component: AppRoot,
@@ -292,5 +296,45 @@ export const AppWithNavigationDrawer = () => {
 				/>
 			}
 		/>
+	);
+};
+
+export const CustomThemes = () => {
+	return (
+		<AppRoot
+			customLightTheme={CustomLightTheme}
+			customDarkTheme={CustomDarkTheme}
+			topNavigation={
+				<NavigationBar
+					left={
+						<NavigationLink link="/">
+							Application Name
+						</NavigationLink>
+					}
+					right={
+						<ThemeSwitcher
+							tooltip="User Menu"
+							items={[
+								{
+									id: 'item1',
+									type: 'text',
+									value: 'Item 1',
+								},
+							]}
+							onPress={() => {}}
+						>
+							<SVG
+								svg={Profile}
+								tooltip=""
+								size={24}
+								design="inverted"
+							/>
+						</ThemeSwitcher>
+					}
+				/>
+			}
+		>
+			<Text>This is some content.</Text>
+		</AppRoot>
 	);
 };

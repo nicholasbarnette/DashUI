@@ -73,7 +73,7 @@ const TestAppRootTheme: FC<{
 	customTheme?: Theme;
 }> = (props) => {
 	return (
-		<AppRoot customTheme={props.customTheme}>
+		<AppRoot customLightTheme={props.customTheme}>
 			<ThemeContext.Consumer>
 				{({ theme, setTheme }) => {
 					return (

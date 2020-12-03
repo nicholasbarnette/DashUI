@@ -26,11 +26,13 @@ export const ThemeContext = createContext<ThemeProviderContext>({
 
 export interface ThemeProviderProps {
 	/**
-	 * For overriding both the light/dark theme
+	 * For overriding the light theme
 	 */
-	themeOverride?: Theme;
-	lightTheme?: Theme;
-	darkTheme?: Theme;
+	lightThemeOverride?: Theme;
+	/**
+	 * For overriding the dark theme
+	 */
+	darkThemeOverride?: Theme;
 	style?: CSSProperties;
 	testId?: string;
 }
@@ -58,19 +60,17 @@ export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
 	};
 
 	const [currentTheme, setCurrentTheme] = useState<ThemeProviderContext>({
-		theme: props.themeOverride ?? props.lightTheme ?? DefaultLightTheme,
+		theme: props.lightThemeOverride ?? DefaultLightTheme,
 		setTheme: setTheme,
 	});
 
 	const properties = useMemo(() => {
 		let theme: { [key: string]: string } = {
-			'--base-size': `${
-				(props.themeOverride ?? currentTheme.theme).theme.core.baseSize
-			}px`,
+			'--base-size': `${currentTheme.theme.theme.core.baseSize}px`,
 		};
 		Object.keys(ThemeDerivations).map((derivation) => {
 			const [base, constant] = getDerivationInfo(
-				props.themeOverride ?? currentTheme.theme,
+				currentTheme.theme,
 				derivation as keyof Derivations,
 			);
 			theme = {
@@ -80,14 +80,13 @@ export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
 					ThemeDerivations[derivation as keyof Derivations](
 						base,
 						constant,
-						(props.themeOverride ?? currentTheme.theme).theme.core
-							.baseSize,
+						currentTheme.theme.theme.core.baseSize,
 					),
 				) as { [key: string]: string }),
 			};
 		});
 		return theme;
-	}, [props.themeOverride, currentTheme]);
+	}, [currentTheme]);
 
 	useEffect(() => {
 		let block = document.createElement('style');
@@ -114,12 +113,8 @@ export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
 			setCurrentTheme({
 				theme:
 					cookies.theme === 'dark'
-						? props.themeOverride ??
-						  props.darkTheme ??
-						  DefaultDarkTheme
-						: props.themeOverride ??
-						  props.lightTheme ??
-						  DefaultLightTheme,
+						? props.darkThemeOverride ?? DefaultDarkTheme
+						: props.lightThemeOverride ?? DefaultLightTheme,
 				setTheme,
 			});
 		}
