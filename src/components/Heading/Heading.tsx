@@ -7,7 +7,6 @@ import cn from './Heading.scss';
 
 export interface HeadingProps extends Component {
 	level: 1 | 2 | 3 | 4 | 5 | 6;
-	children: string;
 }
 
 export const Heading: FC<HeadingProps> = (props) => {
@@ -15,7 +14,9 @@ export const Heading: FC<HeadingProps> = (props) => {
 		return {
 			style: props.style,
 			className: cx(cn.heading, props.className),
-			title: props.children,
+			title: `${
+				typeof props.children === 'string' ? props.children : ''
+			}`,
 		};
 	}, [props]);
 
