@@ -105,9 +105,11 @@ export const PieChart: FC<PieChartProps> = (props) => {
 									} as CSSProperties),
 								}}
 							>
-								{`${Math.floor(
-									(s.value / props.data.total) * 100,
-								)}%`}
+								{s.value > 0
+									? `${Math.floor(
+											(s.value / props.data.total) * 100,
+									  )}%`
+									: ''}
 							</span>,
 						);
 						start += Math.floor((s.value / props.data.total) * 360);

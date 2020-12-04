@@ -10,7 +10,31 @@ export const Basic = () => {
 	const containerRef = useRef<HTMLDivElement>(null);
 	return (
 		<Fragment>
-			
+			<div style={{ maxWidth: '15rem' }} ref={containerRef}>
+				<PieChart
+					containerRef={containerRef}
+					data={{
+						total: 60,
+						slices: [
+							{
+								title: '',
+								value: 0,
+								color: 'var(--color-graph1)',
+							},
+							{
+								title: '',
+								value: 40,
+								color: 'var(--color-graph2)',
+							},
+							{
+								title: '',
+								value: 20,
+								color: 'var(--color-graph3)',
+							},
+						],
+					}}
+				/>
+			</div>
 			<div style={{ maxWidth: '15rem' }} ref={containerRef}>
 				<PieChart
 					containerRef={containerRef}

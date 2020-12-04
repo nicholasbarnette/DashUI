@@ -32,6 +32,7 @@
 	right: 0;
 	bottom: 0;
 	background-color: var(--pattern-neutral-normal-bg);
+	border: 1px solid var(--pattern-neutral-normal-bd);
 	-webkit-transition: 0.4s;
 	transition: 0.4s;
 	border-radius: 34px;
@@ -52,10 +53,12 @@
 
 .input:checked + .slider {
 	background-color: var(--pattern-primary-normal-bg);
+	border-color: var(--pattern-primary-normal-bd);
 }
 
 .input:checked + .slider:before {
 	transform: translateX(1.5rem);
+	background-color: var(--pattern-primary-normal-fg);
 }
 
 .label {

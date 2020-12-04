@@ -12,7 +12,7 @@
 }
 
 .tabs {
-	border-bottom: 1px solid var(--color-neutral);
+	border-bottom: 1px solid var(--pattern-neutral-normal-bd);
 }
 
 .tab {
@@ -34,6 +34,7 @@
 	background-color: var(--pattern-neutral-normal-bg);
 	color: var(--pattern-neutral-normal-fg);
 	border-color: var(--pattern-neutral-normal-bd);
+	border-bottom-color: transparent;
 }
 
 .selected:focus {
