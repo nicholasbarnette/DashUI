@@ -1,8 +1,8 @@
-import { Theme } from '../../../theme';
+import { Theme } from './types';
 
-export const CustomLightTheme: Theme = {
+export const DefaultLightTheme: Theme = {
 	baseTheme: 'light',
-	type: 'custom',
+	type: 'default',
 	theme: {
 		core: {
 			baseSize: 16,
@@ -30,7 +30,7 @@ export const CustomLightTheme: Theme = {
 		},
 		background: {
 			page: [0, 0, 100],
-			navigation: [185, 27, 35],
+			navigation: [0, 0, 0],
 			container: [0, 0, 87],
 			content: [0, 0, 100],
 			'overlay-neutral': 'hsla(var(--color-neutral-src), 0.25)',
@@ -150,7 +150,7 @@ export const CustomLightTheme: Theme = {
 		},
 		input: {
 			bd: 'var(--color-neutral)',
-			bg: 'hsla(0, 0%, 100%, 1)',
+			bg: 'hsla(var(--background-content-src), 1)',
 			fg: 'var(--text-default)',
 			focus: 'var(--color-secondary)',
 		},

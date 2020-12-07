@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, ReactNode, useMemo } from 'react';
 import { Component } from '../../types';
 
 // Styles
@@ -7,6 +7,8 @@ import cn from './Heading.scss';
 
 export interface HeadingProps extends Component {
 	level: 1 | 2 | 3 | 4 | 5 | 6;
+	title?: string;
+	children: ReactNode;
 }
 
 export const Heading: FC<HeadingProps> = (props) => {
@@ -14,9 +16,9 @@ export const Heading: FC<HeadingProps> = (props) => {
 		return {
 			style: props.style,
 			className: cx(cn.heading, props.className),
-			title: `${
-				typeof props.children === 'string' ? props.children : ''
-			}`,
+			title:
+				props.title ??
+				`${typeof props.children === 'string' ? props.children : ''}`,
 		};
 	}, [props]);
 

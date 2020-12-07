@@ -1,10 +1,6 @@
 import { cleanup } from '@testing-library/react';
-import {
-	ThemeDerivations,
-	deriveColor,
-	derivePattern,
-} from '../../theme/ThemeDerivation';
-import { DefaultLightTheme, Theme } from '../../theme/Theme';
+import { ThemeDerivations, derivePattern } from '../../theme/ThemeDerivation';
+import { DefaultLightTheme, Theme } from '../../theme';
 
 afterEach(cleanup);
 
@@ -37,60 +33,68 @@ describe('ThemeDerivation', () => {
 
 	it('color', () => {
 		const color = ThemeDerivations.color(DefaultLightTheme.theme.color);
-		expect(color).toStrictEqual(DefaultLightTheme.theme.color);
+		const output: { [key: string]: string } = {};
+		Object.keys(DefaultLightTheme.theme.color).map((key) => {
+			const c =
+				DefaultLightTheme.theme.color[
+					key as keyof Theme['theme']['color']
+				];
+			output[key] = `hsla(${c[0]}, ${c[1]}%, ${c[2]}%, 1)`;
+			output[`${key}-src`] = `${c[0]}, ${c[1]}%, ${c[2]}%`;
+		});
+		expect(color).toStrictEqual(output);
 	});
 
 	it('text', () => {
-		const text = ThemeDerivations.text(
-			DefaultLightTheme.theme.text,
-			DefaultLightTheme,
-		);
+		const text = ThemeDerivations.text(DefaultLightTheme.theme.text);
 		expect(text).toStrictEqual({
-			alternate: '#131722',
-			default: '#131722',
-			inverse: '#ffffff',
-			label: '#333333',
-			placeholder: '#a1a1a1',
+			alternate: 'hsla(0, 0%, 0%, 1)',
+			'alternate-src': '0, 0%, 0%',
+			default: 'hsla(0, 0%, 0%, 1)',
+			'default-src': '0, 0%, 0%',
+			inverse: 'hsla(0, 0%, 100%, 1)',
+			'inverse-src': '0, 0%, 100%',
+			label: 'hsla(0, 0%, 20%, 1)',
+			'label-src': '0, 0%, 20%',
+			placeholder: 'hsla(0, 0%, 63%, 1)',
+			'placeholder-src': '0, 0%, 63%',
 		});
 	});
 
 	it('background', () => {
 		const bg = ThemeDerivations.background(
 			DefaultLightTheme.theme.background,
-			DefaultLightTheme,
 		);
 		expect(bg).toStrictEqual({
-			container: '#dedede',
-			content: '#ffffff',
-			navigation: '#000000',
-			'overlay-neutral': 'rgba(0, 0, 0, 0.25)',
-			'overlay-primary': 'rgba(120, 0, 210, 0.25)',
-			page: '#ffffff',
+			container: 'hsla(0, 0%, 87%, 1)',
+			'container-src': '0, 0%, 87%',
+			content: 'hsla(0, 0%, 100%, 1)',
+			'content-src': '0, 0%, 100%',
+			navigation: 'hsla(0, 0%, 0%, 1)',
+			'navigation-src': '0, 0%, 0%',
+			'overlay-neutral': 'hsla(var(--color-neutral-src), 0.25)',
+			'overlay-primary': 'hsla(var(--color-primary-src), 0.25)',
+			page: 'hsla(0, 0%, 100%, 1)',
+			'page-src': '0, 0%, 100%',
 			shadow: '0px 2px 10px -4px rgba(0, 0, 0, 0.5)',
 		});
 	});
 
 	it('input', () => {
-		const input = ThemeDerivations.input(
-			DefaultLightTheme.theme.input,
-			DefaultLightTheme,
-		);
+		const input = ThemeDerivations.input(DefaultLightTheme.theme.input);
 		expect(input).toStrictEqual({
-			bd: '#000000',
-			bg: 'hsla(0, 100%, 100%, 1)',
-			fg: '#000000',
-			focus: '#258fd8',
+			bd: 'var(--color-neutral)',
+			bg: 'hsla(var(--background-content-src), 1)',
+			fg: 'var(--text-default)',
+			focus: 'var(--color-secondary)',
 		});
 	});
 
 	it('focus', () => {
-		const focus = ThemeDerivations.focus(
-			DefaultLightTheme.theme.focus,
-			DefaultLightTheme,
-		);
+		const focus = ThemeDerivations.focus(DefaultLightTheme.theme.focus);
 		expect(focus).toStrictEqual({
-			dark: '#000000',
-			light: '#ffffff',
+			dark: 'var(--text-default)',
+			light: 'var(--text-inverse)',
 			style: 'dotted',
 			width: '1px',
 		});
@@ -99,103 +103,104 @@ describe('ThemeDerivation', () => {
 	it('pattern', () => {
 		const patternNeutral = ThemeDerivations['pattern-neutral'](
 			DefaultLightTheme.theme['pattern-neutral'],
-			DefaultLightTheme,
 		);
 		expect(patternNeutral).toStrictEqual({
-			'disabled-bd': 'hsla(0, 0%, 0%, 1)',
-			'disabled-bg': 'hsla(0, 0%, 0%, 1)',
-			'disabled-fg': '#ffffff',
+			'disabled-bd': 'hsla(var(--color-neutral-src), 1)',
+			'disabled-bg': 'hsla(var(--color-neutral-src), 1)',
+			'disabled-fg': 'var(--text-inverse)',
 			'disabled-op': '0.3',
-			'hover-bd': 'hsla(0, 0%, 0%, 0.85)',
-			'hover-bg': 'hsla(0, 0%, 0%, 0.85)',
-			'hover-fg': '#ffffff',
+			'hover-bd': 'hsla(var(--color-neutral-src), 0.85)',
+			'hover-bg': 'hsla(var(--color-neutral-src), 0.85)',
+			'hover-fg': 'var(--text-inverse)',
 			'hover-op': '1',
-			'normal-bd': 'hsla(0, 0%, 0%, 1)',
-			'normal-bg': 'hsla(0, 0%, 0%, 1)',
-			'normal-fg': '#ffffff',
+			'normal-bd': 'hsla(var(--color-neutral-src), 1)',
+			'normal-bg': 'hsla(var(--color-neutral-src), 1)',
+			'normal-fg': 'var(--text-inverse)',
 			'normal-op': '1',
-			'pressed-bd': 'hsla(0, 0%, 0%, 0.75)',
-			'pressed-bg': 'hsla(0, 0%, 0%, 0.75)',
-			'pressed-fg': '#ffffff',
+			'pressed-bd': 'hsla(var(--color-neutral-src), 0.75)',
+			'pressed-bg': 'hsla(var(--color-neutral-src), 0.75)',
+			'pressed-fg': 'var(--text-inverse)',
 			'pressed-op': '1',
 		});
 		const patternPrimary = ThemeDerivations['pattern-primary'](
 			DefaultLightTheme.theme['pattern-primary'],
-			DefaultLightTheme,
 		);
 		expect(patternPrimary).toStrictEqual({
-			'disabled-bd': 'hsla(274, 100%, 41%, 1)',
-			'disabled-bg': 'hsla(274, 100%, 41%, 1)',
-			'disabled-fg': '#ffffff',
+			'disabled-bd': 'hsla(var(--color-primary-src), 1)',
+			'disabled-bg': 'hsla(var(--color-primary-src), 1)',
+			'disabled-fg': 'var(--text-inverse)',
 			'disabled-op': '0.3',
-			'hover-bd': 'hsla(274, 100%, 41%, 0.85)',
-			'hover-bg': 'hsla(274, 100%, 41%, 0.85)',
-			'hover-fg': '#ffffff',
+			'hover-bd': 'hsla(var(--color-primary-src), 0.85)',
+			'hover-bg': 'hsla(var(--color-primary-src), 0.85)',
+			'hover-fg': 'var(--text-inverse)',
 			'hover-op': '1',
-			'normal-bd': 'hsla(274, 100%, 41%, 1)',
-			'normal-bg': 'hsla(274, 100%, 41%, 1)',
-			'normal-fg': '#ffffff',
+			'normal-bd': 'hsla(var(--color-primary-src), 1)',
+			'normal-bg': 'hsla(var(--color-primary-src), 1)',
+			'normal-fg': 'var(--text-inverse)',
 			'normal-op': '1',
-			'pressed-bd': 'hsla(274, 100%, 41%, 0.75)',
-			'pressed-bg': 'hsla(274, 100%, 41%, 0.75)',
-			'pressed-fg': '#ffffff',
+			'pressed-bd': 'hsla(var(--color-primary-src), 0.75)',
+			'pressed-bg': 'hsla(var(--color-primary-src), 0.75)',
+			'pressed-fg': 'var(--text-inverse)',
 			'pressed-op': '1',
 		});
 		const patternSecondary = ThemeDerivations['pattern-secondary'](
 			DefaultLightTheme.theme['pattern-secondary'],
-			DefaultLightTheme,
 		);
 		expect(patternSecondary).toStrictEqual({
-			'disabled-bd': 'hsla(204, 71%, 50%, 1)',
-			'disabled-bg': 'hsla(204, 71%, 50%, 1)',
-			'disabled-fg': '#ffffff',
+			'disabled-bd': 'hsla(var(--color-secondary-src), 1)',
+			'disabled-bg': 'hsla(var(--color-secondary-src), 1)',
+			'disabled-fg': 'var(--text-inverse)',
 			'disabled-op': '0.3',
-			'hover-bd': 'hsla(204, 71%, 50%, 0.85)',
-			'hover-bg': 'hsla(204, 71%, 50%, 0.85)',
-			'hover-fg': '#ffffff',
+			'hover-bd': 'hsla(var(--color-secondary-src), 0.85)',
+			'hover-bg': 'hsla(var(--color-secondary-src), 0.85)',
+			'hover-fg': 'var(--text-inverse)',
 			'hover-op': '1',
-			'normal-bd': 'hsla(204, 71%, 50%, 1)',
-			'normal-bg': 'hsla(204, 71%, 50%, 1)',
-			'normal-fg': '#ffffff',
+			'normal-bd': 'hsla(var(--color-secondary-src), 1)',
+			'normal-bg': 'hsla(var(--color-secondary-src), 1)',
+			'normal-fg': 'var(--text-inverse)',
 			'normal-op': '1',
-			'pressed-bd': 'hsla(204, 71%, 50%, 0.75)',
-			'pressed-bg': 'hsla(204, 71%, 50%, 0.75)',
-			'pressed-fg': '#ffffff',
+			'pressed-bd': 'hsla(var(--color-secondary-src), 0.75)',
+			'pressed-bg': 'hsla(var(--color-secondary-src), 0.75)',
+			'pressed-fg': 'var(--text-inverse)',
 			'pressed-op': '1',
 		});
 		const patternLightweight = ThemeDerivations['pattern-lightweight'](
 			DefaultLightTheme.theme['pattern-lightweight'],
-			DefaultLightTheme,
 		);
 		expect(patternLightweight).toStrictEqual({
-			'disabled-bd': 'hsla(0, 0%, 0%, 0)',
-			'disabled-bg': 'hsla(0, 0%, 0%, 0)',
-			'disabled-fg': '#000000',
+			'disabled-bd': 'hsla(var(--color-neutral-src), 0)',
+			'disabled-bg': 'hsla(var(--color-neutral-src), 0)',
+			'disabled-fg': 'var(--text-default)',
 			'disabled-op': '0.3',
-			'hover-bd': 'hsla(0, 0%, 0%, 0.25)',
-			'hover-bg': 'hsla(0, 0%, 0%, 0.25)',
-			'hover-fg': '#000000',
+			'hover-bd': 'hsla(var(--color-neutral-src), 0.25)',
+			'hover-bg': 'hsla(var(--color-neutral-src), 0.25)',
+			'hover-fg': 'var(--text-default)',
 			'hover-op': '1',
-			'normal-bd': 'hsla(0, 0%, 0%, 0)',
-			'normal-bg': 'hsla(0, 0%, 0%, 0)',
-			'normal-fg': '#000000',
+			'normal-bd': 'hsla(var(--color-neutral-src), 0)',
+			'normal-bg': 'hsla(var(--color-neutral-src), 0)',
+			'normal-fg': 'var(--text-default)',
 			'normal-op': '1',
-			'pressed-bd': 'hsla(0, 0%, 0%, 0.35)',
-			'pressed-bg': 'hsla(0, 0%, 0%, 0.35)',
-			'pressed-fg': '#000000',
+			'pressed-bd': 'hsla(var(--color-neutral-src), 0.35)',
+			'pressed-bg': 'hsla(var(--color-neutral-src), 0.35)',
+			'pressed-fg': 'var(--text-default)',
 			'pressed-op': '1',
 		});
 	});
 
 	it('custom theme deriveColor', () => {
 		const CustomTheme: Theme = { ...DefaultLightTheme, type: 'custom' };
-		const text = ThemeDerivations.text(CustomTheme.theme.text, CustomTheme);
+		const text = ThemeDerivations.text(CustomTheme.theme.text);
 		expect(text).toStrictEqual({
-			alternate: '#131722',
-			default: '#131722',
-			inverse: '#ffffff',
-			label: '#333333',
-			placeholder: '#a1a1a1',
+			alternate: 'hsla(0, 0%, 0%, 1)',
+			'alternate-src': '0, 0%, 0%',
+			default: 'hsla(0, 0%, 0%, 1)',
+			'default-src': '0, 0%, 0%',
+			inverse: 'hsla(0, 0%, 100%, 1)',
+			'inverse-src': '0, 0%, 100%',
+			label: 'hsla(0, 0%, 20%, 1)',
+			'label-src': '0, 0%, 20%',
+			placeholder: 'hsla(0, 0%, 63%, 1)',
+			'placeholder-src': '0, 0%, 63%',
 		});
 	});
 
@@ -203,40 +208,24 @@ describe('ThemeDerivation', () => {
 		const CustomTheme: Theme = { ...DefaultLightTheme, type: 'custom' };
 		const patternSecondary = ThemeDerivations['pattern-secondary'](
 			CustomTheme.theme['pattern-secondary'],
-			CustomTheme,
 		);
 		expect(patternSecondary).toStrictEqual({
-			'disabled-bd': 'hsla(204, 71%, 50%, 1)',
-			'disabled-bg': 'hsla(204, 71%, 50%, 1)',
-			'disabled-fg': '#ffffff',
+			'disabled-bd': 'hsla(var(--color-secondary-src), 1)',
+			'disabled-bg': 'hsla(var(--color-secondary-src), 1)',
+			'disabled-fg': 'var(--text-inverse)',
 			'disabled-op': '0.3',
-			'hover-bd': 'hsla(204, 71%, 50%, 0.85)',
-			'hover-bg': 'hsla(204, 71%, 50%, 0.85)',
-			'hover-fg': '#ffffff',
+			'hover-bd': 'hsla(var(--color-secondary-src), 0.85)',
+			'hover-bg': 'hsla(var(--color-secondary-src), 0.85)',
+			'hover-fg': 'var(--text-inverse)',
 			'hover-op': '1',
-			'normal-bd': 'hsla(204, 71%, 50%, 1)',
-			'normal-bg': 'hsla(204, 71%, 50%, 1)',
-			'normal-fg': '#ffffff',
+			'normal-bd': 'hsla(var(--color-secondary-src), 1)',
+			'normal-bg': 'hsla(var(--color-secondary-src), 1)',
+			'normal-fg': 'var(--text-inverse)',
 			'normal-op': '1',
-			'pressed-bd': 'hsla(204, 71%, 50%, 0.75)',
-			'pressed-bg': 'hsla(204, 71%, 50%, 0.75)',
-			'pressed-fg': '#ffffff',
+			'pressed-bd': 'hsla(var(--color-secondary-src), 0.75)',
+			'pressed-bg': 'hsla(var(--color-secondary-src), 0.75)',
+			'pressed-fg': 'var(--text-inverse)',
 			'pressed-op': '1',
-		});
-	});
-});
-
-describe('deriveColor', () => {
-	it('returns proper values', () => {
-		const color = deriveColor(
-			DefaultLightTheme.theme.focus,
-			DefaultLightTheme,
-		);
-		expect(color).toStrictEqual({
-			dark: '#000000',
-			light: '#ffffff',
-			style: 'dotted',
-			width: '1px',
 		});
 	});
 });
@@ -245,24 +234,23 @@ describe('derivePattern', () => {
 	it('returns proper values', () => {
 		const pattern = derivePattern(
 			DefaultLightTheme.theme['pattern-primary'],
-			DefaultLightTheme,
 		);
 		expect(pattern).toStrictEqual({
-			'disabled-bd': 'hsla(274, 100%, 41%, 1)',
-			'disabled-bg': 'hsla(274, 100%, 41%, 1)',
-			'disabled-fg': '#ffffff',
+			'disabled-bd': 'hsla(var(--color-primary-src), 1)',
+			'disabled-bg': 'hsla(var(--color-primary-src), 1)',
+			'disabled-fg': 'var(--text-inverse)',
 			'disabled-op': '0.3',
-			'hover-bd': 'hsla(274, 100%, 41%, 0.85)',
-			'hover-bg': 'hsla(274, 100%, 41%, 0.85)',
-			'hover-fg': '#ffffff',
+			'hover-bd': 'hsla(var(--color-primary-src), 0.85)',
+			'hover-bg': 'hsla(var(--color-primary-src), 0.85)',
+			'hover-fg': 'var(--text-inverse)',
 			'hover-op': '1',
-			'normal-bd': 'hsla(274, 100%, 41%, 1)',
-			'normal-bg': 'hsla(274, 100%, 41%, 1)',
-			'normal-fg': '#ffffff',
+			'normal-bd': 'hsla(var(--color-primary-src), 1)',
+			'normal-bg': 'hsla(var(--color-primary-src), 1)',
+			'normal-fg': 'var(--text-inverse)',
 			'normal-op': '1',
-			'pressed-bd': 'hsla(274, 100%, 41%, 0.75)',
-			'pressed-bg': 'hsla(274, 100%, 41%, 0.75)',
-			'pressed-fg': '#ffffff',
+			'pressed-bd': 'hsla(var(--color-primary-src), 0.75)',
+			'pressed-bg': 'hsla(var(--color-primary-src), 0.75)',
+			'pressed-fg': 'var(--text-inverse)',
 			'pressed-op': '1',
 		});
 	});

@@ -25,6 +25,7 @@ export * from './components/MessageStrip';
 export * from './components/Navigation';
 export * from './components/Notifications';
 export * from './components/Popover';
+export * from './components/ProgressBar';
 export * from './components/SVG';
 export * from './components/Switch';
 export * from './components/Tabbar';

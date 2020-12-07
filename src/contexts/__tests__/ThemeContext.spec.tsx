@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { cleanup, fireEvent, render } from '@testing-library/react';
 import { ThemeContext, ThemeProvider, ThemeSwitcher } from '../ThemeContext';
-import { DefaultDarkTheme, DefaultLightTheme, Theme } from '../../theme/Theme';
+import { DefaultDarkTheme, DefaultLightTheme, Theme } from '../../theme';
 
 afterEach(cleanup);
 
@@ -67,33 +67,33 @@ describe('theme provider', () => {
 		);
 		let theme = getByTestId('theme');
 		expect(theme.getAttribute('data-neutral')).toBe(
-			DefaultLightTheme.theme.color.neutral,
+			DefaultLightTheme.theme.color.neutral.join(','),
 		);
 		expect(theme.getAttribute('data-primary')).toBe(
-			DefaultLightTheme.theme.color.primary,
+			DefaultLightTheme.theme.color.primary.join(','),
 		);
 		expect(theme.getAttribute('data-secondary')).toBe(
-			DefaultLightTheme.theme.color.secondary,
+			DefaultLightTheme.theme.color.secondary.join(','),
 		);
 		fireEvent.click(getByText('Switch Theme'));
 		expect(theme.getAttribute('data-neutral')).toBe(
-			DefaultDarkTheme.theme.color.neutral,
+			DefaultDarkTheme.theme.color.neutral.join(','),
 		);
 		expect(theme.getAttribute('data-primary')).toBe(
-			DefaultDarkTheme.theme.color.primary,
+			DefaultDarkTheme.theme.color.primary.join(','),
 		);
 		expect(theme.getAttribute('data-secondary')).toBe(
-			DefaultDarkTheme.theme.color.secondary,
+			DefaultDarkTheme.theme.color.secondary.join(','),
 		);
 		fireEvent.click(getByText('Switch Theme'));
 		expect(theme.getAttribute('data-neutral')).toBe(
-			DefaultLightTheme.theme.color.neutral,
+			DefaultLightTheme.theme.color.neutral.join(','),
 		);
 		expect(theme.getAttribute('data-primary')).toBe(
-			DefaultLightTheme.theme.color.primary,
+			DefaultLightTheme.theme.color.primary.join(','),
 		);
 		expect(theme.getAttribute('data-secondary')).toBe(
-			DefaultLightTheme.theme.color.secondary,
+			DefaultLightTheme.theme.color.secondary.join(','),
 		);
 	});
 
@@ -105,9 +105,9 @@ describe('theme provider', () => {
 				...DefaultLightTheme.theme,
 				color: {
 					...DefaultLightTheme.theme.color,
-					neutral: 'red',
-					primary: 'green',
-					secondary: 'blue',
+					neutral: [0, 100, 100],
+					primary: [120, 100, 100],
+					secondary: [240, 100, 100],
 				},
 			},
 		};
@@ -118,9 +118,9 @@ describe('theme provider', () => {
 				...DefaultDarkTheme.theme,
 				color: {
 					...DefaultDarkTheme.theme.color,
-					neutral: 'orange',
-					primary: 'purple',
-					secondary: 'yellow',
+					neutral: [0, 100, 50],
+					primary: [120, 100, 50],
+					secondary: [240, 100, 50],
 				},
 			},
 		};
@@ -134,23 +134,23 @@ describe('theme provider', () => {
 		);
 		let theme = getByTestId('theme');
 		expect(theme.getAttribute('data-neutral')).toBe(
-			CustomLightTheme.theme.color.neutral,
+			CustomLightTheme.theme.color.neutral.join(','),
 		);
 		expect(theme.getAttribute('data-primary')).toBe(
-			CustomLightTheme.theme.color.primary,
+			CustomLightTheme.theme.color.primary.join(','),
 		);
 		expect(theme.getAttribute('data-secondary')).toBe(
-			CustomLightTheme.theme.color.secondary,
+			CustomLightTheme.theme.color.secondary.join(','),
 		);
 		fireEvent.click(getByText('Switch Theme'));
 		expect(theme.getAttribute('data-neutral')).toBe(
-			CustomDarkTheme.theme.color.neutral,
+			CustomDarkTheme.theme.color.neutral.join(','),
 		);
 		expect(theme.getAttribute('data-primary')).toBe(
-			CustomDarkTheme.theme.color.primary,
+			CustomDarkTheme.theme.color.primary.join(','),
 		);
 		expect(theme.getAttribute('data-secondary')).toBe(
-			CustomDarkTheme.theme.color.secondary,
+			CustomDarkTheme.theme.color.secondary.join(','),
 		);
 	});
 
@@ -163,23 +163,23 @@ describe('theme provider', () => {
 		);
 		let theme = getByTestId('theme');
 		expect(theme.getAttribute('data-neutral')).toBe(
-			DefaultLightTheme.theme.color.neutral,
+			DefaultLightTheme.theme.color.neutral.join(','),
 		);
 		expect(theme.getAttribute('data-primary')).toBe(
-			DefaultLightTheme.theme.color.primary,
+			DefaultLightTheme.theme.color.primary.join(','),
 		);
 		expect(theme.getAttribute('data-secondary')).toBe(
-			DefaultLightTheme.theme.color.secondary,
+			DefaultLightTheme.theme.color.secondary.join(','),
 		);
 		fireEvent.click(getByText('Switch Theme'));
 		expect(theme.getAttribute('data-neutral')).toBe(
-			DefaultDarkTheme.theme.color.neutral,
+			DefaultDarkTheme.theme.color.neutral.join(','),
 		);
 		expect(theme.getAttribute('data-primary')).toBe(
-			DefaultDarkTheme.theme.color.primary,
+			DefaultDarkTheme.theme.color.primary.join(','),
 		);
 		expect(theme.getAttribute('data-secondary')).toBe(
-			DefaultDarkTheme.theme.color.secondary,
+			DefaultDarkTheme.theme.color.secondary.join(','),
 		);
 	});
 
@@ -191,9 +191,9 @@ describe('theme provider', () => {
 				...DefaultLightTheme.theme,
 				color: {
 					...DefaultLightTheme.theme.color,
-					neutral: 'red',
-					primary: 'green',
-					secondary: 'blue',
+					neutral: [0, 100, 100],
+					primary: [120, 100, 100],
+					secondary: [240, 100, 100],
 				},
 			},
 		};
@@ -204,9 +204,9 @@ describe('theme provider', () => {
 				...DefaultDarkTheme.theme,
 				color: {
 					...DefaultDarkTheme.theme.color,
-					neutral: 'orange',
-					primary: 'purple',
-					secondary: 'yellow',
+					neutral: [0, 100, 50],
+					primary: [120, 100, 50],
+					secondary: [240, 100, 50],
 				},
 			},
 		};
@@ -220,33 +220,33 @@ describe('theme provider', () => {
 		);
 		let theme = getByTestId('theme');
 		expect(theme.getAttribute('data-neutral')).toBe(
-			ApplicationLightTheme.theme.color.neutral,
+			ApplicationLightTheme.theme.color.neutral.join(','),
 		);
 		expect(theme.getAttribute('data-primary')).toBe(
-			ApplicationLightTheme.theme.color.primary,
+			ApplicationLightTheme.theme.color.primary.join(','),
 		);
 		expect(theme.getAttribute('data-secondary')).toBe(
-			ApplicationLightTheme.theme.color.secondary,
+			ApplicationLightTheme.theme.color.secondary.join(','),
 		);
 		fireEvent.click(getByText('Switch Theme'));
 		expect(theme.getAttribute('data-neutral')).toBe(
-			ApplicationDarkTheme.theme.color.neutral,
+			ApplicationDarkTheme.theme.color.neutral.join(','),
 		);
 		expect(theme.getAttribute('data-primary')).toBe(
-			ApplicationDarkTheme.theme.color.primary,
+			ApplicationDarkTheme.theme.color.primary.join(','),
 		);
 		expect(theme.getAttribute('data-secondary')).toBe(
-			ApplicationDarkTheme.theme.color.secondary,
+			ApplicationDarkTheme.theme.color.secondary.join(','),
 		);
 		fireEvent.click(getByText('Switch Theme'));
 		expect(theme.getAttribute('data-neutral')).toBe(
-			ApplicationLightTheme.theme.color.neutral,
+			ApplicationLightTheme.theme.color.neutral.join(','),
 		);
 		expect(theme.getAttribute('data-primary')).toBe(
-			ApplicationLightTheme.theme.color.primary,
+			ApplicationLightTheme.theme.color.primary.join(','),
 		);
 		expect(theme.getAttribute('data-secondary')).toBe(
-			ApplicationLightTheme.theme.color.secondary,
+			ApplicationLightTheme.theme.color.secondary.join(','),
 		);
 	});
 
@@ -263,33 +263,33 @@ describe('theme provider', () => {
 		);
 		let theme = getByTestId('theme');
 		expect(theme.getAttribute('data-neutral')).toBe(
-			DefaultDarkTheme.theme.color.neutral,
+			DefaultDarkTheme.theme.color.neutral.join(','),
 		);
 		expect(theme.getAttribute('data-primary')).toBe(
-			DefaultDarkTheme.theme.color.primary,
+			DefaultDarkTheme.theme.color.primary.join(','),
 		);
 		expect(theme.getAttribute('data-secondary')).toBe(
-			DefaultDarkTheme.theme.color.secondary,
+			DefaultDarkTheme.theme.color.secondary.join(','),
 		);
 		fireEvent.click(getByText('Switch Theme'));
 		expect(theme.getAttribute('data-neutral')).toBe(
-			DefaultLightTheme.theme.color.neutral,
+			DefaultLightTheme.theme.color.neutral.join(','),
 		);
 		expect(theme.getAttribute('data-primary')).toBe(
-			DefaultLightTheme.theme.color.primary,
+			DefaultLightTheme.theme.color.primary.join(','),
 		);
 		expect(theme.getAttribute('data-secondary')).toBe(
-			DefaultLightTheme.theme.color.secondary,
+			DefaultLightTheme.theme.color.secondary.join(','),
 		);
 		fireEvent.click(getByText('Switch Theme'));
 		expect(theme.getAttribute('data-neutral')).toBe(
-			DefaultDarkTheme.theme.color.neutral,
+			DefaultDarkTheme.theme.color.neutral.join(','),
 		);
 		expect(theme.getAttribute('data-primary')).toBe(
-			DefaultDarkTheme.theme.color.primary,
+			DefaultDarkTheme.theme.color.primary.join(','),
 		);
 		expect(theme.getAttribute('data-secondary')).toBe(
-			DefaultDarkTheme.theme.color.secondary,
+			DefaultDarkTheme.theme.color.secondary.join(','),
 		);
 	});
 });

@@ -2,7 +2,7 @@ import React from 'react';
 import { addDecorator } from '@storybook/react';
 import { withContexts } from '@storybook/addon-contexts/react';
 import { ThemeProvider } from '../src/contexts/ThemeContext';
-import { DefaultLightTheme, DefaultDarkTheme } from '../src/theme/Theme';
+import { DefaultLightTheme, DefaultDarkTheme } from '../src/theme';
 
 import './storybook.scss';
 
@@ -30,11 +30,19 @@ addDecorator(
 				{
 					name: 'Light',
 					default: true,
-					props: { themeOverride: DefaultLightTheme },
+					props: { 
+						lightThemeOverride: DefaultLightTheme,
+						darkThemeOverride: DefaultLightTheme,
+						applyAtRoot: true
+					},
 				},
 				{
 					name: 'Dark',
-					props: { themeOverride: DefaultDarkTheme },
+					props: { 
+						lightThemeOverride: DefaultDarkTheme,
+						darkThemeOverride: DefaultDarkTheme,
+						applyAtRoot: true
+					},
 				},
 			],
 		},

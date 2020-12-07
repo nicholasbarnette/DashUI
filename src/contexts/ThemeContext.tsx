@@ -10,9 +10,11 @@ import { MenuButton, MenuButtonProps } from '../components/MenuButton';
 import { MenuItem } from '../components/Menu';
 import { ThemeDerivations, Derivations } from '../theme/ThemeDerivation';
 import { resolveDerivation, getDerivationInfo } from '../theme/utils';
-import { DefaultLightTheme, Theme, DefaultDarkTheme } from '../theme/Theme';
+import { Theme } from '../theme/types';
 import { useCookies, useGenerateUniqueId } from '../hooks';
 import { useGenerateUniqueClassName } from '../hooks/useGenerateUniqueClassName';
+import { DefaultLightTheme } from '../theme/LightTheme';
+import { DefaultDarkTheme } from '../theme/DarkTheme';
 
 interface ThemeProviderContext {
 	theme: Theme;
@@ -52,7 +54,7 @@ export const convertPropertiesToCSS = (
 
 export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
 	const styleId = useGenerateUniqueId('dash-theme', 20);
-	const themeClassName = useGenerateUniqueClassName(20);
+	const themeClassName = useGenerateUniqueClassName(20, 'theme');
 	const [cookies, setCookie] = useCookies();
 
 	const setTheme = (theme: 'light' | 'dark') => {
@@ -89,6 +91,20 @@ export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
 	}, [currentTheme]);
 
 	useEffect(() => {
+		if (cookies.theme === 'light') {
+			setCurrentTheme({
+				...currentTheme,
+				theme: props.lightThemeOverride ?? currentTheme.theme,
+			});
+		} else {
+			setCurrentTheme({
+				...currentTheme,
+				theme: props.darkThemeOverride ?? currentTheme.theme,
+			});
+		}
+	}, [cookies, props.lightThemeOverride, props.darkThemeOverride]);
+
+	useEffect(() => {
 		let block = document.createElement('style');
 		block.setAttribute('id', styleId);
 		document.getElementsByTagName('head')[0].appendChild(block);
@@ -120,11 +136,21 @@ export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
 		}
 	}, [cookies]);
 
+	useEffect(() => {
+		// Apply at the root
+		const el = document.getElementsByTagName('html')[0];
+		for (let c in el.classList) {
+			if (c.startsWith('dashui-theme')) {
+				el.classList.remove(c);
+			}
+		}
+		document.getElementsByTagName('html')[0].classList.add(themeClassName);
+	}, [themeClassName]);
+
 	return (
 		<div
 			style={{ height: '100%', width: '100%', ...props.style }}
 			data-testid={props.testId}
-			className={themeClassName}
 		>
 			<ThemeContext.Provider value={currentTheme}>
 				{props.children}

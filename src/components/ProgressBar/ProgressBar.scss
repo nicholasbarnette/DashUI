@@ -1,0 +1,32 @@
+.container {
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 2rem;
+}
+
+.progress {
+	background-color: var(--background-overlay-primary);
+	position: absolute;
+	height: 100%;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+}
+
+.percentage {
+	position: absolute;
+	left: 1rem;
+	font-size: var(--font-size-sm);
+	z-index: 1;
+}
+
+.label {
+	text-align: center;
+	padding: 0.5rem 3rem;
+	z-index: 1;
+}

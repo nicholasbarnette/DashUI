@@ -5,7 +5,7 @@ import {
 	getDerivationInfo,
 	resolveDerivation,
 } from '../../theme/utils';
-import { DefaultLightTheme } from '../../theme/Theme';
+import { DefaultLightTheme } from '../../theme/LightTheme';
 
 afterEach(cleanup);
 

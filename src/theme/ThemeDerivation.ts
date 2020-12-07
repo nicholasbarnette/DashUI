@@ -1,5 +1,7 @@
 import { px2rem } from './utils';
-import { Theme, Patterns, States, StateValues, ColorDerivation } from './Theme';
+import { Theme, Patterns, States, StateValues, ColorDerivation } from './types';
+
+type HSL = [number, number, number];
 
 export type SpacingSize = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 type Spacing = { [key in SpacingSize]: string };
@@ -8,14 +10,14 @@ export type FontSize = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 type FontSizes = { [key in FontSize]: string };
 
 type Color = keyof Theme['theme']['color'];
-type Colors = { [key in Color]: string };
+type Colors = { [key in Color]: HSL };
 
 type TextType = keyof Theme['theme']['text'];
-type Text = { [key in TextType]: string };
+type Text = { [key in TextType]: HSL };
 
 type Background = keyof Theme['theme']['background'];
 type Backgrounds = {
-	[key in Background]: string;
+	[key in Background]: HSL | string;
 };
 
 type InputType = keyof Theme['theme']['input'];
@@ -23,9 +25,6 @@ type Input = { [key in InputType]: string };
 
 type FocusType = keyof Theme['theme']['focus'];
 type Focus = { [key in FocusType]: string };
-
-type PatternColor = keyof Patterns;
-type Pattern = { [key: string]: string };
 
 interface ThemeProperties {
 	[key: string]: string;
@@ -42,15 +41,15 @@ export interface Derivations {
 		fontSizeMultiplier: number,
 		baseSize: number,
 	) => FontSizes;
-	color: (colors: Colors) => Colors;
-	text: (text: Text, theme: Theme) => ThemeProperties;
-	background: (background: Backgrounds, theme: Theme) => ThemeProperties;
-	input: (input: Input, theme: Theme) => ThemeProperties;
-	focus: (focus: Focus, theme: Theme) => ThemeProperties;
-	'pattern-neutral': (pattern: States, theme: Theme) => ThemeProperties;
-	'pattern-primary': (pattern: States, theme: Theme) => ThemeProperties;
-	'pattern-secondary': (pattern: States, theme: Theme) => ThemeProperties;
-	'pattern-lightweight': (pattern: States, theme: Theme) => ThemeProperties;
+	color: (colors: Colors) => { [key: string]: string };
+	text: (text: Text) => ThemeProperties;
+	background: (background: Backgrounds) => ThemeProperties;
+	input: (input: Input) => ThemeProperties;
+	focus: (focus: Focus) => ThemeProperties;
+	'pattern-neutral': (pattern: States) => ThemeProperties;
+	'pattern-primary': (pattern: States) => ThemeProperties;
+	'pattern-secondary': (pattern: States) => ThemeProperties;
+	'pattern-lightweight': (pattern: States) => ThemeProperties;
 }
 
 export const ThemeDerivations: Derivations = {
@@ -90,20 +89,16 @@ export const ThemeDerivations: Derivations = {
 			xxl: `calc(var(--font-size-xl) * ${fontSizeMultiplier} * 1.5)`,
 		};
 	},
-	color: (colors: Colors) => colors,
-	text: (text: Text, theme: Theme) => deriveColor(text, theme),
-	background: (background: Backgrounds, theme: Theme) =>
-		deriveColor(background, theme),
-	input: (input: Input, theme: Theme) => deriveColor(input, theme),
-	focus: (focus: Focus, theme: Theme) => deriveColor(focus, theme),
-	'pattern-neutral': (pattern: States, theme: Theme) =>
-		derivePattern(pattern, theme),
-	'pattern-primary': (pattern: States, theme: Theme) =>
-		derivePattern(pattern, theme),
-	'pattern-secondary': (pattern: States, theme: Theme) =>
-		derivePattern(pattern, theme),
-	'pattern-lightweight': (pattern: States, theme: Theme) =>
-		derivePattern(pattern, theme),
+	color: (colors: Colors) => convertToColor<Colors>(colors),
+	text: (text: Text) => convertToColor<Text>(text),
+	background: (background: Backgrounds) =>
+		convertToColor<Backgrounds>(background),
+	input: (input: Input) => input,
+	focus: (focus: Focus) => focus,
+	'pattern-neutral': (pattern: States) => derivePattern(pattern),
+	'pattern-primary': (pattern: States) => derivePattern(pattern),
+	'pattern-secondary': (pattern: States) => derivePattern(pattern),
+	'pattern-lightweight': (pattern: States) => derivePattern(pattern),
 };
 
 export const deriveColor = (
@@ -120,21 +115,29 @@ export const deriveColor = (
 	return o;
 };
 
-export const derivePattern = (pattern: States, theme: Theme) => {
+export const derivePattern = (pattern: States) => {
 	const o: ThemeProperties = {};
 	Object.keys(pattern).map((state) => {
 		Object.keys(pattern[state as keyof States]).map((value) => {
 			o[`${state as keyof States}-${value as keyof StateValues}`] =
 				pattern[state as keyof States][value as keyof StateValues];
-
-			if (theme.type === 'custom') {
-				o[`${state as keyof States}-${value as keyof StateValues}`] =
-					pattern[state as keyof States][
-						value as keyof StateValues
-					] ??
-					o[`${state as keyof States}-${value as keyof StateValues}`];
-			}
 		});
 	});
 	return o;
+};
+
+export const convertToColor = <T extends { [key: string]: HSL | string }>(
+	colors: T,
+) => {
+	const colorsConverted: { [key: string]: string } = {};
+	Object.keys(colors).map((key) => {
+		const c = colors[key as keyof T];
+		if (!(typeof c === 'string')) {
+			colorsConverted[key] = `hsla(${c[0]}, ${c[1]}%, ${c[2]}%, 1)`;
+			colorsConverted[`${key}-src`] = `${c[0]}, ${c[1]}%, ${c[2]}%`;
+		} else {
+			colorsConverted[key] = c;
+		}
+	});
+	return colorsConverted;
 };

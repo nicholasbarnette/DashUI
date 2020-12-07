@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
 
+import { Text } from '../Text';
+
 // Styles
 import cx from 'classnames';
 import cn from './List.scss';
@@ -39,13 +41,13 @@ export const ListItem: FC<ListItemProps> = (props) => {
 			}}
 			tabIndex={0}
 		>
-			<span className={cn.text} title={props.item.text}>
+			<Text className={cn.text} title={props.item.text}>
 				{props.item.text}
-			</span>
+			</Text>
 			{props.item.description && (
-				<span className={cn.description} title={props.item.description}>
+				<Text className={cn.description} title={props.item.description}>
 					{props.item.description}
-				</span>
+				</Text>
 			)}
 		</li>
 	);
