@@ -136,21 +136,11 @@ export const ThemeProvider: FC<ThemeProviderProps> = (props) => {
 		}
 	}, [cookies]);
 
-	useEffect(() => {
-		// Apply at the root
-		const el = document.getElementsByTagName('html')[0];
-		for (let c in el.classList) {
-			if (c.startsWith('dashui-theme')) {
-				el.classList.remove(c);
-			}
-		}
-		document.getElementsByTagName('html')[0].classList.add(themeClassName);
-	}, [themeClassName]);
-
 	return (
 		<div
 			style={{ height: '100%', width: '100%', ...props.style }}
 			data-testid={props.testId}
+			className={themeClassName}
 		>
 			<ThemeContext.Provider value={currentTheme}>
 				{props.children}

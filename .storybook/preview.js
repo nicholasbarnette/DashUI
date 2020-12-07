@@ -33,7 +33,6 @@ addDecorator(
 					props: { 
 						lightThemeOverride: DefaultLightTheme,
 						darkThemeOverride: DefaultLightTheme,
-						applyAtRoot: true
 					},
 				},
 				{
@@ -41,7 +40,6 @@ addDecorator(
 					props: { 
 						lightThemeOverride: DefaultDarkTheme,
 						darkThemeOverride: DefaultDarkTheme,
-						applyAtRoot: true
 					},
 				},
 			],
