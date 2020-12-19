@@ -10,7 +10,7 @@ import { Derivations } from './ThemeDerivation';
  * @returns rem value as a number
  */
 export const px2rem = (baseSize: number, value: number) => {
-	return value / baseSize;
+	return Math.round((value / baseSize) * 1000) / 1000;
 };
 
 /**

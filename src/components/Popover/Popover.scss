@@ -8,6 +8,7 @@
 	position: absolute;
 	background-color: var(--background-content);
 	padding: var(--spacing-md);
+	z-index: 15;
 }
 
 .closed {

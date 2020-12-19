@@ -25,7 +25,7 @@ export const CustomLightTheme: Theme = {
 			spacingMultiplier: 1,
 		},
 		'font-size': {
-			fontSizeBase: 16,
+			fontSizeBase: 12,
 			fontSizeMultiplier: 1,
 		},
 		background: {

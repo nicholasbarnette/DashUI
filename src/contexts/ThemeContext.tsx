@@ -49,6 +49,7 @@ export const convertPropertiesToCSS = (
 	Object.keys(properties).map((key) => {
 		styles += `${key}: ${properties[key]};\n`;
 	});
+	styles += 'color: var(--text-default);';
 	return styles + '}';
 };
 

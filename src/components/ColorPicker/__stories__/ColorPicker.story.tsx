@@ -1,6 +1,6 @@
-import React, { FC, useState } from 'react';
+import React, { FC, Fragment, useState } from 'react';
 import { ColorPicker } from '../';
-import { HSL } from '../utils/conversions';
+import { Input } from '../../Input';
 
 export default {
 	component: ColorPicker,
@@ -18,4 +18,14 @@ export const Basic = () => {
 
 export const CustomDefaultColor = () => {
 	return <ColorPickerContainer defaultColor="hsl(250, 50%, 50%)" />;
+};
+
+export const UpdateColorExternally = () => {
+	const [color, setColor] = useState('hsl(250, 50%, 50%)');
+	return (
+		<Fragment>
+			<Input value={color} onChange={(val) => setColor(val)} />
+			<ColorPicker color={color} />
+		</Fragment>
+	);
 };

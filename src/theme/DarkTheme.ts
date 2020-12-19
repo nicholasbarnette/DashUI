@@ -8,7 +8,7 @@ export const DefaultDarkTheme: Theme = {
 			baseSize: 16,
 		},
 		color: {
-			neutral: [224, 15, 19],
+			neutral: [224, 15, 35],
 			primary: [275, 100, 41],
 			secondary: [209, 78, 46],
 			alert: [0, 80, 61],
@@ -33,8 +33,8 @@ export const DefaultDarkTheme: Theme = {
 			navigation: [224, 15, 19],
 			content: [223, 24, 17],
 			container: [223, 24, 17],
-			'overlay-neutral': 'hsla(var(--color-neutral), 0.15)',
-			'overlay-primary': 'hsla(var(--color-primary), 0.25)',
+			'overlay-neutral': 'hsla(var(--color-neutral-src), 0.15)',
+			'overlay-primary': 'hsla(var(--color-primary-src), 0.75)',
 			shadow: '0px 0px 32px -9px rgba(0, 0, 0, 0.75)',
 		},
 		text: {
@@ -46,20 +46,20 @@ export const DefaultDarkTheme: Theme = {
 		},
 		'pattern-neutral': {
 			normal: {
-				bd: 'hsla(var(--color-neutral-src), 0.15)',
-				bg: 'hsla(var(--color-neutral-src), 0.15)',
+				bd: 'hsla(var(--color-neutral-src), 1)',
+				bg: 'hsla(var(--color-neutral-src), 1)',
 				fg: 'var(--text-default)',
 				op: '1',
 			},
 			hover: {
-				bd: 'hsla(var(--color-neutral-src), 0.25)',
-				bg: 'hsla(var(--color-neutral-src), 0.25)',
+				bd: 'hsla(var(--color-neutral-src), 0.9)',
+				bg: 'hsla(var(--color-neutral-src), 0.9)',
 				fg: 'var(--text-default)',
 				op: '1',
 			},
 			pressed: {
-				bd: 'hsla(var(--color-neutral-src), 0.35)',
-				bg: 'hsla(var(--color-neutral-src), 0.35)',
+				bd: 'hsla(var(--color-neutral-src), 0.75)',
+				bg: 'hsla(var(--color-neutral-src), 0.75)',
 				fg: 'var(--text-default)',
 				op: '1',
 			},
@@ -149,8 +149,8 @@ export const DefaultDarkTheme: Theme = {
 			},
 		},
 		input: {
-			bd: 'var(--background-navigation)',
-			bg: 'hsla(var(--background-content-src), 0.85)',
+			bd: 'hsla(var(--color-neutral-src), 1)',
+			bg: 'hsla(var(--color-neutral-src), 0.4)',
 			fg: 'var(--text-default)',
 			focus: 'var(--color-secondary)',
 		},

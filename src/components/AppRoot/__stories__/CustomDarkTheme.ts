@@ -25,7 +25,7 @@ export const CustomDarkTheme: Theme = {
 			spacingMultiplier: 1,
 		},
 		'font-size': {
-			fontSizeBase: 16,
+			fontSizeBase: 20,
 			fontSizeMultiplier: 1,
 		},
 		background: {

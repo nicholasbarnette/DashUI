@@ -26,8 +26,8 @@
 	display: flex;
 
 	> svg {
-		height: 1.5rem;
-		width: 1.5rem;
+		height: var(--font-size-lg);
+		width: var(--font-size-lg);
 	}
 
 	&:focus {
@@ -39,8 +39,8 @@
 
 .user {
 	svg {
-		height: 1.5rem;
-		width: 1.5rem;
+		height: var(--font-size-lg);
+		width: var(--font-size-lg);
 	}
 }
 

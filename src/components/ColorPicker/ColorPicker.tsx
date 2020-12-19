@@ -32,6 +32,12 @@ export const ColorPicker: FC<ColorPickerProps> = (props) => {
 		props.onChange?.(getHSLColorString(color));
 	}, [color]);
 
+	useEffect(() => {
+		if (color !== getColorArray(props.color)) {
+			setColor(getColorArray(props.color));
+		}
+	}, [props.color]);
+
 	const checkClick = () => setIsOpen(false);
 	useEffect(() => {
 		window.addEventListener('click', checkClick);

@@ -84,7 +84,7 @@ export const ThemeDerivations: Derivations = {
 				fontSizeBase,
 				baseSize,
 			)}rem * ${fontSizeMultiplier})`,
-			lg: `calc(var(--font-size-md) * ${fontSizeMultiplier} * 1.5)`,
+			lg: `calc(var(--font-size-md) * ${fontSizeMultiplier} * 1.25)`,
 			xl: `calc(var(--font-size-lg) * ${fontSizeMultiplier} * 1.5)`,
 			xxl: `calc(var(--font-size-xl) * ${fontSizeMultiplier} * 1.5)`,
 		};

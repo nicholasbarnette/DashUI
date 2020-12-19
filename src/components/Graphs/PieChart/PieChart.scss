@@ -12,7 +12,7 @@
 	height: 100%;
 	display: block;
 	transform-origin: center center;
-	z-index: 100;
+	z-index: 1;
 	font-weight: 600;
 	position: absolute;
 	right: 25%;
@@ -25,5 +25,5 @@
 			var(--slice-text-scalar)
 	);
 	text-decoration: underline;
-	color: var(--color-neutral);
+	color: var(--text-default);
 }

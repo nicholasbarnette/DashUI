@@ -17,7 +17,8 @@ describe('basic color picker', () => {
 		);
 		fireEvent.click(getByRole('button')); // Open color picker
 		expect(handleChange.mock.calls[0][0]).toBe('hsl(250, 15%, 20%)');
-		expect(handleChange.mock.calls.length).toBe(1);
+		expect(handleChange.mock.calls[1][0]).toBe('hsl(250, 15%, 20%)');
+		expect(handleChange.mock.calls.length).toBe(2);
 	});
 
 	it('handles clicks', () => {
@@ -35,8 +36,21 @@ describe('basic color picker', () => {
 			clientX: 20,
 		});
 		expect(handleChange.mock.calls[0][0]).toBe('hsl(0, 0%, 0%)');
-		expect(handleChange.mock.calls[1][0]).toBe('hsl(0, 13%, 88%)');
-		expect(handleChange.mock.calls[2][0]).toBe('hsl(45, 13%, 88%)');
-		expect(handleChange.mock.calls.length).toBe(3);
+		expect(handleChange.mock.calls[1][0]).toBe('hsl(0, 0%, 0%)');
+		expect(handleChange.mock.calls[2][0]).toBe('hsl(0, 13%, 88%)');
+		expect(handleChange.mock.calls[3][0]).toBe('hsl(45, 13%, 88%)');
+		expect(handleChange.mock.calls.length).toBe(4);
+	});
+
+	it('updates if color prop is updated externally', async () => {
+		const { getByRole, findByText, rerender } = render(
+			<ColorPicker color="hsl(0, 0%, 0%)" />,
+		);
+		fireEvent.click(getByRole('button')); // Open color picker
+		expect(await findByText('hsl(0, 0%, 0%)')).toBeTruthy();
+		fireEvent.click(getByRole('button')); // Open color picker
+		rerender(<ColorPicker color="hsl(100, 100%, 100%)" />);
+		fireEvent.click(getByRole('button')); // Open color picker
+		expect(await findByText('hsl(100, 100%, 100%)')).toBeTruthy();
 	});
 });

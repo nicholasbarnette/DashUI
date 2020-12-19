@@ -99,9 +99,9 @@ describe('approot theme support', () => {
 				...DefaultLightTheme.theme,
 				color: {
 					...DefaultLightTheme.theme.color,
-					neutral: 'red',
-					primary: 'green',
-					secondary: 'blue',
+					neutral: [0, 100, 100],
+					primary: [150, 100, 100],
+					secondary: [300, 100, 100],
 				},
 			},
 		};
@@ -111,13 +111,13 @@ describe('approot theme support', () => {
 		);
 		let theme = getByTestId('theme');
 		expect(theme.getAttribute('data-neutral')).toBe(
-			CustomLightTheme.theme.color.neutral,
+			CustomLightTheme.theme.color.neutral.join(','),
 		);
 		expect(theme.getAttribute('data-primary')).toBe(
-			CustomLightTheme.theme.color.primary,
+			CustomLightTheme.theme.color.primary.join(','),
 		);
 		expect(theme.getAttribute('data-secondary')).toBe(
-			CustomLightTheme.theme.color.secondary,
+			CustomLightTheme.theme.color.secondary.join(','),
 		);
 	});
 });

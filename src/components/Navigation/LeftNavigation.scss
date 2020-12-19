@@ -16,6 +16,7 @@
 	flex-direction: column;
 	padding: var(--spacing-md) 0;
 	transition: width 0.25s ease-in-out;
+	flex-shrink: 0;
 }
 
 .list {
@@ -53,22 +54,22 @@
 	margin-inline-start: var(--spacing-sm);
 	margin-inline-end: var(--spacing-sm);
 	border-radius: 100%;
-	height: var(--spacing-md);
-	width: var(--spacing-md);
+	height: var(--font-size-md);
+	width: var(--font-size-md);
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
 .icon {
-	height: var(--spacing-md);
-	width: var(--spacing-md);
+	height: var(--font-size-md);
+	width: var(--font-size-md);
 }
 
 .textIcon {
 	font-weight: 600;
 	text-transform: uppercase;
-	font-size: var(--spacing-md);
+	font-size: var(--font-size-md);
 	color: var(--text-inverse);
 }
 
@@ -100,12 +101,15 @@
 }
 
 .expandIcon {
-	height: var(--spacing-md);
-	width: var(--spacing-md);
+	height: var(--font-size-md);
+	width: var(--font-size-md);
 	margin: 0 var(--spacing-md);
 }
 
 .content {
 	flex: 1 1 auto;
 	padding: var(--spacing-md);
+	min-width: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
